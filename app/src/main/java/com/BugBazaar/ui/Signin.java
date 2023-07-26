@@ -32,7 +32,7 @@ public class Signin extends AppCompatActivity {
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
-                boolean isLoggedin= loginController.validateLogin("admin", "BugBazaarSeccool");
+                boolean isLoggedin= loginController.validateLogin(username, password);
                 if (isLoggedin) {
                     // Successful login, do something (e.g., start a new activity)
                     Toast.makeText(Signin.this, "Login successful!", Toast.LENGTH_SHORT).show();
