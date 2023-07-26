@@ -1,2 +1,2 @@
-admin
+"username ="admin
 "password" = BugBazaarSeccool
