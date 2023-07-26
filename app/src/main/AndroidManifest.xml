@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:taskAffinity="@string/app_name"
+        android:testOnly="true"
         android:allowTaskReparenting="true"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
