@@ -21,8 +21,6 @@ public class Signin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        String obfuscatedUsername = CredentialsLoader.getUsername();
-//        String obfuscatedPassword = CredentialsLoader.getPassword();
         loginController = new com.BugBazaar.controller.LoginController();
 
         usernameEditText = findViewById(R.id.editUsername);
