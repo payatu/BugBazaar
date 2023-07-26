@@ -24,9 +24,6 @@ public class Signin extends AppCompatActivity {
 //        String obfuscatedUsername = CredentialsLoader.getUsername();
 //        String obfuscatedPassword = CredentialsLoader.getPassword();
         loginController = new com.BugBazaar.controller.LoginController();
-        Boolean isLoggedin= loginController.validateLogin("admin", "BugBazaarSeccool");
-       Log.d("hello", String.valueOf(isLoggedin));
-
 
         usernameEditText = findViewById(R.id.editUsername);
         passwordEditText = findViewById(R.id.editPassword);
