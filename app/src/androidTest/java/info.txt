@@ -1,2 +1,2 @@
 admin
-BugBazaarSeccool
+"password" = BugBazaarSeccool
