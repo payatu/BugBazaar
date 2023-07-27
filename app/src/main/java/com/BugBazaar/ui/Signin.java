@@ -1,6 +1,7 @@
 package com.BugBazaar.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +37,7 @@ public class Signin extends AppCompatActivity {
                 if (isLoggedin) {
                     // Successful login, do something (e.g., start a new activity)
                     Toast.makeText(Signin.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),Passcode_Activity.class));
                 } else {
                     // Failed login, show an error message
                     Toast.makeText(Signin.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
