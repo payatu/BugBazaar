@@ -10,13 +10,11 @@
 
 
     <application
-<<<<<<< HEAD
         android:requestLegacyExternalStorage="true"
-=======
+
         android:testOnly="true"
         android:allowTaskReparenting="true"
         android:usesCleartextTraffic="true"
->>>>>>> 6a2ca29ce2df6bd56aa432b4a654dfb912f9ce5f
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
