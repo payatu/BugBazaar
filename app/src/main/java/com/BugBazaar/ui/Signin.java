@@ -11,18 +11,36 @@ import android.widget.Toast;
 
 import com.BugBazaar.Models.CredentialsLoader;
 import com.BugBazaar.R;
+import com.BugBazaar.utils.PermissionManager;
+import com.BugBazaar.utils.PermissionCallback;
 
-public class Signin extends AppCompatActivity {
+
+public class Signin extends AppCompatActivity implements PermissionCallback {
     private com.BugBazaar.controller.LoginController loginController;
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button loginButton;
+    private PermissionManager permissionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loginController = new com.BugBazaar.controller.LoginController();
+
+        permissionManager = new PermissionManager(this, this);
+
+
+//        if (permissionManager.checkExternalStoragePermission()) {
+//            // Permission is already granted, proceed with your app logic here
+//            onPermissionGranted();
+//        } else {
+//            // Permission is not granted, request it
+//            permissionManager.requestExternalStoragePermission();
+//        }
+
+
+
 
         usernameEditText = findViewById(R.id.editUsername);
         passwordEditText = findViewById(R.id.editPassword);
@@ -47,4 +65,13 @@ public class Signin extends AppCompatActivity {
     }
 
 
+//    @Override
+//    public void onPermissionGranted() {
+//
+//    }
+//
+//    @Override
+//    public void onPermissionDenied() {
+//
+//    }
 }
