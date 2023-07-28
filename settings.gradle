@@ -3,6 +3,9 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven {
+            url "https://github.com/omadahealth/omada-nexus/raw/master/release"
+        }
     }
 }
 dependencyResolutionManagement {
@@ -10,6 +13,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url "https://github.com/omadahealth/omada-nexus/raw/master/release"
+        }
     }
 }
 rootProject.name = "BugBazaar"
