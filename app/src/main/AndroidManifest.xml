@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:tools="http://schemas.android.com/tools">
+
+
 <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -25,6 +27,10 @@
         android:theme="@style/Theme.BugBazaar"
         tools:targetApi="31">
         <activity
+
+            android:name=".ui.MyProfile"
+            android:exported="true" />
+
             android:name=".ui.TermsAndConditionsActivity"
             android:exported="true" />
         <activity
