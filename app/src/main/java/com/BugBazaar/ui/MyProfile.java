@@ -6,18 +6,24 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.BugBazaar.utils.DeviceDetails;
 import com.BugBazaar.R;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
         public class MyProfile extends AppCompatActivity {
+            private FirebaseStorage firebaseStorage;
+
 
             private static final int SELECT_PHOTO_REQUEST = 1;
             private ImageView imageView;
@@ -26,7 +32,8 @@ import java.io.InputStream;
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_myprofile);
-
+                FirebaseApp.initializeApp(this);
+                firebaseStorage = FirebaseStorage.getInstance();
                 imageView = findViewById(R.id.imageView);
 
                 imageView.setOnClickListener(new View.OnClickListener() {
@@ -62,12 +69,35 @@ import java.io.InputStream;
 
                             // Save the image to internal storage
                             saveImageToInternalStorage(imageBitmap);
+                            uploadImageToFirebaseStorage(selectedImageUri);
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }
             }
+
+
+
+            private void uploadImageToFirebaseStorage(Uri imageUri) {
+               String device= DeviceDetails.getDeviceName();
+                // Get a reference to the Firebase Storage location where you want to upload the image
+                StorageReference storageRef = firebaseStorage.getReference().child(device+"/" + System.currentTimeMillis() + ".png");
+
+                // Upload the image
+                storageRef.putFile(imageUri)
+                        .addOnSuccessListener(taskSnapshot -> {
+                            Log.d("hello","success");
+                            // Image upload successful, do something if needed
+                        })
+                        .addOnFailureListener(exception -> {
+                            Log.d("hello","fail");
+                            // Handle unsuccessful uploads, do something if needed
+                        });
+            }
+
+
 
             private void loadAndDisplayImage() {
                 try {
