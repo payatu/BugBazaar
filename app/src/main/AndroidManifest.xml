@@ -9,11 +9,16 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
-
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PICK" />
+            <data android:mimeType="image/*" />
+        </intent>
+    </queries>
 
     <application
+        android:debuggable="true"
         android:requestLegacyExternalStorage="true"
-
         android:testOnly="true"
         android:allowTaskReparenting="true"
         android:usesCleartextTraffic="true"
@@ -31,6 +36,7 @@
             android:name=".ui.MyProfile"
             android:exported="true" />
 
+        <activity
             android:name=".ui.TermsAndConditionsActivity"
             android:exported="true" />
         <activity
@@ -51,6 +57,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
     </application>
 
 </manifest>
