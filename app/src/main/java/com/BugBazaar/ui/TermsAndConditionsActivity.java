@@ -58,7 +58,8 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         }
 
         else {
-   finish();
+            webView.loadUrl(AppConstants.Terms_Conditions_URL);
+
 
         }
 

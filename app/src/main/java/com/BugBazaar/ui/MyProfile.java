@@ -1,5 +1,8 @@
 package com.BugBazaar.ui;
 
+import static com.BugBazaar.R.*;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,9 +11,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.BugBazaar.Models.Profile;
 import com.BugBazaar.utils.DeviceDetails;
 import com.BugBazaar.R;
 import com.google.firebase.FirebaseApp;
@@ -24,17 +30,25 @@ import java.io.InputStream;
         public class MyProfile extends AppCompatActivity {
             private FirebaseStorage firebaseStorage;
 
-
+private EditText editText;
+            private Profile userProfile;
+            private EditText etName, etEmail, etMobileNumber;
             private static final int SELECT_PHOTO_REQUEST = 1;
             private ImageView imageView;
 
+            @SuppressLint("MissingInflatedId")
             @Override
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
-                setContentView(R.layout.activity_myprofile);
+                setContentView(layout.activity_myprofile);
                 FirebaseApp.initializeApp(this);
                 firebaseStorage = FirebaseStorage.getInstance();
-                imageView = findViewById(R.id.imageView);
+
+//// You can implement this method to load data from SharedPreferences or any other source.
+
+
+
+
 
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -48,6 +62,8 @@ import java.io.InputStream;
                 // Load and display the image from internal storage
                 loadAndDisplayImage();
             }
+
+
 
             private void selectPhotoFromGallery() {
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -127,6 +143,8 @@ import java.io.InputStream;
                     e.printStackTrace();
                 }
             }
+
+
         }
 
 
