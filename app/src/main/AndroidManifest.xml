@@ -16,8 +16,8 @@
             android:name=".ui.MyProfile"
             android:exported="true" />
         <activity
-            android:name=".ui.Passcode_Activity"
-            android:exported="false" />
+            android:name=".ui.PasscodeActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.Signin"
             android:exported="true">

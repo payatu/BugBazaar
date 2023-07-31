@@ -150,11 +150,17 @@
             android:id="@+id/editTxtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="326dp"
+            android:layout_marginBottom="396dp"
             android:layout_weight="0"
             android:ems="20"
             android:hint="Name"
             android:inputType="text"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtViewEmail"
