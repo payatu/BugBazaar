@@ -9,9 +9,11 @@ import android.webkit.WebViewClient;
 
 import com.BugBazaar.R;
 import com.BugBazaar.utils.AppConstants;
+import android.webkit.SafeBrowsingResponse;
 
 public class TermsAndConditionsActivity extends AppCompatActivity {
     WebView webView;
+
     private String webViewUrl;
 
     @Override
@@ -19,6 +21,7 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terms_and_conditions);
         webView = findViewById(R.id.terms_condition_view);
+
         setupwebview(webView);
         if (getIntent().getExtras() != null) {
             if (getIntent().hasExtra(AppConstants.KEY_WEBVIEW_URL)) {
@@ -58,7 +61,8 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         }
 
         else {
-   finish();
+            webView.loadUrl(AppConstants.Terms_Conditions_URL);
+
 
         }
 

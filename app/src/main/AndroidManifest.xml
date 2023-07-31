@@ -8,11 +8,10 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <queries>
         <intent>
             <action android:name="android.intent.action.PICK" />
-            <data android:mimeType="image/*" />
+            <data android:mimeType="*/*" />
         </intent>
     </queries>
 
@@ -32,7 +31,6 @@
         android:theme="@style/Theme.BugBazaar"
         tools:targetApi="31">
         <activity
-
             android:name=".ui.MyProfile"
             android:exported="true" />
 
@@ -48,6 +46,9 @@
         <activity
             android:name=".ui.PasscodeActivity"
             android:exported="true" />
+
+        <activity android:name=".ui.PasscodeCreateActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".ui.Signin"
             android:exported="true">
