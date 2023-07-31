@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools">
 
+
+<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
+
     <application
+        android:requestLegacyExternalStorage="true"
+
+        android:testOnly="true"
+        android:allowTaskReparenting="true"
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,8 +27,18 @@
         android:theme="@style/Theme.BugBazaar"
         tools:targetApi="31">
         <activity
+
             android:name=".ui.MyProfile"
             android:exported="true" />
+
+            android:name=".ui.TermsAndConditionsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.TermsOfService"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Contact_us"
+            android:exported="false" />
         <activity
             android:name=".ui.PasscodeActivity"
             android:exported="true" />
