@@ -64,6 +64,16 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
         });
     }
 
+    @Override
+    public void onPermissionGranted() {
+
+    }
+
+    @Override
+    public void onPermissionDenied() {
+
+    }
+
 
 //    @Override
 //    public void onPermissionGranted() {

@@ -1,37 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:tools="http://schemas.android.com/tools">
 
-
-<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-
-
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:requestLegacyExternalStorage="true"
-
-        android:testOnly="true"
-        android:allowTaskReparenting="true"
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
+        android:allowTaskReparenting="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/Theme.BugBazaar"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-
-            android:name=".ui.MyProfile"
+            android:name=".ui.PasscodeCreateActivity"
             android:exported="true" />
-
-            android:name=".ui.TermsAndConditionsActivity"
+        <activity
+            android:name=".ui.MyProfile"
             android:exported="true" />
         <activity
             android:name=".ui.TermsOfService"

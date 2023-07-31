@@ -58,5 +58,4 @@ dependencies {
 
     //Custom installed modules
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
 }
