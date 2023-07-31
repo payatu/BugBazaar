@@ -55,7 +55,7 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
                 if (isLoggedin) {
                     // Successful login, do something (e.g., start a new activity)
                     Toast.makeText(Signin.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),Passcode_Activity.class));
+                    startActivity(new Intent(getApplicationContext(),PasscodeActivity.class));
                 } else {
                     // Failed login, show an error message
                     Toast.makeText(Signin.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
