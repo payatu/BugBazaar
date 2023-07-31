@@ -31,13 +31,13 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
         permissionManager = new PermissionManager(this, this);
 
 
-//        if (permissionManager.checkExternalStoragePermission()) {
-//            // Permission is already granted, proceed with your app logic here
-//            onPermissionGranted();
-//        } else {
-//            // Permission is not granted, request it
-//            permissionManager.requestExternalStoragePermission();
-//        }
+        if (permissionManager.checkExternalStoragePermission()) {
+            // Permission is already granted, proceed with your app logic here
+            onPermissionGranted();
+        } else {
+            // Permission is not granted, request it
+            permissionManager.requestExternalStoragePermission();
+        }
 
 
 
@@ -75,13 +75,13 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
     }
 
 
-//    @Override
-//    public void onPermissionGranted() {
-//
-//    }
-//
-//    @Override
-//    public void onPermissionDenied() {
-//
-//    }
+    @Override
+    public void onPermissionGranted() {
+
+    }
+
+    @Override
+    public void onPermissionDenied() {
+
+    }
 }

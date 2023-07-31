@@ -37,11 +37,10 @@
         app:layout_constraintGuide_end="715dp" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circleImageView"
+        android:id="@+id/imageView"
         android:layout_width="253dp"
         android:layout_height="164dp"
         android:clickable="true"
-        android:onClick="clickImage"
         android:src="@drawable/scp"
         android:text="Upload Image"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"

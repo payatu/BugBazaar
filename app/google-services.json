@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "135771924448",
+    "project_id": "bugbazaar-cb1a1",
+    "storage_bucket": "bugbazaar-cb1a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135771924448:android:57eab34c35a3088fdbad85",
+        "android_client_info": {
+          "package_name": "com.BugBazaar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135771924448-e2786hjc5p8uhrcup3ig2fsepka3299i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOx8mTnKN6LiCVh7bCjAvGqrx4QCd9AHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135771924448-e2786hjc5p8uhrcup3ig2fsepka3299i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135771924448:android:1eb890fe9f200f2adbad85",
+        "android_client_info": {
+          "package_name": "com.example.democode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135771924448-e2786hjc5p8uhrcup3ig2fsepka3299i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOx8mTnKN6LiCVh7bCjAvGqrx4QCd9AHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135771924448-e2786hjc5p8uhrcup3ig2fsepka3299i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
