@@ -64,7 +64,6 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
         });
     }
 
-
     @Override
     public void onPermissionGranted() {
 
@@ -74,4 +73,5 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
     public void onPermissionDenied() {
 
     }
+
 }
