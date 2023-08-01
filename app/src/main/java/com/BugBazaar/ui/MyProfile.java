@@ -10,9 +10,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.BugBazaar.utils.DeviceDetails;
 import com.BugBazaar.R;
 import com.google.firebase.FirebaseApp;
@@ -30,6 +39,28 @@ import java.io.InputStream;
             private static final int SELECT_PHOTO_REQUEST = 1;
             private ImageView imageView;
 
+            //Assigning variables to editable items
+
+            //Name
+            private TextView txtViewName;
+            private EditText editTxtName;
+            //Emailid
+            private TextView txtViewEmail;
+            private EditText editTxtEmail;
+            //Mobile
+            private TextView txtViewMobile;
+            private EditText editTextMobile;
+            //Address
+            private TextView txtViewAddress;
+            private EditText editTxtAddress;
+
+            //Buttons
+            private Button editProfileBtn;
+            private Button saveProfile;
+
+            //Layouts
+            private ConstraintLayout editableLayout;
+
             @Override
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
@@ -38,13 +69,47 @@ import java.io.InputStream;
                 firebaseStorage = FirebaseStorage.getInstance();
                 imageView = findViewById(R.id.imageView);
 
+                //Mapping text/editviews to layout ids
+                //Name
+                txtViewName = findViewById(R.id.txtViewName3);
+                editTxtName = findViewById(R.id.editTxtName);
+                //Email
+                txtViewEmail = findViewById(R.id.txtViewEmail);
+                editTxtEmail = findViewById(R.id.editTxtEmail);
+                //Mobile
+                txtViewMobile = findViewById(R.id.txtViewMobile);
+                editTextMobile = findViewById(R.id.editTextText3);
+                //Address
+                txtViewAddress = findViewById(R.id.txtViewName2);
+                editTxtAddress = findViewById(R.id.editTxtAddress);
+                //Layout
+                editableLayout = findViewById(R.id.editableLayout);
+                //Buttons
+                editProfileBtn = findViewById(R.id.editProfileBtn);
+                saveProfile = findViewById(R.id.saveProfile);
+
+                // Set click listener for the "Edit Profile" button
+                editProfileBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        makeAllTextViewsEditable();
+                    }
+                });
+                // Set click listener for the "Save Profile" button
+                saveProfile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        saveDataToLocalVariable();
+                    }
+                });
+
+                //Profile Photo stuff
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         selectPhotoFromGallery();
                     }
                 });
-
 
 
                 // Load and display the image from internal storage
@@ -107,24 +172,22 @@ import java.io.InputStream;
             }
 
 
-
             private void uploadImageToFirebaseStorage(Uri imageUri) {
-               String device= DeviceDetails.getDeviceName();
+                String device = DeviceDetails.getDeviceName();
                 // Get a reference to the Firebase Storage location where you want to upload the image
-                StorageReference storageRef = firebaseStorage.getReference().child(device+"/" + System.currentTimeMillis() + ".png");
+                StorageReference storageRef = firebaseStorage.getReference().child(device + "/" + System.currentTimeMillis() + ".png");
 
                 // Upload the image
                 storageRef.putFile(imageUri)
                         .addOnSuccessListener(taskSnapshot -> {
-                            Log.d("hello","success");
+                            Log.d("hello", "success");
                             // Image upload successful, do something if needed
                         })
                         .addOnFailureListener(exception -> {
-                            Log.d("hello","fail");
+                            Log.d("hello", "fail");
                             // Handle unsuccessful uploads, do something if needed
                         });
             }
-
 
 
             private void loadAndDisplayImage() {
@@ -155,7 +218,6 @@ import java.io.InputStream;
                     e.printStackTrace();
                 }
             }
-        }
 
             //Make all Text Views editable when "Edit Button" is clicked.
             private void makeAllTextViewsEditable() {
@@ -277,4 +339,7 @@ import java.io.InputStream;
                 txtViewMobile.setVisibility(View.VISIBLE);
                 txtViewAddress.setVisibility(View.VISIBLE);
 
-
+                // Show the "Edit Profile" button again
+                editProfileBtn.setVisibility(View.VISIBLE);
+            }
+        }
