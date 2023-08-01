@@ -147,7 +147,7 @@
             app:layout_constraintHorizontal_bias="0.957"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.067"></TextView>
+            app:layout_constraintVertical_bias="0.067" />
 
         <EditText
             android:id="@+id/editTxtName"
