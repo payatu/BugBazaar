@@ -16,6 +16,7 @@
         android:text="My Profile"
         android:textColor="#1B887E"
         android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,24 +44,25 @@
         android:clickable="true"
         android:src="@drawable/scp"
         android:text="Upload Image"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/editableLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1.0"></de.hdodenhof.circleimageview.CircleImageView>
+        app:layout_constraintVertical_bias="0.0"></de.hdodenhof.circleimageview.CircleImageView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="326dp"
-        android:layout_height="396dp"
+        android:id="@+id/editableLayout"
+        android:layout_width="332dp"
+        android:layout_height="337dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.732">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.727">
 
         <TextView
             android:id="@+id/txtViewName"
@@ -74,7 +76,6 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/txtViewName3"
-            app:layout_constraintHorizontal_bias="0.521"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.067"></TextView>
@@ -83,12 +84,14 @@
             android:id="@+id/txtViewName4"
             android:layout_width="90dp"
             android:layout_height="39dp"
+            android:layout_marginBottom="239dp"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center_vertical"
             android:text="Email-ID:"
             android:textSize="18dp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/txtViewEmail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtViewName"></TextView>
@@ -96,7 +99,7 @@
         <TextView
             android:id="@+id/txtViewName5"
             android:layout_width="90dp"
-            android:layout_height="152dp"
+            android:layout_height="90dp"
             android:clickable="true"
             android:focusable="true"
             android:gravity="top|center_vertical"
@@ -105,7 +108,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintHorizontal_bias="0.061"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtViewName6"
             app:layout_constraintVertical_bias="0.0"></TextView>
@@ -114,6 +117,7 @@
             android:id="@+id/txtViewName6"
             android:layout_width="90dp"
             android:layout_height="39dp"
+            android:layout_marginStart="12dp"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center_vertical"
@@ -121,8 +125,8 @@
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txtViewAge"
-            app:layout_constraintHorizontal_bias="0.521"
+            app:layout_constraintEnd_toStartOf="@+id/txtViewMobile"
+            app:layout_constraintHorizontal_bias="0.176"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtViewName4"
             app:layout_constraintVertical_bias="0.0"></TextView>
@@ -147,19 +151,19 @@
 
         <EditText
             android:id="@+id/editTxtName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="326dp"
-            android:layout_marginBottom="396dp"
+            android:layout_width="208dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="24dp"
             android:layout_weight="0"
             android:ems="20"
-            android:hint="Name"
             android:inputType="text"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/txtViewEmail"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/txtViewName3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/txtViewEmail"
@@ -180,16 +184,22 @@
 
         <EditText
             android:id="@+id/editTxtEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="203dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="24dp"
             android:layout_weight="0"
             android:ems="20"
-            android:hint="Email-id"
-            android:inputType="text"
-            android:visibility="gone" />
+            android:inputType="textEmailAddress"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/txtViewEmail"
+            app:layout_constraintEnd_toEndOf="@+id/txtViewEmail"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/txtViewEmail"
+            app:layout_constraintTop_toTopOf="@+id/txtViewName3"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/txtViewAge"
+            android:id="@+id/txtViewMobile"
             android:layout_width="208dp"
             android:layout_height="40dp"
             android:background="@drawable/border_txtbox"
@@ -210,18 +220,22 @@
 
         <EditText
             android:id="@+id/editTextText3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="208dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="76dp"
             android:layout_weight="0"
-            android:ems="10"
-            android:hint="Age"
+            android:ems="15"
             android:inputType="number"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/txtViewMobile"
+            app:layout_constraintStart_toStartOf="@+id/txtViewMobile"
+            app:layout_constraintTop_toTopOf="@+id/txtViewName3"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/txtViewName2"
             android:layout_width="208dp"
-            android:layout_height="149dp"
+            android:layout_height="115dp"
             android:background="@drawable/border_txtbox"
             android:clickable="true"
             android:focusable="true"
@@ -232,84 +246,63 @@
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.687"
+            app:layout_constraintHorizontal_bias="0.705"
             app:layout_constraintStart_toEndOf="@+id/txtViewName5"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.57"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/txtViewMobile"
+            app:layout_constraintVertical_bias="0.0"></TextView>
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <EditText
+            android:id="@+id/editTxtAddress"
+            android:layout_width="207dp"
+            android:layout_height="149dp"
             android:layout_weight="0"
-            android:text="Save"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.899" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="28dp"
-            android:layout_height="29dp"
-            android:clickable="true"
-            android:focusable="true"
+            android:ems="30"
+            android:inputType="textMultiLine"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/txtViewName2"
             app:layout_constraintEnd_toEndOf="@+id/txtViewName2"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/txtViewName2"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewAge"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/editpencil" />
+            app:layout_constraintTop_toTopOf="@+id/txtViewName3"
+            app:layout_constraintVertical_bias="1.0" />
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="28dp"
-            android:layout_height="29dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
-            app:layout_constraintEnd_toEndOf="@+id/txtViewName3"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/txtViewName3"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.705"
-            app:srcCompat="@drawable/editpencil" />
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="28dp"
-            android:layout_height="29dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintBottom_toTopOf="@+id/imageView3"
-            app:layout_constraintEnd_toEndOf="@+id/txtViewAge"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/txtViewAge"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewEmail"
-            app:layout_constraintVertical_bias="0.09"
-            app:srcCompat="@drawable/editpencil" />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="28dp"
-            android:layout_height="29dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintBottom_toBottomOf="@+id/txtViewEmail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.972"
-            app:layout_constraintStart_toStartOf="@+id/txtViewEmail"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewName3"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/editpencil" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <Button
+        android:id="@+id/editProfileBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:onClick="onEditProfileClick"
+        android:text="Edit Profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.913" />
+
+    <Button
+        android:id="@+id/saveProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Profile"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintStart_toEndOf="@+id/editProfileBtn"
+        app:layout_constraintTop_toBottomOf="@+id/editableLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="40dp"
         android:layout_height="35dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onProfileImageClick"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintHorizontal_bias="0.497"

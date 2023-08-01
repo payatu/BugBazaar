@@ -47,9 +47,8 @@
             android:name=".ui.PasscodeActivity"
             android:exported="true" />
 
-        <activity
-            android:name=".ui.PasscodeCreateActivity"
-            android:exported="true" />
+        <activity android:name=".ui.PasscodeCreateActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".ui.Signin"
             android:exported="true">
