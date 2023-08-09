@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.BugBazaar.R;
 
 public class PasscodeActivity extends AppCompatActivity {
-
     private EditText editTextPasscode;
     private TextView textViewDot;
     private ImageView btnBackspace; // Declare the ImageView for backspace button

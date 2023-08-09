@@ -46,7 +46,7 @@
         </LinearLayout>
 
         <include
-            layout="@layout/layout_numpad"
+            layout="@layout/passcode_layout_numpad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical" />
