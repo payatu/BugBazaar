@@ -30,7 +30,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.NavigationDrawer_sample"
+            android:name=".ui.NavigationDrawer_Dashboard"
             android:exported="true" />
         <activity
             android:name=".ui.MyProfile"

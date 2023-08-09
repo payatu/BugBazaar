@@ -11,9 +11,14 @@
         android:icon="@drawable/outline_my_profile"></item>
 
     <item
-        android:id="@+id/itemAboutUs"
-        android:title="About Us"
-        android:icon="@drawable/baseline_info_24"></item>
+        android:id="@+id/itemWallet"
+        android:title="Wallet"
+        android:icon="@drawable/baseline_wallet_24"></item>
+
+        <item
+        android:id="@+id/itemCart"
+        android:title="Cart"
+        android:icon="@drawable/baseline_shopping_cart_24"></item>
     <item
         android:id="@+id/itemContactUs"
         android:title="Contact Us"
@@ -23,8 +28,8 @@
         android:title="Terms and Conditions"
         android:icon="@drawable/baseline_termsandconditions"></item>
     <item
-        android:id="@+id/itemLogout"
-        android:title="Logout"
-        android:icon="@drawable/baseline_logout_24"></item>
+        android:id="@+id/itemLoginLogout"
+        android:title="Login"
+        android:icon="@drawable/baseline_login_24"></item>
     </group>
 </menu>
