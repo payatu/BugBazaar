@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="top"
     tools:context=".ui.MyProfile">
+    <include layout="@layout/nav_toolbar_sub"></include>
 
     <TextView
         android:id="@+id/textView"
@@ -14,14 +15,14 @@
         android:layout_height="57dp"
         android:gravity="center"
         android:text="My Profile"
-        android:textColor="#1B887E"
+        android:textColor="#3a5e7d"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.027"></TextView>
+        app:layout_constraintVertical_bias="0.06"></TextView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

@@ -1,36 +1,65 @@
 <!-- activity_passcode.xml -->
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:layout_height="match_parent">
 
-    <!-- Display a title or prompt for the passcode screen -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter Passcode"
-        android:textSize="29sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Display a passcode input field -->
-    <EditText
-        android:id="@+id/editTextPasscode"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:inputType="numberPassword"
-        android:maxLength="4"
+    <LinearLayout
+        android:id="@+id/layoutCenter"
+        android:layout_width="365dp"
+        android:layout_height="660dp"
+        android:layout_centerInParent="true"
         android:gravity="center"
-        android:ems="4" />
+        android:orientation="vertical">
 
-    <!-- Optionally, add a button for validation -->
-    <Button
-        android:id="@+id/btnValidate"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:text="Validate"
-        android:layout_marginTop="16dp" />
+        <!-- Display a title or prompt for the passcode screen -->
+        <TextView
+            android:id="@+id/textViewDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Enter Passcode"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="346dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/editTextPasscode"
+                android:layout_width="237dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/btnBackspace"
+                android:layout_width="35dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_backspace1"></ImageView>
+
+        </LinearLayout>
+
+        <include
+            layout="@layout/passcode_layout_numpad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/btnValidate"
+            android:layout_width="wrap_content"
+            android:layout_height="69dp"
+            android:layout_marginTop="16dp"
+            android:text="Validate"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>
