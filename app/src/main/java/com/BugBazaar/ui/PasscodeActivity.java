@@ -1,5 +1,6 @@
 package com.BugBazaar.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -55,6 +56,8 @@ public class PasscodeActivity extends AppCompatActivity {
                 if (enteredPasscode.equals(desiredPasscode)) {
                     // Passcode is correct, proceed to the next activity. Add next activity here....
                     Toast.makeText(PasscodeActivity.this, "Passcode correct!", Toast.LENGTH_SHORT).show();
+
+                    startActivity(new Intent(getApplicationContext(),NavigationDrawer_Dashboard.class));
                     // Implement your logic to proceed to the next activity here
                 } else {
                     // Passcode is incorrect, show an error message

@@ -41,7 +41,7 @@
                 android:id="@+id/btnBackspace"
                 android:layout_width="35dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_backspace1"></ImageView>
+                android:src="@drawable/ic_backspace1" />
 
         </LinearLayout>
 
