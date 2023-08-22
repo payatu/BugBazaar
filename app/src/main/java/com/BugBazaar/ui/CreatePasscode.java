@@ -1,7 +1,6 @@
 package com.BugBazaar.ui;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,14 +10,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.BugBazaar.R;
+import android.view.View;
 
-public class PasscodeActivity extends AppCompatActivity {
+public class CreatePasscode extends AppCompatActivity {
+
     private EditText editTextPasscode;
     private TextView textViewDot;
-    private ImageView btnBackspace; // Declare the ImageView for backspace button
-    private Button btnValidate; // Declare the Button for validate button
 
-    private String desiredPasscode = "1234"; // Replace with your desired passcode
+    private ImageView btnBackspace;
+    private Button btnCreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,46 +27,21 @@ public class PasscodeActivity extends AppCompatActivity {
 
         editTextPasscode = findViewById(R.id.editTextPasscode);
         textViewDot = findViewById(R.id.textViewDot);
-        btnValidate = findViewById(R.id.btnValidate);
-        btnBackspace = findViewById(R.id.btnBackspace); // Initialize the backspace ImageView
+        btnBackspace = findViewById(R.id.btnBackspace);
+        btnCreate = findViewById(R.id.btncreate);
 
-        // OnClickListener for the backspace ImageView
+        // Handle backspace button
         btnBackspace.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                // Get the current passcode text from the EditText
-                String passcode = editTextPasscode.getText().toString();
-
-                // If the passcode is not empty, remove the last character
-                if (!passcode.isEmpty()) {
-                    passcode = passcode.substring(0, passcode.length() - 1);
-                }
-
-                // Set the updated passcode text back to the EditText
-                editTextPasscode.setText(passcode);
-            }
-        });
-
-        //Passcode Validator code
-        btnValidate.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View view) {
-                String enteredPasscode = editTextPasscode.getText().toString();
-                if (enteredPasscode.equals(desiredPasscode)) {
-                    // Passcode is correct, proceed to the next activity. Add next activity here....
-                    Toast.makeText(PasscodeActivity.this, "Passcode correct!", Toast.LENGTH_SHORT).show();
-                    // Implement your logic to proceed to the next activity here
-                } else {
-                    // Passcode is incorrect, show an error message
-                    Toast.makeText(PasscodeActivity.this, "Incorrect passcode. Try again.", Toast.LENGTH_SHORT).show();
-                    // Clear the entered passcode
-                    editTextPasscode.setText("");
-                    textViewDot.setText("Enter Passcode");
+                String currentText = editTextPasscode.getText().toString();
+                if (!currentText.isEmpty()) {
+                    editTextPasscode.setText(currentText.substring(0, currentText.length() - 1));
                 }
             }
         });
 
-        // Handle numpad buttons click
+        // Handle number buttons
         findViewById(R.id.lbtn1).setOnClickListener(numpadClickListener);
         findViewById(R.id.lbtn2).setOnClickListener(numpadClickListener);
         findViewById(R.id.lbtn3).setOnClickListener(numpadClickListener);
@@ -77,6 +52,24 @@ public class PasscodeActivity extends AppCompatActivity {
         findViewById(R.id.lbtn8).setOnClickListener(numpadClickListener);
         findViewById(R.id.lbtn9).setOnClickListener(numpadClickListener);
         findViewById(R.id.lbtn0).setOnClickListener(numpadClickListener);
+
+        // Handle this event when user clicks on Create button
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String enteredPasscode = editTextPasscode.getText().toString();
+                if (enteredPasscode.equals("1234")) { // Enclose the passcode in quotes
+                    // Passcode is correct
+                    Toast.makeText(CreatePasscode.this, "Passcode correct!", Toast.LENGTH_SHORT).show();
+                    // Proceed to the next activity or perform other actions
+                } else {
+                    // Passcode is incorrect
+                    Toast.makeText(CreatePasscode.this, "Incorrect passcode. Try again.", Toast.LENGTH_SHORT).show();
+                    // Clear the entered passcode
+                    editTextPasscode.setText("");
+                }
+            }
+        });
     }
 
     private View.OnClickListener numpadClickListener = new View.OnClickListener() {

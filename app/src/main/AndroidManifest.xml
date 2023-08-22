@@ -30,6 +30,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.CreatePasscode"
+            android:exported="true" />
+        <activity
+            android:name=".ui.ProductCatalogActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.NavigationDrawer_Dashboard"
             android:exported="true" />
         <activity
@@ -59,6 +65,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
