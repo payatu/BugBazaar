@@ -3,20 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
 
     <ImageView
         android:id="@+id/itemImage"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/deadpool" />
+        android:layout_height="220dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/deadpool"
+        android:onClick="itemClicked"/>
 
     <TextView
         android:id="@+id/itemName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Product Name"
+        android:textSize="23dp"
         android:textStyle="bold" />
 
 </LinearLayout>
