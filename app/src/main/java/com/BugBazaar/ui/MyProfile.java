@@ -132,8 +132,7 @@ import java.io.InputStream;
                     String emailData = sharedPreferences.getString("email", "");
                     String mobileData = sharedPreferences.getString("mobile", "");
                     String addressData = sharedPreferences.getString("address", "");
-                    Log.d("hello",nameData);
-
+                   System.out.println(sharedPreferences.getAll().toString());
                     txtViewName.setText(nameData);
                     txtViewEmail.setText(emailData);
                     txtViewMobile.setText(mobileData);
