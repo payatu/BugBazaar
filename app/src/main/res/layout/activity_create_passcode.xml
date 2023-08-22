@@ -1,0 +1,65 @@
+<!-- activity_passcode.xml -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layoutCenter"
+        android:layout_width="365dp"
+        android:layout_height="660dp"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Display a title or prompt for the passcode screen -->
+        <TextView
+            android:id="@+id/textViewDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Create New Passcode"
+            android:textSize="27dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="346dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/editTextPasscode"
+                android:layout_width="237dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/btnBackspace"
+                android:layout_width="35dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_backspace1"></ImageView>
+
+        </LinearLayout>
+
+        <include
+            layout="@layout/passcode_layout_numpad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/btncreate"
+            android:layout_width="wrap_content"
+            android:layout_height="69dp"
+            android:layout_marginTop="16dp"
+            android:text="Create"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>

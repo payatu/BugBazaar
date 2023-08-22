@@ -8,27 +8,28 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
+    <!--Toolbar-->
 
-    <FrameLayout
-        android:id="@+id/main_content"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--Toolbar-->
-        <include layout="@layout/nav_toolbar_main"></include>
-
-        <!--MainContent-->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="DashBoard"
-            android:textSize="34sp" />
-    </FrameLayout>
+            android:orientation="vertical"
+            android:paddingTop="60dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Some Offer Banner "
+                android:textSize="40dp"></TextView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Navigation Toolbar -->
+    <include layout="@layout/nav_toolbar_main" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/mainNavView"
@@ -37,5 +38,6 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header_layout"
         app:menu="@menu/navigation_items" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
