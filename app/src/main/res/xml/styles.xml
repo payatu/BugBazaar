@@ -1,0 +1,3 @@
+<style name="CustomFontStyle">
+    <item name="android:fontFamily">@font/coolvetica</item>
+</style>

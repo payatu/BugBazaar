@@ -24,7 +24,7 @@ public class PasscodeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_passcode);
+        setContentView(R.layout.activity_create_passcode);
 
         editTextPasscode = findViewById(R.id.editTextPasscode);
         textViewDot = findViewById(R.id.textViewDot);
