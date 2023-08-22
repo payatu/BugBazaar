@@ -25,11 +25,24 @@
                 android:text="Some Offer Banner "
                 android:textSize="40dp"></TextView>
 
+            <GridView
+                android:id="@+id/productGridView"
+                android:layout_width="match_parent"
+                android:layout_height="603dp"
+                android:gravity="center"
+                android:horizontalSpacing="8dp"
+                android:numColumns="2"
+                android:padding="16dp"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="8dp" />
+
         </LinearLayout>
+
     </ScrollView>
 
     <!-- Navigation Toolbar -->
     <include layout="@layout/nav_toolbar_main" />
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/mainNavView"

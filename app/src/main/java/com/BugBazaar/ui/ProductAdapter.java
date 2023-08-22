@@ -1,6 +1,7 @@
 package com.BugBazaar.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.BugBazaar.R;
+import com.BugBazaar.ui.DetailedProductActivity;
+import com.BugBazaar.ui.Product;
+import java.io.Serializable;
 
 import java.util.List;
 
@@ -39,19 +43,31 @@ public class ProductAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        View view;
         if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.grid_item, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.grid_item, parent, false);
+        } else {
+            view = convertView;
         }
 
-        ImageView imageView = convertView.findViewById(R.id.itemImage);
-        TextView textView = convertView.findViewById(R.id.itemName);
+        ImageView itemImage = view.findViewById(R.id.itemImage);
+        TextView itemName = view.findViewById(R.id.itemName);
 
         Product product = productList.get(position);
-        imageView.setImageResource(product.getImageResId());
-        textView.setText(product.getName());
 
-        return convertView;
+        itemImage.setImageResource(product.getImageResId());
+        itemName.setText(product.getName());
+
+        // Set OnClickListener for the product click
+        itemImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Open detailed product page or activity here
+                Intent intentz = new Intent(context, DetailedProductActivity.class);
+                intentz.putExtra("product", product);
+                context.startActivity(intentz);
+            }
+        });
+        return view;
     }
 }
-
