@@ -35,39 +35,42 @@ import java.io.InputStream;
         public class MyProfile extends AppCompatActivity {
             private FirebaseStorage firebaseStorage;
 
-
             private static final int SELECT_PHOTO_REQUEST = 1;
             private ImageView imageView;
 
             //Assigning variables to editable items
-
-            //Name
+                //Name
             private TextView txtViewName;
             private EditText editTxtName;
-            //Emailid
+                //Emailid
             private TextView txtViewEmail;
             private EditText editTxtEmail;
-            //Mobile
+                //Mobile
             private TextView txtViewMobile;
             private EditText editTextMobile;
-            //Address
+                //Address
             private TextView txtViewAddress;
             private EditText editTxtAddress;
-
-            //Buttons
+                //Buttons
             private Button editProfileBtn;
             private Button saveProfile;
 
-            //Layouts
+                //Layouts
             private ConstraintLayout editableLayout;
 
             @Override
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_myprofile);
+
+                //Firebase
                 FirebaseApp.initializeApp(this);
                 firebaseStorage = FirebaseStorage.getInstance();
                 imageView = findViewById(R.id.imageView);
+
+                //Toolbar title set
+                TextView toolbarTitle = findViewById(R.id.toolbarTitle);
+                toolbarTitle.setText("My Profile");
 
                 //Mapping text/editviews to layout ids
                 //Name
@@ -340,5 +343,9 @@ import java.io.InputStream;
 
                 // Show the "Edit Profile" button again
                 editProfileBtn.setVisibility(View.VISIBLE);
+            }
+            //Code to handle backbutton
+            public void onBackButtonClick(View view) {
+                onBackPressed(); // Navigate back to the previous activity
             }
         }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary" >
+        <!-- Image Button for Navigation Drawer Toggle -->
+        <ImageView
+            android:id="@+id/imageViewToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_menu_24"
+        android:contentDescription="Navigation Drawer Toggle"
+        android:paddingStart="1dp"
+        android:paddingEnd="12dp"
+        android:layout_gravity="start"
+        android:onClick="onToggleDrawerClick"
+        />
+        <TextView
+            android:id="@+id/textViewAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:layout_centerInParent="true" />
+    </androidx.appcompat.widget.Toolbar>
+
+</LinearLayout>

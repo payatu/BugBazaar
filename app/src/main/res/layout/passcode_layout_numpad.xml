@@ -1,0 +1,168 @@
+<!-- layout_numpad.xml -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <Button
+        android:id="@+id/lbtn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="3dp"
+        android:text="1"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:background="@android:color/transparent"
+        android:outlineProvider="none"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/lbtn4"
+        app:layout_constraintEnd_toStartOf="@+id/lbtn2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/lbtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="2dp"
+        android:text="2"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:background="@android:color/transparent"
+        android:outlineProvider="none"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/lbtn5"
+        app:layout_constraintEnd_toStartOf="@+id/lbtn3"
+        app:layout_constraintStart_toEndOf="@+id/lbtn1" />
+
+    <Button
+        android:id="@+id/lbtn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="3"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:background="@android:color/transparent"
+        android:outlineProvider="none"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lbtn2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/lbtn4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:text="4"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:background="@android:color/transparent"
+        android:outlineProvider="none"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/lbtn7"
+        app:layout_constraintEnd_toStartOf="@+id/lbtn5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/lbtn5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="1dp"
+        android:text="5"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:background="@android:color/transparent"
+        android:outlineProvider="none"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/lbtn8"
+        app:layout_constraintEnd_toStartOf="@+id/lbtn6"
+        app:layout_constraintStart_toEndOf="@+id/lbtn4" />
+
+    <Button
+        android:id="@+id/lbtn6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="6"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:background="@android:color/transparent"
+        android:outlineProvider="none"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/lbtn9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lbtn5" />
+
+    <Button
+        android:id="@+id/lbtn7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:text="7"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:background="@android:color/transparent"
+        android:outlineProvider="none"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintEnd_toStartOf="@+id/lbtn8"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/lbtn8" />
+
+    <Button
+        android:id="@+id/lbtn8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="8"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:background="@android:color/transparent"
+        android:outlineProvider="none"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/lbtn0"
+        app:layout_constraintEnd_toStartOf="@+id/lbtn9"
+        app:layout_constraintStart_toEndOf="@+id/lbtn7" />
+
+    <Button
+        android:id="@+id/lbtn9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="9"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:background="@android:color/transparent"
+        android:outlineProvider="none"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lbtn8"
+        app:layout_constraintTop_toTopOf="@+id/lbtn8" />
+
+    <Button
+        android:id="@+id/lbtn0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:background="@android:color/transparent"
+        android:outlineProvider="none"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.913" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
