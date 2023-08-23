@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.BugBazaar.controller.UserAuthSave;
 import com.BugBazaar.utils.DeviceDetails;
 import com.BugBazaar.R;
 import com.google.firebase.FirebaseApp;
@@ -63,7 +64,17 @@ import java.io.InputStream;
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_myprofile);
 
-                //Firebase
+                UserAuthSave userAuthSave = new UserAuthSave(getApplicationContext());
+
+                if(!UserAuthSave.isLoggedIn()){
+
+                    startActivity(new Intent(this,Signin.class));
+
+
+                }
+
+
+                    //Firebase
                 FirebaseApp.initializeApp(this);
                 firebaseStorage = FirebaseStorage.getInstance();
                 imageView = findViewById(R.id.imageView);

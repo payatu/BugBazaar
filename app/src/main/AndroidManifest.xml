@@ -40,7 +40,13 @@
             android:exported="true" />
         <activity
             android:name=".ui.NavigationDrawer_Dashboard"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.MyProfile"
             android:exported="true" />
@@ -60,11 +66,7 @@
         <activity
             android:name=".ui.Signin"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
