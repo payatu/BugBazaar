@@ -78,7 +78,7 @@ public class CreatePasscode extends AppCompatActivity {
             }
         });
     }
-
+    //Numpad click handling
     private View.OnClickListener numpadClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {

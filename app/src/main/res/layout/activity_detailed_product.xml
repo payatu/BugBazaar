@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/nav_toolbar_sub"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"></include>
+
+    <ImageView
+        android:id="@+id/detailedImage"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/deadpool"
+        android:padding="16dp"/>
+
+    <TextView
+        android:id="@+id/detailedName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Product Name"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"/>
+
+    <TextView
+        android:id="@+id/detailedDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Product Description"
+        android:textSize="20dp"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"/>
+
+</LinearLayout>
