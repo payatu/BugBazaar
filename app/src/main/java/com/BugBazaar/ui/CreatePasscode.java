@@ -1,5 +1,6 @@
 package com.BugBazaar.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.BugBazaar.R;
+import com.BugBazaar.controller.UserAuthSave;
+
 import android.view.View;
 
 public class CreatePasscode extends AppCompatActivity {
@@ -58,16 +61,20 @@ public class CreatePasscode extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String enteredPasscode = editTextPasscode.getText().toString();
-                if (enteredPasscode.equals("1234")) { // Enclose the passcode in quotes
-                    // Passcode is correct
-                    Toast.makeText(CreatePasscode.this, "Passcode correct!", Toast.LENGTH_SHORT).show();
-                    // Proceed to the next activity or perform other actions
-                } else {
-                    // Passcode is incorrect
-                    Toast.makeText(CreatePasscode.this, "Incorrect passcode. Try again.", Toast.LENGTH_SHORT).show();
-                    // Clear the entered passcode
-                    editTextPasscode.setText("");
+
+                if(enteredPasscode.length()!=4){
+
+                    Toast.makeText(CreatePasscode.this, "Passcode of 4 numbers!", Toast.LENGTH_SHORT).show();
+                    return;
+
                 }
+
+                UserAuthSave.savepasscode(Integer.parseInt(enteredPasscode));
+                Toast.makeText(CreatePasscode.this, "  New Passcode created!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(),NavigationDrawer_Dashboard.class));
+
+
+
             }
         });
     }
