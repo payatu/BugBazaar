@@ -34,7 +34,23 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
 
             Toast.makeText(Signin.this, "already logged in!", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(getApplicationContext(),PasscodeActivity.class));
+            Log.d("passcodemait", String.valueOf(UserAuthSave.getpasscode_flag()));
+
+            if(UserAuthSave.getpasscode_flag()){
+
+                startActivity(new Intent(this,PasscodeActivity.class));
+            }
+
+            else {
+                startActivity(new Intent(this,CreatePasscode.class));
+
+
+            }
+
+            return;
+
+
+
 
 
 
@@ -67,6 +83,7 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
                 String password = passwordEditText.getText().toString().trim();
                 boolean isLoggedin= loginController.validateLogin(username, password);
 
+
                 if (isLoggedin) {
 
                     UserAuthSave.saveUserCredentials(username,password, true);
@@ -75,7 +92,7 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
                     Toast.makeText(Signin.this, "Login successful!", Toast.LENGTH_SHORT).show();
 
 
-                    startActivity(new Intent(getApplicationContext(),PasscodeActivity.class));
+                        startActivity(new Intent(getApplicationContext(),CreatePasscode.class));
                 } else {
 
 //                    UserAuthSave.saveUserCredentials(username,password, false);
