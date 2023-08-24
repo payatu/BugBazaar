@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<products>
+    <product name="Product 1" imageResId="@drawable/item_camera" description="Description of Product 1" />
+    <product name="Product 2" imageResId="@drawable/item_camera" description="Description of Product 2" />
+    <!-- Add more product entries -->
+</products>

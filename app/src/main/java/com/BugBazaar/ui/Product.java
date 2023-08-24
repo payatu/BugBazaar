@@ -1,18 +1,22 @@
 package com.BugBazaar.ui;
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 public class Product implements Parcelable {
     private int imageResId;
     private String name;
     private String description;
+    private String price;
 
-    public Product(String name, String description, int imageResId) {
+    public Product(String name, String description, int imageResId, String price) {
         this.imageResId = imageResId;
         this.name = name;
         this.description = description;
+        this.price=price;
     }
-
+    int cornerRadius = 16; // Set the desired corner radius
     // Rest of the Parcelable implementation...
 
     protected Product(Parcel in) {
@@ -44,7 +48,9 @@ public class Product implements Parcelable {
     public String getDescription() {
         return description;
     }
-
+    public String getPrice() {
+        return price;
+    }
     @Override
     public int describeContents() {
         return 0;
@@ -55,6 +61,7 @@ public class Product implements Parcelable {
         parcel.writeInt(imageResId);
         parcel.writeString(name);
         parcel.writeString(description);
+        parcel.writeString(price);
     }
 }
 
