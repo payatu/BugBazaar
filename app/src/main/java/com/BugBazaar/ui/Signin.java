@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.BugBazaar.Models.CredentialsLoader;
 import com.BugBazaar.R;
+import com.BugBazaar.controller.UserAuthSave;
 import com.BugBazaar.utils.PermissionManager;
 import com.BugBazaar.utils.PermissionCallback;
 
@@ -26,6 +27,35 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        UserAuthSave userAuthSave = new UserAuthSave(getApplicationContext()); // 'this' refers to the Activity's context
+
+
+        if(UserAuthSave.isLoggedIn()){
+
+            Toast.makeText(Signin.this, "already logged in!", Toast.LENGTH_SHORT).show();
+
+            Log.d("passcodemait", String.valueOf(UserAuthSave.getpasscode_flag()));
+
+            if(UserAuthSave.getpasscode_flag()){
+
+                startActivity(new Intent(this,PasscodeActivity.class));
+            }
+
+            else {
+                startActivity(new Intent(this,CreatePasscode.class));
+
+
+            }
+
+            return;
+
+
+
+
+
+
+        }
+
         loginController = new com.BugBazaar.controller.LoginController();
 
         permissionManager = new PermissionManager(this, this);
@@ -52,11 +82,20 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
                 String username = usernameEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
                 boolean isLoggedin= loginController.validateLogin(username, password);
+
+
                 if (isLoggedin) {
+
+                    UserAuthSave.saveUserCredentials(username,password, true);
+
                     // Successful login, do something (e.g., start a new activity)
                     Toast.makeText(Signin.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),PasscodeActivity.class));
+
+
+                        startActivity(new Intent(getApplicationContext(),CreatePasscode.class));
                 } else {
+
+//                    UserAuthSave.saveUserCredentials(username,password, false);
                     // Failed login, show an error message
                     Toast.makeText(Signin.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                 }
