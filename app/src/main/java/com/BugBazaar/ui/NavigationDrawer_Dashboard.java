@@ -118,4 +118,8 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
             drawerLayout.openDrawer(GravityCompat.START);
         }
     }
+
+    public void onBackPressed() {
+        finishAffinity();
+    }
 }
