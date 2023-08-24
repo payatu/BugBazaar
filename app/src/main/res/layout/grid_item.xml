@@ -1,13 +1,13 @@
-<!-- res/layout/grid_item.xml -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:background="@drawable/back_blur">
     <ImageView
         android:id="@+id/itemImage"
         android:layout_width="match_parent"
@@ -15,7 +15,6 @@
         android:onClick="itemClicked"
         android:scaleType="centerInside"
         android:src="@drawable/item_camera"
-        android:background="@drawable/back_blur"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -26,28 +25,30 @@
     <TextView
         android:id="@+id/itemName"
         android:layout_width="412dp"
-        android:layout_height="25dp"
+        android:layout_height="22dp"
         android:layout_marginEnd="136dp"
         android:background="#9936454F"
-        android:padding="2dp"
+        android:paddingBottom="3dp"
+        android:paddingLeft="10dp"
         android:text="Product Name"
         android:textColor="@color/white"
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/itemImage"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.007"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/itemImage"
-        app:layout_constraintVertical_bias="0.871" />
+        app:layout_constraintVertical_bias="0.869" />
 
     <TextView
         android:id="@+id/itemPrice"
         android:layout_width="412dp"
-        android:layout_height="25dp"
+        android:layout_height="22dp"
         android:layout_marginEnd="136dp"
         android:background="#9936454F"
-        android:padding="2dp"
+        android:paddingBottom="3dp"
+        android:paddingLeft="10dp"
         android:text="₹3,000"
         android:textColor="@color/white"
         android:textSize="15dp"

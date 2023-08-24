@@ -28,11 +28,11 @@
             <GridView
                 android:id="@+id/productGridView"
                 android:layout_width="match_parent"
-                android:layout_height="603dp"
+                android:layout_height="617dp"
                 android:gravity="center"
                 android:horizontalSpacing="8dp"
                 android:numColumns="2"
-                android:padding="16dp"
+                android:padding="12dp"
                 android:stretchMode="columnWidth"
                 android:verticalSpacing="8dp" />
 
