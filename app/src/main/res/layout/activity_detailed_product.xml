@@ -1,60 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/linearLayout3">
+    android:orientation="vertical">
 
-
+    <include
+        layout="@layout/nav_toolbar_sub"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"></include>
 
     <ImageView
         android:id="@+id/detailedImage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         android:src="@drawable/deadpool"
-        android:paddingTop="30dp"
-        tools:layout_conversion_absoluteHeight="350dp"
-        tools:layout_editor_absoluteY="56dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_conversion_absoluteWidth="411dp" />
+        android:paddingTop="30dp"/>
 
     <TextView
         android:id="@+id/detailedName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Product Name"
         android:textSize="35dp"
         android:textStyle="bold"
-        android:paddingLeft="10dp"
-        tools:layout_conversion_absoluteHeight="47dp"
-        tools:layout_editor_absoluteY="407dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_conversion_absoluteWidth="411dp" />
+        android:layout_marginTop="1dp"
+        android:paddingLeft="10dp"/>
     <TextView
         android:id="@+id/detailedPrice"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Price"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:paddingLeft="10dp"
-        tools:layout_conversion_absoluteHeight="40dp"
-        tools:layout_editor_absoluteY="455dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_conversion_absoluteWidth="205dp" />
+        android:layout_marginTop="1dp"
+        android:paddingLeft="10dp"/>
 
     <TextView
         android:id="@+id/detailedDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Product Description"
         android:textSize="20dp"
-        android:paddingLeft="10dp"
-        tools:layout_conversion_absoluteHeight="27dp"
-        tools:layout_editor_absoluteY="497dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_conversion_absoluteWidth="411dp" />
+        android:layout_marginTop="1dp"
+        android:paddingLeft="10dp"/>
 
 </LinearLayout>
