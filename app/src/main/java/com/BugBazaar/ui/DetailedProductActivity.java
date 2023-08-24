@@ -29,10 +29,12 @@ public class DetailedProductActivity extends AppCompatActivity {
         ImageView detailedImage = findViewById(R.id.detailedImage);
         TextView detailedName = findViewById(R.id.detailedName);
         TextView detailedDescription = findViewById(R.id.detailedDescription);
+        TextView detailedPrice=findViewById(R.id.detailedPrice);
 
         detailedImage.setImageResource(product.getImageResId());
         detailedName.setText(product.getName());
         detailedDescription.setText(product.getDescription());
+        detailedPrice.setText(product.getPrice());
     }
     //Code to handle backbutton
     public void onBackButtonClick(View view) {

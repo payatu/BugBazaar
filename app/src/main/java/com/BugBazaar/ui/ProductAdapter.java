@@ -52,11 +52,13 @@ public class ProductAdapter extends BaseAdapter {
 
         ImageView itemImage = view.findViewById(R.id.itemImage);
         TextView itemName = view.findViewById(R.id.itemName);
+        TextView itemPrice = view.findViewById(R.id.itemPrice);
 
         Product product = productList.get(position);
 
         itemImage.setImageResource(product.getImageResId());
         itemName.setText(product.getName());
+        itemPrice.setText(product.getPrice());
 
         // Set OnClickListener for the product click
         itemImage.setOnClickListener(new View.OnClickListener() {

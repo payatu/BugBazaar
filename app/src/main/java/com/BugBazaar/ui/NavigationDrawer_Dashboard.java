@@ -40,7 +40,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,"₹5,640"));
         productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,"₹19,000"));
         productList.add(new Product("PineApple iPhone", getString(R.string.desc_cycle), R.drawable.item_iphone,"₹69,000"));
-        productList.add(new Product("Z Box Gaming Controller", getString(R.string.desc_cycle), R.drawable.item_gc,"₹3,000"));
+        productList.add(new Product("Z Box Gaming Controller", getString(R.string.desc_cycle), R.drawable.item_gc,"₹3,400"));
         productList.add(new Product("A Rat", getString(R.string.desc_cycle), R.drawable.item_mouse,"₹1,200"));
         productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,"₹4,200"));
         productList.add(new Product("VR device", getString(R.string.desc_cycle), R.drawable.item_vr,"₹24,000"));
