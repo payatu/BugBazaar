@@ -29,6 +29,13 @@
         android:theme="@style/Theme.BugBazaar"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <provider
+            android:name=".provider.UserProfileProvider"
+            android:authorities="com.BugBazaar.UserProfile"
+            android:enabled="true"
+            android:readPermission="@string/app_name"
+            android:exported="true" />
+
         <activity
             android:name=".ui.DetailedProductActivity"
             android:exported="false" />
@@ -40,7 +47,7 @@
             android:exported="true" />
         <activity
             android:name=".ui.NavigationDrawer_Dashboard"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,12 +69,10 @@
         <activity
             android:name=".ui.PasscodeActivity"
             android:exported="true" />
-
         <activity
             android:name=".ui.Signin"
-            android:exported="true">
-
-        </activity>
+            android:clearTaskOnLaunch="true"
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
