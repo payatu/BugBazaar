@@ -12,8 +12,8 @@
     <ImageView
         android:id="@+id/detailedImage"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:scaleType="centerInside"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
         android:src="@drawable/deadpool"
         android:padding="16dp"/>
 
