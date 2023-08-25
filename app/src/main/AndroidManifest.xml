@@ -55,8 +55,9 @@
             </intent-filter>
         </activity>
         <activity
+
             android:name=".ui.MyProfile"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ui.TermsAndConditionsActivity"
             android:exported="true" />
