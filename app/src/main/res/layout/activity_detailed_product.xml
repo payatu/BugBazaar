@@ -77,15 +77,15 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="2"
+            android:layout_height="70dp"
+            android:layout_weight="1"
             android:background="@drawable/sharp_button_corners"
             android:text="Add to Cart"></Button>
 
         <Button
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="2"
+        android:layout_height="70dp"
+        android:layout_weight="1"
         android:background="@drawable/sharp_button_corners"
         android:text="Save to Wishlist"
         ></Button>
