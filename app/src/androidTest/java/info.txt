@@ -1,2 +1,5 @@
 "username ="admin
 "password" = BugBazaarSeccool
+
+
+- Account Takeover using insecure file upload
