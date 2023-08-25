@@ -12,10 +12,10 @@
     <ImageView
         android:id="@+id/detailedImage"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:scaleType="centerInside"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
         android:src="@drawable/deadpool"
-        android:padding="16dp"/>
+        android:paddingTop="30dp"/>
 
     <TextView
         android:id="@+id/detailedName"
@@ -24,8 +24,17 @@
         android:text="Product Name"
         android:textSize="35dp"
         android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:padding="16dp"/>
+        android:layout_marginTop="1dp"
+        android:paddingLeft="10dp"/>
+    <TextView
+        android:id="@+id/detailedPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginTop="1dp"
+        android:paddingLeft="10dp"/>
 
     <TextView
         android:id="@+id/detailedDescription"
@@ -33,7 +42,7 @@
         android:layout_height="wrap_content"
         android:text="Product Description"
         android:textSize="20dp"
-        android:layout_marginTop="8dp"
-        android:padding="16dp"/>
+        android:layout_marginTop="1dp"
+        android:paddingLeft="10dp"/>
 
 </LinearLayout>

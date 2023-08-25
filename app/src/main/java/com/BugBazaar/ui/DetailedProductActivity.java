@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,9 @@ public class DetailedProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_product);
+        //Toolbar title set
+        TextView toolbarTitle = findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText("Product Details");
 
         // Retrieve the product details passed from the adapter
         Intent intent = getIntent();
@@ -25,9 +29,15 @@ public class DetailedProductActivity extends AppCompatActivity {
         ImageView detailedImage = findViewById(R.id.detailedImage);
         TextView detailedName = findViewById(R.id.detailedName);
         TextView detailedDescription = findViewById(R.id.detailedDescription);
+        TextView detailedPrice=findViewById(R.id.detailedPrice);
 
         detailedImage.setImageResource(product.getImageResId());
         detailedName.setText(product.getName());
         detailedDescription.setText(product.getDescription());
+        detailedPrice.setText(product.getPrice());
+    }
+    //Code to handle backbutton
+    public void onBackButtonClick(View view) {
+        onBackPressed(); // Navigate back to the previous activity
     }
 }

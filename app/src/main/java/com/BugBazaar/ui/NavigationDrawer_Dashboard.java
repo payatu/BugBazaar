@@ -19,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class NavigationDrawer_Dashboard extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -34,14 +35,15 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
 
         // product data
         productList = new ArrayList<>();
-        productList.add(new Product("DeadPool", "A merc with mouth", R.drawable.deadpool));
-        productList.add(new Product("Squirtle", "Evolution Level 1", R.drawable.jap));
-        productList.add(new Product("PoolDead", "Bad parody of deadpool", R.drawable.deadpool));
-        productList.add(new Product("Turtle", "Just a water turtle", R.drawable.jap));
-        productList.add(new Product("Wolverine", "A guy who scratch his balls with claws", R.drawable.deadpool));
-        productList.add(new Product("Tortoise", "Description 2", R.drawable.jap));
-        productList.add(new Product("Product 1", "Description 1", R.drawable.deadpool));
-        productList.add(new Product("Product 2", "Description 2", R.drawable.jap));
+        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,"₹3,000"));
+        productList.add(new Product("Dumb Watch", getString(R.string.desc_cycle), R.drawable.item_watch,"₹2,400"));
+        productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,"₹5,640"));
+        productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,"₹19,000"));
+        productList.add(new Product("PineApple iPhone", getString(R.string.desc_cycle), R.drawable.item_iphone,"₹69,000"));
+        productList.add(new Product("Z Box Gaming Controller", getString(R.string.desc_cycle), R.drawable.item_gc,"₹3,400"));
+        productList.add(new Product("A Rat", getString(R.string.desc_cycle), R.drawable.item_mouse,"₹1,200"));
+        productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,"₹4,200"));
+        productList.add(new Product("VR device", getString(R.string.desc_cycle), R.drawable.item_vr,"₹24,000"));
         // Find the GridView in the layout
         productGridView = findViewById(R.id.productGridView);
 
