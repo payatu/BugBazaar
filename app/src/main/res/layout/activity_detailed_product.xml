@@ -1,48 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/nav_toolbar_sub"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"></include>
-
-    <ImageView
-        android:id="@+id/detailedImage"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@drawable/deadpool"
-        android:paddingTop="30dp"/>
+        android:layout_height="676dp">
 
-    <TextView
-        android:id="@+id/detailedName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Product Name"
-        android:textSize="35dp"
-        android:textStyle="bold"
-        android:layout_marginTop="1dp"
-        android:paddingLeft="10dp"/>
-    <TextView
-        android:id="@+id/detailedPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Price"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:layout_marginTop="1dp"
-        android:paddingLeft="10dp"/>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/detailedDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Product Description"
-        android:textSize="20dp"
-        android:layout_marginTop="1dp"
-        android:paddingLeft="10dp"/>
+            <include
+                layout="@layout/nav_toolbar_sub"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></include>
 
+            <ImageView
+                android:id="@+id/detailedImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/deadpool" />
+
+            <TextView
+                android:id="@+id/detailedName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:paddingLeft="10dp"
+                android:text="Product Name"
+                android:textSize="35dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detailedPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:paddingLeft="10dp"
+                android:text="Price"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/titleDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:paddingLeft="10dp"
+                android:text="Product Description:"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detailedDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:paddingLeft="10dp"
+                android:text="Product Description"
+                android:textSize="20dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:background="@drawable/sharp_button_corners"
+            android:text="Add to Cart"></Button>
+
+        <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="2"
+        android:background="@drawable/sharp_button_corners"
+        android:text="Save to Wishlist"
+        ></Button>
+    </LinearLayout>
 </LinearLayout>
