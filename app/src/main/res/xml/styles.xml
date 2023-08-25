@@ -1,3 +1,13 @@
-<style name="CustomFontStyle">
-    <item name="android:fontFamily">@font/coolvetica</item>
-</style>
+<resources>
+
+    <style name="CustomFontStyle">
+        <item name="android:fontFamily">@font/coolvetica</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/sharp_button_corners</item>
+        <item name="android:textColor">@color/black</item>
+        <!-- Add other properties as needed -->
+    </style>
+
+</resources>

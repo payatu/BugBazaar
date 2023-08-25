@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.BugBazaar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">#3a5e7d</item>
-        <item name="colorPrimaryVariant">#3a5e7d</item>
+        <!-- Primary brand color.-->
+        <item name="colorPrimary">@color/main_theme</item>
+        <item name="colorPrimaryVariant">@color/primary_varient</item>
         <item name="colorOnPrimary">#FBEEC1</item>
-        <!-- Secondary brand color. -->
+        <!-- Secondary brand color.-->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
