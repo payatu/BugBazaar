@@ -176,7 +176,7 @@ public class MyProfile extends AppCompatActivity {
 
 
     private void selectPhotoFromGallery() {
-        Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent photoPickerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         photoPickerIntent.setType("*/*");
         startActivityForResult(photoPickerIntent,SELECT_FILE_REQUEST);
     }
