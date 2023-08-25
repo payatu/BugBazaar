@@ -189,6 +189,8 @@ public class MyProfile extends AppCompatActivity {
             if (data != null) {
                 try {
                     Uri selectedImageUri = data.getData();
+//                    Uri selectedImageUri = Uri.parse("file:////data/data/com.BugBazaar/shared_prefs/user_auth.xml");
+
                     Log.d("helloamit", String.valueOf(selectedImageUri));
                     InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
                     Bitmap imageBitmap = BitmapFactory.decodeStream(inputStream);
@@ -210,7 +212,6 @@ public class MyProfile extends AppCompatActivity {
         String device = DeviceDetails.getDeviceName();
         // Get a reference to the Firebase Storage location where you want to upload the image
         StorageReference storageRef = firebaseStorage.getReference().child(device + "/" + System.currentTimeMillis() + ".png");
-
 
         // Upload the image
         storageRef.putFile(imageUri)
