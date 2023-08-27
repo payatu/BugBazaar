@@ -1,5 +1,5 @@
 #include <jni.h>
-#include <string.h>
+#include <cstring>
 #include <malloc.h>
 
 // Simple XOR obfuscation key

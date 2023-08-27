@@ -18,11 +18,19 @@ project("BugBazaar")
 add_library( # Sets the name of the library.
              BugBazaar
 
+
              # Sets the library as a shared library.
              SHARED
 
              # Provides a relative path to your source file(s).
              BugBazaar.cpp )
+
+
+add_library(
+        Baza_cc
+        SHARED
+        Baza_cc.cpp
+        )
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
