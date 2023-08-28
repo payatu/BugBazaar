@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -73,32 +74,43 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searchText = searchEditText.getText().toString().toLowerCase().trim();
+                String searchText = String.valueOf(searchEditText.getText());
+                Log.d("amit", String.valueOf(searchText.length()));
 
-                ArrayList<Product> filteredList = new ArrayList<>();
-                for (Product product : productList) {
-                    if (product.getName().toLowerCase().contains(searchText)) {
-                        filteredList.add(product);
+                if (searchText.length() <= 25) {
+
+                    ArrayList<Product> filteredList = new ArrayList<>();
+                    for (Product product : productList) {
+                        if (product.getName().toLowerCase().contains(searchText)) {
+                            filteredList.add(product);
+                        }
                     }
-                }
-                if (filteredList.isEmpty()) {
-                    // Show "No products found" message
-                    ProductAdapter adapter = new ProductAdapter(NavigationDrawer_Dashboard.this, new ArrayList<>());
-                    productGridView.setAdapter(adapter);
-                    Toast.makeText(NavigationDrawer_Dashboard.this, "No products found", Toast.LENGTH_LONG).show();
-                } else {
-                    // Update the GridView adapter with filtered data
-                    ProductAdapter adapter = new ProductAdapter(NavigationDrawer_Dashboard.this, filteredList);
-                    productGridView.setAdapter(adapter);
+                    if (filteredList.isEmpty()) {
+                        // Show "No products found" message
+                        ProductAdapter adapter = new ProductAdapter(NavigationDrawer_Dashboard.this, new ArrayList<>());
+                        productGridView.setAdapter(adapter);
+                        Toast.makeText(NavigationDrawer_Dashboard.this, "No products found", Toast.LENGTH_LONG).show();
+                    } else {
+                        // Update the GridView adapter with filtered data
+                        ProductAdapter adapter = new ProductAdapter(NavigationDrawer_Dashboard.this, filteredList);
+                        productGridView.setAdapter(adapter);
+                    }
+
+
+                    // Hide the keyboard
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
 
-                // Hide the keyboard
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                String filteredList = null;
+                Log.d("Excpetion",filteredList);
             }
 
 
+
         });
+
+
 
         //Drawer and Navigation bar layout view find
         drawerLayout = findViewById(R.id.drawerLayout);
