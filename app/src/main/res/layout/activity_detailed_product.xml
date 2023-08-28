@@ -7,11 +7,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="676dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <include
@@ -22,7 +24,7 @@
             <ImageView
                 android:id="@+id/detailedImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="270dp"
                 android:paddingTop="30dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/deadpool" />
@@ -32,9 +34,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
                 android:text="Product Name"
-                android:textSize="35dp"
+                android:textColor="#3a5e7d"
+                android:textSize="32sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -43,19 +46,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:paddingLeft="10dp"
+                android:textColor="@color/black"
                 android:text="Price"
-                android:textSize="25dp"
+                android:textSize="24dp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/titleDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
+                android:layout_marginTop="10dp"
                 android:paddingLeft="10dp"
                 android:text="Product Description:"
+                android:textColor="#3a5e7d"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:id="@+id/detailedDescription"
@@ -70,24 +76,23 @@
         </LinearLayout>
     </ScrollView>
     <LinearLayout
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/sharp_button_corners"
             android:text="Add to Cart"></Button>
 
         <Button
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/sharp_button_corners"
-        android:text="Save to Wishlist"
-        ></Button>
+            android:background="@color/black"
+            style="?android:attr/buttonBarButtonStyle"
+        android:text="Save to Wishlist"></Button>
     </LinearLayout>
 </LinearLayout>
