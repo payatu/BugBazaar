@@ -15,6 +15,7 @@
     </queries>
 
     <application
+        tools:replace="android:fullBackupContent"
         android:allowBackup="true"
         android:allowTaskReparenting="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -57,7 +58,7 @@
         <activity
 
             android:name=".ui.MyProfile"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.TermsAndConditionsActivity"
             android:exported="true" />
