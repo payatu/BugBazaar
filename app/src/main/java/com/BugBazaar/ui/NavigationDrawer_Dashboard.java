@@ -5,11 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
@@ -32,6 +37,21 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer_dashboard);
+        // Hide the keyboard and clear focus from the EditText
+        View focusedView = getCurrentFocus();
+        if (focusedView != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(focusedView.getWindowToken(), 0);
+            focusedView.clearFocus();
+        }
+
+        //Product Search views find
+        EditText searchEditText = findViewById(R.id.searchBox);
+        Button searchButton = findViewById(R.id.btnSearch);
+
+
+        // Find the GridView in the layout
+        productGridView = findViewById(R.id.productGridView);
 
         // product data
         productList = new ArrayList<>();
@@ -44,13 +64,43 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         productList.add(new Product("A Rat", getString(R.string.desc_cycle), R.drawable.item_mouse,"₹1,200"));
         productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,"₹4,200"));
         productList.add(new Product("VR device", getString(R.string.desc_cycle), R.drawable.item_vr,"₹24,000"));
-        // Find the GridView in the layout
-        productGridView = findViewById(R.id.productGridView);
+
 
         // Create and set the adapter for the GridView
         ProductAdapter adapter = new ProductAdapter(this, productList);
         productGridView.setAdapter(adapter);
+        //Adding onClickListener to search button
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchText = searchEditText.getText().toString().toLowerCase().trim();
 
+                ArrayList<Product> filteredList = new ArrayList<>();
+                for (Product product : productList) {
+                    if (product.getName().toLowerCase().contains(searchText)) {
+                        filteredList.add(product);
+                    }
+                }
+                if (filteredList.isEmpty()) {
+                    // Show "No products found" message
+                    ProductAdapter adapter = new ProductAdapter(NavigationDrawer_Dashboard.this, new ArrayList<>());
+                    productGridView.setAdapter(adapter);
+                    Toast.makeText(NavigationDrawer_Dashboard.this, "No products found", Toast.LENGTH_LONG).show();
+                } else {
+                    // Update the GridView adapter with filtered data
+                    ProductAdapter adapter = new ProductAdapter(NavigationDrawer_Dashboard.this, filteredList);
+                    productGridView.setAdapter(adapter);
+                }
+
+                // Hide the keyboard
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+
+
+        });
+
+        //Drawer and Navigation bar layout view find
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.mainNavView);
         toolbar = findViewById(R.id.toolbar);
@@ -63,6 +113,8 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+
 
         //Adding actions for each items in navigation drawer
         navigationView.setNavigationItemSelectedListener(item -> {
