@@ -30,12 +30,16 @@
         android:theme="@style/Theme.BugBazaar"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.Cart"
+            android:exported="false" />
+
         <provider
             android:name=".provider.UserProfileProvider"
             android:authorities="com.BugBazaar.UserProfile"
             android:enabled="true"
-            android:readPermission="@string/app_name"
-            android:exported="true" />
+            android:exported="true"
+            android:readPermission="@string/app_name" />
 
         <activity
             android:name=".ui.DetailedProductActivity"
