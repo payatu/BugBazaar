@@ -77,7 +77,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 String searchText = String.valueOf(searchEditText.getText());
                 Log.d("amit", String.valueOf(searchText.length()));
 
-                if (searchText.length() <= 25) {
+                if (searchText.length() <= 30) {
 
                     ArrayList<Product> filteredList = new ArrayList<>();
                     for (Product product : productList) {
