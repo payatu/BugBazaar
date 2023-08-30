@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,9 +36,27 @@ public class DetailedProductActivity extends AppCompatActivity {
         detailedName.setText(product.getName());
         detailedDescription.setText(product.getDescription());
         detailedPrice.setText(product.getPrice());
+        //Add to cart button view
+        Button addToCartButton = findViewById(R.id.addToCartButton);
+        // Handle "Add to Cart" button click
+        addToCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an intent to start AddToCartActivity
+                Intent addToCartIntent = new Intent(DetailedProductActivity.this, Cart.class);
+                // Pass the product details to the intent
+                addToCartIntent.putExtra("product", product);
+                // Start the AddToCartActivity
+                startActivity(addToCartIntent);
+            }
+        });
     }
+
+
+
     //Code to handle backbutton
     public void onBackButtonClick(View view) {
         onBackPressed(); // Navigate back to the previous activity
     }
+
 }
