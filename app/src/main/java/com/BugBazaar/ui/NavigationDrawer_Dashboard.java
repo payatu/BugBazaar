@@ -96,7 +96,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                         productGridView.setAdapter(adapter);
                     }
 
-
                     // Hide the keyboard
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -106,11 +105,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 Log.d("Excpetion",filteredList);
             }
 
-
-
         });
-
-
 
         //Drawer and Navigation bar layout view find
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -145,7 +140,10 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 Toast.makeText(this, "Wallet is clicked", Toast.LENGTH_SHORT).show();
             }
             else if (itemId == R.id.itemCart) {
-                Toast.makeText(this, "Cart is clicked", Toast.LENGTH_SHORT).show();
+                Intent intent =new Intent(this, Cart.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
             }else if (itemId == R.id.itemContactUs) {
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, Contact_us.class);
                 startActivity(intent);

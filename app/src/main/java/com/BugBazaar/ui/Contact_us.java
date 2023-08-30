@@ -33,6 +33,7 @@ public class Contact_us extends AppCompatActivity {
         setContentView(R.layout.activity_contact_us);
         //Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText("Contact-us");
         WebView webView = findViewById(R.id.webview2);
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
@@ -135,5 +136,9 @@ public class Contact_us extends AppCompatActivity {
 
 
         }
+    }
+    //Code to handle backbutton
+    public void onBackButtonClick(View view) {
+        onBackPressed(); // Navigate back to the previous activity
     }
 }
