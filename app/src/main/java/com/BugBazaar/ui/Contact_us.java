@@ -2,6 +2,7 @@ package com.BugBazaar.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,7 +33,7 @@ public class Contact_us extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);
         //Toolbar title set
-        TextView toolbarTitle = findViewById(R.id.toolbarTitle);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         WebView webView = findViewById(R.id.webview2);
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
