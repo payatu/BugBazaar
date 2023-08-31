@@ -140,7 +140,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 Toast.makeText(this, "Wallet is clicked", Toast.LENGTH_SHORT).show();
             }
             else if (itemId == R.id.itemCart) {
-                Intent intent =new Intent(this, Cart.class);
+                Intent intent =new Intent(this, CartActivity.class);
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
