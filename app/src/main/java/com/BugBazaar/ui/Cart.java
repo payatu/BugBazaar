@@ -1,41 +1,30 @@
 package com.BugBazaar.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.ArrayList;
+import java.util.List;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+public class Cart {
+    private static Cart instance;
+    private List<CartItem> cartItems;
 
-import com.BugBazaar.R;
-
-public class Cart extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
-
-        //Toolbar title set
-        TextView toolbarTitle = findViewById(R.id.toolbarTitle);
-        toolbarTitle.setText("Cart");
-
-        //Get intent from other activities
-        Intent intent = getIntent();
-        Product product=intent.getParcelableExtra("product");
-
-        TextView txtProductName=findViewById(R.id.txtProductName);
-        TextView txtProductPrice=findViewById(R.id.txtProductPrice);
-        ImageView imgProduct=findViewById(R.id.imgProduct);
-
-        txtProductName.setText(product.getName());
-        txtProductPrice.setText(product.getPrice());
-        imgProduct.setImageResource(product.getImageResId());
-
+    private Cart() {
+        cartItems = new ArrayList<>();
     }
-    //Code to handle backbutton
-    public void onBackButtonClick(View view) {
-        onBackPressed(); // Navigate back to the previous activity
+
+    public static Cart getInstance() {
+        if (instance == null) {
+            instance = new Cart();
+        }
+        return instance;
     }
+
+    public void addCartItem(CartItem cartItem) {
+        cartItems.add(cartItem);
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    // Other methods like removeCartItem(), clearCart(), etc.
 }
