@@ -4,27 +4,33 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.BugBazaar.R;
 import com.BugBazaar.ui.Product;
 
-public class DetailedProductActivity extends AppCompatActivity {
+import java.net.Inet4Address;
 
+public class DetailedProductActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_product);
+
         //Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Product Details");
 
         // Retrieve the product details passed from the adapter
-        Intent intent = getIntent();
-        Product product = intent.getParcelableExtra("product");
+        //Intent intent = getIntent();
+        Product product = getIntent().getParcelableExtra("product");
+
+
 
         // Use the product details to display the detailed information
         ImageView detailedImage = findViewById(R.id.detailedImage);
@@ -42,12 +48,20 @@ public class DetailedProductActivity extends AppCompatActivity {
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create an intent to start AddToCartActivity
-                Intent addToCartIntent = new Intent(DetailedProductActivity.this, Cart.class);
-                // Pass the product details to the intent
-                addToCartIntent.putExtra("product", product);
-                // Start the AddToCartActivity
-                startActivity(addToCartIntent);
+                CartItem cartItem = new CartItem(product, 1);
+                cartItem=getIntent().getParcelableExtra("product");
+
+                // Create a CartItem instance with the clicked product and quantity 1
+                //CartItem cartItem = new CartItem(product, 1);
+                Intent intent =new Intent(getApplicationContext(), CartActivity.class);
+                intent.putExtra("addedCartItem",product);
+
+                // Add the cartItem to the cart
+                Cart.getInstance().addCartItem(cartItem);
+
+                //Optionally, show a toast or a message to indicate the item was added to the cart
+                    Toast.makeText(DetailedProductActivity.this, "Product has been added to cart", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
             }
         });
     }
