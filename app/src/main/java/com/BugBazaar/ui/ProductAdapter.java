@@ -65,9 +65,9 @@ public class ProductAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 // Open detailed product page or activity here
-                Intent intentz = new Intent(context, DetailedProductActivity.class);
-                intentz.putExtra("product", product);
-                context.startActivity(intentz);
+                Intent intent = new Intent(context, DetailedProductActivity.class);
+                intent.putExtra("product", product);
+                context.startActivity(intent);
             }
         });
         return view;

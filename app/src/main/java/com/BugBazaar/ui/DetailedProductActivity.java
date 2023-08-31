@@ -30,8 +30,6 @@ public class DetailedProductActivity extends AppCompatActivity {
         //Intent intent = getIntent();
         Product product = getIntent().getParcelableExtra("product");
 
-
-
         // Use the product details to display the detailed information
         ImageView detailedImage = findViewById(R.id.detailedImage);
         TextView detailedName = findViewById(R.id.detailedName);
@@ -49,12 +47,17 @@ public class DetailedProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CartItem cartItem = new CartItem(product, 1);
-                cartItem=getIntent().getParcelableExtra("product");
+//                cartItem=getIntent().getParcelableExtra("product");
+                if(getIntent().getParcelableExtra("product")==null){
+
+                    Log.d("amitcool", String.valueOf(cartItem));
+                }
+
 
                 // Create a CartItem instance with the clicked product and quantity 1
                 //CartItem cartItem = new CartItem(product, 1);
                 Intent intent =new Intent(getApplicationContext(), CartActivity.class);
-                intent.putExtra("addedCartItem",product);
+                intent.putExtra("addedCartItem",cartItem);
 
                 // Add the cartItem to the cart
                 Cart.getInstance().addCartItem(cartItem);
