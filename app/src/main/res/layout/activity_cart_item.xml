@@ -49,8 +49,9 @@
 
     <ImageView
         android:id="@+id/incrementButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:paddingTop="3dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:src="@drawable/baseline_add_plus" />
 
     <TextView
@@ -58,13 +59,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="22"
-        android:textSize="24sp"
+        android:textSize="20dp"
         android:textColor="#333333"
         android:paddingHorizontal="8dp"/>
 
     <ImageView
         android:id="@+id/decrementButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:paddingTop="3dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:src="@drawable/baseline_remove_minus" />
 </LinearLayout>

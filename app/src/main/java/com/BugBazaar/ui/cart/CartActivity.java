@@ -35,21 +35,29 @@ public class CartActivity extends AppCompatActivity {
         // Initialize your cartItems list and populate it
         cartItems = new ArrayList<>();
 
-        // Retrieve the ArrayList<CartItem> extra from the intent
+// Retrieve the ArrayList<CartItem> extra from the intent
         Intent intent = getIntent();
         ArrayList<CartItem> receivedCartItems = intent.getParcelableArrayListExtra("cartItems");
 
+// Log the product names from the initial cartItems list
+        if (receivedCartItems != null) {
+            for (CartItem cartItem : receivedCartItems) {
+                Log.d("ReceivedCartItems", "Product Name: " + cartItem.getProductName());
+            }
+        }
+        //Adding new cart items (receivedCartItems) to old list (cartItems)
         if (receivedCartItems != null) {
             cartItems.addAll(receivedCartItems);
-
         }
 
-        // Create and set up the adapter
+// Create and set up the adapter
         cartAdapter = new CartAdapter(this, cartItems);
+
         cartRecyclerView.setAdapter(cartAdapter);
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        // Notify the adapter that the dataset has changed
+// Notify the adapter that the dataset has changed
         cartAdapter.notifyDataSetChanged();
+
     }
 
     //Code to handle backbutton
