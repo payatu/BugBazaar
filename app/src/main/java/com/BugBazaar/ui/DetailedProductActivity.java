@@ -12,9 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.BugBazaar.R;
-import com.BugBazaar.ui.Product;
+import com.BugBazaar.ui.cart.Cart;
+import com.BugBazaar.ui.cart.CartActivity;
+import com.BugBazaar.ui.cart.CartDatabaseHelper;
+import com.BugBazaar.ui.cart.CartItem;
 
-import java.net.Inet4Address;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailedProductActivity extends AppCompatActivity {
     @Override
@@ -22,58 +26,60 @@ public class DetailedProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_product);
 
-        //Toolbar title set
+        CartDatabaseHelper cartDBHelper=new CartDatabaseHelper(this,"cart.db",null,1);
+
+        // Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Product Details");
 
         // Retrieve the product details passed from the adapter
-        //Intent intent = getIntent();
         Product product = getIntent().getParcelableExtra("product");
 
         // Use the product details to display the detailed information
         ImageView detailedImage = findViewById(R.id.detailedImage);
         TextView detailedName = findViewById(R.id.detailedName);
         TextView detailedDescription = findViewById(R.id.detailedDescription);
-        TextView detailedPrice=findViewById(R.id.detailedPrice);
+        TextView detailedPrice = findViewById(R.id.detailedPrice);
 
         detailedImage.setImageResource(product.getImageResId());
         detailedName.setText(product.getName());
         detailedDescription.setText(product.getDescription());
         detailedPrice.setText(product.getPrice());
-        //Add to cart button view
+
+        // Add to cart button view
         Button addToCartButton = findViewById(R.id.addToCartButton);
+
         // Handle "Add to Cart" button click
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CartItem cartItem = new CartItem(product, 1);
-//                cartItem=getIntent().getParcelableExtra("product");
-                if(getIntent().getParcelableExtra("product")==null){
-
-                    Log.d("amitcool", String.valueOf(cartItem));
-                }
-
-
                 // Create a CartItem instance with the clicked product and quantity 1
-                //CartItem cartItem = new CartItem(product, 1);
-                Intent intent =new Intent(getApplicationContext(), CartActivity.class);
-                intent.putExtra("addedCartItem",cartItem);
+                String productName = product.getName();
+                int productPrice = Integer.parseInt(product.getPrice());
+                int quantity = 1;
 
-                // Add the cartItem to the cart
-                Cart.getInstance().addCartItem(cartItem);
+                // Save the product details to the SQLite database
+                long recordId = cartDBHelper.saveProductDetails(productName, productPrice, quantity);
+                // Optionally, show a toast or a message to indicate the item was added to the cart
+                Toast.makeText(DetailedProductActivity.this, "Product has been added to cart", Toast.LENGTH_SHORT).show();
 
-                //Optionally, show a toast or a message to indicate the item was added to the cart
-                    Toast.makeText(DetailedProductActivity.this, "Product has been added to cart", Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
+                List<CartItem> cartItems = cartDBHelper.getAllRecords();
+                ArrayList<CartItem> cartItemList=new ArrayList<>(cartItems);
+                for (CartItem cartItem : cartItemList) {
+                    Log.d("DetailedProd", "Product Name: " + cartItem.getProductName());
+                }
+                Intent intent=new Intent(DetailedProductActivity.this, CartActivity.class);
+                intent.putParcelableArrayListExtra("cartItems",cartItemList);
+                startActivity(intent);
+
             }
         });
+
     }
 
-
-
-    //Code to handle backbutton
+    // Code to handle back button
     public void onBackButtonClick(View view) {
         onBackPressed(); // Navigate back to the previous activity
     }
-
 }
+

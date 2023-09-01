@@ -31,10 +31,10 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31" >
         <activity
-            android:name=".ui.CartActivity"
+            android:name=".ui.cart.CartActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.Cart"
+            android:name=".ui.cart.Cart"
             android:exported="false" />
 
         <provider

@@ -1,4 +1,4 @@
-package com.BugBazaar.ui;
+package com.BugBazaar.ui.cart;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,25 +34,24 @@ public class CartActivity extends AppCompatActivity {
 
         // Initialize your cartItems list and populate it
         cartItems = new ArrayList<>();
-        //Log.d("addedCartItem", getIntent().getParcelableExtra("addedCartItem"));
-        // Retrieve the added cart item from the intent
-        CartItem addedCartItem = getIntent().getParcelableExtra("addedCartItem");
-        if(addedCartItem == null){
-            Log.d("nulladdedCartItem","addedCartItem is null");
+
+        // Retrieve the ArrayList<CartItem> extra from the intent
+        Intent intent = getIntent();
+        ArrayList<CartItem> receivedCartItems = intent.getParcelableArrayListExtra("cartItems");
+
+        if (receivedCartItems != null) {
+            cartItems.addAll(receivedCartItems);
+
         }
-        // Add the added cart item to the list
-        cartItems.add(addedCartItem);
-
-
 
         // Create and set up the adapter
         cartAdapter = new CartAdapter(this, cartItems);
         cartRecyclerView.setAdapter(cartAdapter);
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // Notify the adapter that the dataset has changed
+        cartAdapter.notifyDataSetChanged();
     }
 
-    // ... other code ...
-    //Toolbar title set
     //Code to handle backbutton
     public void onBackButtonClick(View view) {
         onBackPressed(); // Navigate back to the previous activity
