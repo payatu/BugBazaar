@@ -1,4 +1,4 @@
-package com.BugBazaar.ui;
+package com.BugBazaar.ui.cart;
 
 import android.content.Context;
 import android.view.LayoutInflater;

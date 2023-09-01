@@ -47,24 +47,24 @@
             android:textColor="#666666"/>
     </LinearLayout>
 
-    <Button
+    <ImageView
         android:id="@+id/incrementButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:text="Add" />
+        android:src="@drawable/baseline_add_plus" />
 
     <TextView
         android:id="@+id/cartItemQuantityNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="22"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textColor="#333333"
         android:paddingHorizontal="8dp"/>
 
-    <Button
+    <ImageView
         android:id="@+id/decrementButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:text="Remove" />
+        android:src="@drawable/baseline_remove_minus" />
 </LinearLayout>
