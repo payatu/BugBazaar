@@ -1,6 +1,7 @@
 package com.BugBazaar.ui.cart;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,20 +27,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @NonNull
     @Override
-    public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CartViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.activity_cart_item, parent, false);
         return new CartViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
+    public void onBindViewHolder( CartViewHolder holder, int position) {
         CartItem cartItem = cartItems.get(position);
-        if(cartItem!=null && cartItem.getProduct()!=null) {
-            holder.itemName.setText(cartItem.getProduct().getName());
-            holder.itemPrice.setText(cartItem.getProduct().getPrice());
-            holder.itemQuantity.setText(String.valueOf(cartItem.getQuantity()));
-            holder.itemImage.setImageResource(cartItem.getProduct().getImageResId());
-        }}
+        holder.itemName.setText(cartItem.getProductName());
+        holder.itemPrice.setText("Price: " + cartItem.getPrice());
+        holder.itemQuantity.setText("Quantity: " + cartItem.getQuantity());
+        // Set the product image here, if you're doing it dynamically.
+            //holder.itemImage.setImageResource(cartItem.getProduct().getImageResId());
+        }
 
     @Override
     public int getItemCount() {
