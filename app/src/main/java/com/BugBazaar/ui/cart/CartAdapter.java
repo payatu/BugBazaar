@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.BugBazaar.R;
+import com.BugBazaar.ui.Product;
 
 import java.util.List;
 
@@ -35,12 +36,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public void onBindViewHolder( CartViewHolder holder, int position) {
         CartItem cartItem = cartItems.get(position);
+
         holder.itemName.setText(cartItem.getProductName());
-        holder.itemPrice.setText("Price: " + cartItem.getPrice());
+        holder.itemPrice.setText("Price: ₹" + String.valueOf(cartItem.getPrice()));
         holder.itemQuantity.setText("Quantity: " + cartItem.getQuantity());
+        Log.d("cartItemImage",String.valueOf(cartItem.getImage()));
+        holder.itemImage.setImageResource((int) cartItem.getImage());
         // Set the product image here, if you're doing it dynamically.
-            //holder.itemImage.setImageResource(cartItem.getProduct().getImageResId());
-        }
+    }
 
     @Override
     public int getItemCount() {
@@ -59,6 +62,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             itemName = itemView.findViewById(R.id.cartItemName);
             itemPrice = itemView.findViewById(R.id.cartItemPrice);
             itemQuantity = itemView.findViewById(R.id.cartItemQuantity);
+
         }
     }
 }

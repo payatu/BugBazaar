@@ -58,7 +58,8 @@ public class ProductAdapter extends BaseAdapter {
 
         itemImage.setImageResource(product.getImageResId());
         itemName.setText(product.getName());
-        itemPrice.setText(product.getPrice());
+
+        itemPrice.setText("₹"+String.valueOf(product.getPrice()));
 
         // Set OnClickListener for the product click
         itemImage.setOnClickListener(new View.OnClickListener() {

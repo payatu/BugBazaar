@@ -15,6 +15,7 @@ public final class CartItemDBModel {
         public static final String COLUMN_PRODUCT_DESCRIPTION = "product_description";
         public static final String COLUMN_PRODUCT_PRICE = "product_price";
         public static final String COLUMN_QUANTITY = "product_quantity";
+        public static final String COLUMN_PRODIMAGE="product_image";
 
         // Add other fields if needed.
 
@@ -25,7 +26,8 @@ public final class CartItemDBModel {
                         COLUMN_PRODUCT_NAME + " TEXT," +
                         COLUMN_PRODUCT_DESCRIPTION + " TEXT," +
                         COLUMN_PRODUCT_PRICE + " TEXT," +
-                        COLUMN_QUANTITY + " INTEGER)";
+                        COLUMN_QUANTITY + " INTEGER,"+
+                        COLUMN_PRODIMAGE + " INTEGER)";
 
         // SQL command to delete the table.
         public static final String SQL_DELETE_TABLE =
