@@ -20,7 +20,8 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
                     CartItemDBModel.CartItemEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME + " TEXT," +
                     CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_PRICE + " INTEGER," +
-                    CartItemDBModel.CartItemEntry.COLUMN_QUANTITY + " INTEGER"+
+                    CartItemDBModel.CartItemEntry.COLUMN_QUANTITY + " INTEGER,"+
+                    CartItemDBModel.CartItemEntry.COLUMN_PRODIMAGE +" INTEGER"+
                     ");";
 
     // SQL command to delete the cart_items table
@@ -42,12 +43,13 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long saveProductDetails(String ProductName, int ProductPrice, int ProductQuantity) {
+    public long saveProductDetails(String ProductName, int ProductPrice, int ProductQuantity, int ProductImage) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("product_name", ProductName);
         cv.put("product_price", ProductPrice);
         cv.put("product_quantity", ProductQuantity);
+        cv.put("product_image", ProductImage);
         long recordid = sqLiteDatabase.insert("cart_items", null, cv);
         return recordid;
     }
@@ -62,12 +64,12 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
             String product_name = cursor.getString(1);
             int product_price = cursor.getInt(2);
             int product_quantity = cursor.getInt(3);
+            int product_image=cursor.getInt(4);
 
             //Things are getting added into list.
-            cartItem = new CartItem(product_name, product_price, product_quantity);
+            cartItem = new CartItem(product_name, product_price, product_quantity, product_image);
             cartItems.add(cartItem);
             //Log.d("DatabaseHelper", "CartItem " + cartItem.getProductName() + ", Quantity " + cartItem.getQuantity());
-            // Add debug logging to check retrieved values
         }
         return cartItems;
     }

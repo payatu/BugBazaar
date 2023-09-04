@@ -2,6 +2,7 @@ package com.BugBazaar.ui.cart;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.BugBazaar.ui.Product;
 
@@ -10,26 +11,32 @@ public class CartItem implements Parcelable {
     private String productName;
     private int price;
     private int quantity;
+    private long productimage;
 
-    public CartItem(Product product, String productName, int price, int quantity) {
+    public CartItem(Product product, String productName, int price, int quantity, long productimage) {
         this.product = product;
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
+       this.productimage = productimage;
     }
 
     // Constructor for creating a CartItem without a Product object
-    public CartItem(String productName, int quantity, int price) {
+// Constructor for creating a CartItem without a Product object
+    public CartItem(String productName, int price, int quantity, long productimage) {
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
+        this.productimage = productimage;
     }
+
 
     protected CartItem(Parcel in) {
         product = in.readParcelable(Product.class.getClassLoader());
         productName = in.readString();
         price = in.readInt();
         quantity = in.readInt();
+        productimage=in.readLong();
     }
 
     public static final Creator<CartItem> CREATOR = new Creator<CartItem>() {
@@ -59,6 +66,9 @@ public class CartItem implements Parcelable {
     public int getQuantity() {
         return quantity;
     }
+    public long getImage(){
+        return productimage;
+    }
 
     // Increment the quantity by 1
     public void incrementQuantity() {
@@ -83,5 +93,9 @@ public class CartItem implements Parcelable {
         parcel.writeString(productName);
         parcel.writeInt(price);
         parcel.writeInt(quantity);
+        long imageResID=productimage;
+        Log.d("parcelIntProdimg",String.valueOf(imageResID));
+        parcel.writeLong(imageResID);
+        Log.d("writeLongCheck","Long sent");
     }
 }
