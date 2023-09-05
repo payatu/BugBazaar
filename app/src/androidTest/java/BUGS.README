@@ -1,0 +1,20 @@
+PROFILE Modules bugs
+ - Improper input validation
+ - UNRESTRICTED FILE UPLOAD-PROFILE IMAGE
+ - Firebase misconfigurations
+ -  Content Provider Permission MIsconfigured-allows to write to data to content provider
+ - User Account Takeover Using Exported_components+Firebase Misconfigurations
+
+
+
+ lOGIN MODULE BUGS
+  - Insecure storage(Storing cred in plain text)
+  - Insecure logging (logging cred )
+  - Passcode Bruteforcing
+ - insecure firebase uri
+ - COPY PASTE BUFFER
+ - Tapjacking
+
+
+ CONTACT-US
+  - File Stealing through webviewresourceresponse
