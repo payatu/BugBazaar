@@ -66,9 +66,13 @@ public class CartItem implements Parcelable {
     public int getQuantity() {
         return quantity;
     }
-    public long getImage(){
-        return productimage;
+    // Add a setter method for quantity
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
+
+
+    public long getImage(){ return productimage; }
 
     // Increment the quantity by 1
     public void incrementQuantity() {
