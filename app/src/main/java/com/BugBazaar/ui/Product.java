@@ -5,9 +5,9 @@ public class Product implements Parcelable {
     private int imageResId;
     private String name;
     private String description;
-    private String price;
+    private int price;
 
-    public Product(String name, String description, int imageResId, String price) {
+    public Product(String name, String description, int imageResId, int price) {
         this.imageResId = imageResId;
         this.name = name;
         this.description = description;
@@ -18,7 +18,7 @@ public class Product implements Parcelable {
         imageResId = in.readInt();
         name = in.readString();
         description = in.readString();
-        price=in.readString();
+        price=in.readInt();
     }
     public static final Creator<Product> CREATOR = new Creator<Product>() {
         @Override
@@ -41,9 +41,7 @@ public class Product implements Parcelable {
     public String getDescription() {
         return description;
     }
-    public String getPrice() {
-        return price;
-    }
+    public int getPrice() {return price;}
     @Override
     public int describeContents() {
         return 0;
@@ -54,7 +52,7 @@ public class Product implements Parcelable {
         parcel.writeInt(imageResId);
         parcel.writeString(name);
         parcel.writeString(description);
-        parcel.writeString(price);
+        parcel.writeInt(price);
     }
 }
 

@@ -1,5 +1,7 @@
 package com.BugBazaar.ui.cart;
 
+import static com.BugBazaar.ui.cart.CartItemDBModel.CartItemEntry.COLUMN_PRODIMAGE;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -19,6 +21,7 @@ public class Cart {
         values.put(CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME, cartItem.getProductName());
         values.put(CartItemDBModel.CartItemEntry.COLUMN_QUANTITY, cartItem.getQuantity());
         values.put(CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_PRICE, cartItem.getPrice());
+        //values.put(CartItemDBModel.CartItemEntry.COLUMN_PRODIMAGE, cartItem.getImage());
 
         return database.insert(CartItemDBModel.CartItemEntry.TABLE_NAME, null, values);
     }
@@ -28,7 +31,8 @@ public class Cart {
         String[] projection = {
                 CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME,
                 CartItemDBModel.CartItemEntry.COLUMN_QUANTITY,
-                CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_PRICE
+                CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_PRICE,
+               // CartItemDBModel.CartItemEntry.COLUMN_PRODIMAGE
         };
 
         Cursor cursor = database.query(
@@ -46,7 +50,8 @@ public class Cart {
                 String productName = cursor.getString(cursor.getColumnIndexOrThrow(CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME));
                 int quantity = cursor.getInt(cursor.getColumnIndexOrThrow(CartItemDBModel.CartItemEntry.COLUMN_QUANTITY));
                 int price = cursor.getInt(cursor.getColumnIndexOrThrow(CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_PRICE));
-                CartItem cartItem = new CartItem(productName, quantity, price);
+                int productImage=cursor.getInt(cursor.getColumnIndexOrThrow(CartItemDBModel.CartItemEntry.COLUMN_PRODIMAGE));
+                CartItem cartItem = new CartItem(productName, quantity, price, productImage);
                 cartItems.add(cartItem);
             }
             cursor.close();
