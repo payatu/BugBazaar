@@ -78,8 +78,9 @@ public class DetailedProductActivity extends AppCompatActivity {
                 long recordId = cartDBHelper.saveProductDetails(productName, productPrice, quantity, productImage);
                 // Optionally, show a toast or a message to indicate the item was added to the cart
                 Toast.makeText(DetailedProductActivity.this, "Product has been added to cart", Toast.LENGTH_SHORT).show();
+
+                //Get All Items from DB and add them in Array to pass to next Activity.
                 cartItems = cartDBHelper.getAllRecords();
-                //Log.d("getAllRecords",String.valueOf(cartDBHelper.getAllRecords()));
                 ArrayList<CartItem> cartItemList = new ArrayList<>(cartItems);
 
                 Intent intent = new Intent(DetailedProductActivity.this, CartActivity.class);
