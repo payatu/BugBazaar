@@ -12,6 +12,8 @@ public class CartItem implements Parcelable {
     private int price;
     private int quantity;
     private long productimage;
+    private long id; // Unique identifier for the item in the database
+    private int quantityFromDatabase;
 
     public CartItem(Product product, String productName, int price, int quantity, long productimage) {
         this.product = product;
@@ -21,13 +23,13 @@ public class CartItem implements Parcelable {
        this.productimage = productimage;
     }
 
-    // Constructor for creating a CartItem without a Product object
 // Constructor for creating a CartItem without a Product object
     public CartItem(String productName, int price, int quantity, long productimage) {
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
         this.productimage = productimage;
+        //this.quantityFromDatabase = 0;
     }
 
 
@@ -73,6 +75,13 @@ public class CartItem implements Parcelable {
 
 
     public long getImage(){ return productimage; }
+    // Add a getter and setter for the ID
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
 
     // Increment the quantity by 1
     public void incrementQuantity() {
@@ -90,6 +99,10 @@ public class CartItem implements Parcelable {
     public int describeContents() {
         return 0;
     }
+    // Add a getter for the quantity from the database
+    public int getQuantityFromDatabase() {
+        return quantityFromDatabase;
+    }
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
@@ -98,8 +111,6 @@ public class CartItem implements Parcelable {
         parcel.writeInt(price);
         parcel.writeInt(quantity);
         long imageResID=productimage;
-        Log.d("parcelIntProdimg",String.valueOf(imageResID));
         parcel.writeLong(imageResID);
-        Log.d("writeLongCheck","Long sent");
     }
 }

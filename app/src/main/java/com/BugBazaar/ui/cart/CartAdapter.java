@@ -1,6 +1,8 @@
 package com.BugBazaar.ui.cart;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +20,6 @@ import java.util.List;
 
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
-
-
     private Context context;
     private List<CartItem> cartItems;
 
@@ -39,13 +39,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder( CartViewHolder holder, int position) {
         CartItem cartItem = cartItems.get(position);
 
+
         holder.itemName.setText(cartItem.getProductName());
         holder.itemPrice.setText("Price: ₹" + cartItem.getPrice());
         holder.itemQuantity.setText("Quantity: " + cartItem.getQuantity());
-        Log.d("cartItemImage",String.valueOf(cartItem.getImage()));
         holder.itemImage.setImageResource((int) cartItem.getImage());
         // Set the quantity text
         holder.itemQuantity.setText(String.valueOf(cartItem.getQuantity()));
+
 
         // Set click listeners for increment and decrement buttons
         holder.incrementButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +54,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             public void onClick(View v) {
                 // Increment the quantity of the current item
                 cartItem.incrementQuantity();
+                // Update the database with the new quantity
+                updateQuantityInDatabase(cartItem);
 
                 notifyDataSetChanged(); // Update the UI
             }
@@ -64,6 +67,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 // Decrement the quantity of the current item, but ensure it doesn't go below 0
                 if (cartItem.getQuantity() > 0) {
                     cartItem.decrementQuantity();
+
+                    // Update the database with the new quantity
+                    updateQuantityInDatabase(cartItem);
                     notifyDataSetChanged(); // Update the UI
                 }
             }
@@ -73,6 +79,32 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public int getItemCount() {
         return cartItems.size();
+    }
+
+    private void updateQuantityInDatabase(CartItem cartItem) {
+        long itemId = cartItem.getId(); // Get the item ID from the CartItem
+
+        // Update the database with the new quantity using your CartDatabaseHelper
+        CartDatabaseHelper dbHelper = new CartDatabaseHelper(context, "cart.db", null, 1);
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(CartItemDBModel.CartItemEntry.COLUMN_QUANTITY, cartItem.getQuantity());
+
+        // Update the row with the matching item ID
+        int rowsUpdated = database.update(
+                CartItemDBModel.CartItemEntry.TABLE_NAME,
+                values,
+                CartItemDBModel.CartItemEntry._ID + " = ?",
+                new String[]{String.valueOf(itemId)}
+        );
+
+        // Close the database connection
+        dbHelper.close();
+
+        if (rowsUpdated > 0) {
+            Log.d("CartAdapter", "Quantity updated in the database.");
+        }
     }
 
     public class CartViewHolder extends RecyclerView.ViewHolder {
