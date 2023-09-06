@@ -38,35 +38,46 @@
             android:textSize="14sp"
             android:textColor="#666666"/>
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:orientation="vertical">
+
         <TextView
-            android:id="@+id/cartItemQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quantity: 0"
-            android:textSize="14sp"
-            android:textColor="#666666"/>
-    </LinearLayout>
+            android:textSize="16dp"
+            android:layout_gravity="center"
+            android:text="Quantity"
+            android:textStyle="bold"></TextView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/incrementButton"
-        android:paddingTop="3dp"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:paddingTop="0dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:clickable="true"
         android:src="@drawable/baseline_add_plus" />
 
-    <TextView
-        android:id="@+id/cartItemQuantityNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="22"
-        android:textSize="20dp"
-        android:textColor="#333333"
-        android:paddingHorizontal="8dp"/>
+            <TextView
+                android:id="@+id/cartItemQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="23"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/decrementButton"
-        android:paddingTop="3dp"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:paddingTop="0dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:src="@drawable/baseline_remove_minus" />
+    </LinearLayout>
+</LinearLayout>
 </LinearLayout>

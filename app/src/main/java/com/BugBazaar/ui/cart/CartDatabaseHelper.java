@@ -1,4 +1,7 @@
 package com.BugBazaar.ui.cart;
+import static com.BugBazaar.ui.cart.CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME;
+import static com.BugBazaar.ui.cart.CartItemDBModel.CartItemEntry.TABLE_NAME;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,9 +19,9 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
 
     // SQL command to create the cart_items table
     private static final String SQL_CREATE_CART_TABLE =
-            "CREATE TABLE " + CartItemDBModel.CartItemEntry.TABLE_NAME + " (" +
+            "CREATE TABLE " + TABLE_NAME + " (" +
                     CartItemDBModel.CartItemEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME + " TEXT," +
+                    COLUMN_PRODUCT_NAME + " TEXT," +
                     CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_PRICE + " INTEGER," +
                     CartItemDBModel.CartItemEntry.COLUMN_QUANTITY + " INTEGER,"+
                     CartItemDBModel.CartItemEntry.COLUMN_PRODIMAGE +" INTEGER"+
@@ -26,7 +29,7 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
 
     // SQL command to delete the cart_items table
     private static final String SQL_DELETE_CART_TABLE =
-            "DROP TABLE IF EXISTS " + CartItemDBModel.CartItemEntry.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + TABLE_NAME;
 
     public CartDatabaseHelper(Context context, String dbname, SQLiteDatabase.CursorFactory factory, int DATABASE_VERSION) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -53,6 +56,61 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
         long recordid = sqLiteDatabase.insert("cart_items", null, cv);
         return recordid;
     }
+    public int getQuantityForProduct(String productName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int quantity = 0;
+
+        String[] projection = {
+                CartItemDBModel.CartItemEntry.COLUMN_QUANTITY
+        };
+
+        String selection = CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME + " = ?";
+        String[] selectionArgs = { productName };
+
+        Cursor cursor = db.query(
+                CartItemDBModel.CartItemEntry.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        if (cursor.moveToFirst()) {
+            quantity = cursor.getInt(cursor.getColumnIndexOrThrow(CartItemDBModel.CartItemEntry.COLUMN_QUANTITY));
+        }
+
+        cursor.close();
+        return quantity;
+    }
+
+    public int updateCartItem(CartItem cartItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("product_quantity", cartItem.getQuantity());
+
+        int rowsAffected = db.update("cart_items", values, "product_name = ?", new String[]{cartItem.getProductName()});
+
+        db.close();
+        return rowsAffected;
+    }
+
+    // Method to add a CartItem to the database
+    public long addCartItem(CartItem cartItem) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME, cartItem.getProductName());
+        cv.put(CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_PRICE, cartItem.getPrice());
+        cv.put(CartItemDBModel.CartItemEntry.COLUMN_QUANTITY, cartItem.getQuantity());
+        cv.put(CartItemDBModel.CartItemEntry.COLUMN_PRODIMAGE, cartItem.getImage());
+
+        // Insert the new item into the database
+        long recordId = sqLiteDatabase.insert(CartItemDBModel.CartItemEntry.TABLE_NAME, null, cv);
+        sqLiteDatabase.close(); // Close the database connection
+
+        return recordId;
+    }
 
     public List<CartItem> getAllRecords() {
         List<CartItem> cartItems = new ArrayList<>();
@@ -69,7 +127,7 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
             //Things are getting added into list.
             cartItem = new CartItem(product_name, product_price, product_quantity, product_image);
             cartItems.add(cartItem);
-            //Log.d("DatabaseHelper", "CartItem " + cartItem.getProductName() + ", Quantity " + cartItem.getQuantity());
+
         }
         return cartItems;
     }

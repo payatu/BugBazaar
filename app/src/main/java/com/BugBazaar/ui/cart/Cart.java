@@ -7,9 +7,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Cart {
+    private HashMap<CartItem, Integer> cartItems;
+
+    public Cart() {
+        cartItems = new HashMap<>();
+    }
+
     private static Cart instance;
     private CartDatabaseHelper dbHelper;
     private SQLiteDatabase database;
@@ -18,13 +25,37 @@ public class Cart {
 
     public long addCartItem(CartItem cartItem) {
         ContentValues values = new ContentValues();
-        values.put(CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME, cartItem.getProductName());
-        values.put(CartItemDBModel.CartItemEntry.COLUMN_QUANTITY, cartItem.getQuantity());
-        values.put(CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_PRICE, cartItem.getPrice());
-        //values.put(CartItemDBModel.CartItemEntry.COLUMN_PRODIMAGE, cartItem.getImage());
+        if (cartItems.containsKey(cartItem)) {
+            // If the item already exists in the cart, increment its quantity
+            int quantity = cartItems.get(cartItem);
+            cartItems.put(cartItem, quantity + 1);
 
-        return database.insert(CartItemDBModel.CartItemEntry.TABLE_NAME, null, values);
+            // Update the quantity in the database
+            ContentValues updateValues = new ContentValues();
+            updateValues.put(CartItemDBModel.CartItemEntry.COLUMN_QUANTITY, quantity + 1);
+
+            // Update the database row with the same product name
+            database.update(
+                    CartItemDBModel.CartItemEntry.TABLE_NAME,
+                    updateValues,
+                    CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME + " = ?",
+                    new String[]{cartItem.getProductName()}
+            );
+        } else {
+            // If the item is not in the cart, add it with a quantity of 1
+            cartItems.put(cartItem, 1);
+
+            // Insert the new item into the database
+            values.put(CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME, cartItem.getProductName());
+            values.put(CartItemDBModel.CartItemEntry.COLUMN_QUANTITY, 1); // Initial quantity
+            values.put(CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_PRICE, cartItem.getPrice());
+            values.put(CartItemDBModel.CartItemEntry.COLUMN_PRODIMAGE, cartItem.getImage());
+
+            return database.insert(CartItemDBModel.CartItemEntry.TABLE_NAME, null, values);
+        }
+        return -1; // Return -1 if there was an issue
     }
+
 
     public List<CartItem> getCartItems() {
         List<CartItem> cartItems = new ArrayList<>();
@@ -32,7 +63,7 @@ public class Cart {
                 CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME,
                 CartItemDBModel.CartItemEntry.COLUMN_QUANTITY,
                 CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_PRICE,
-               // CartItemDBModel.CartItemEntry.COLUMN_PRODIMAGE
+                CartItemDBModel.CartItemEntry.COLUMN_PRODIMAGE
         };
 
         Cursor cursor = database.query(
