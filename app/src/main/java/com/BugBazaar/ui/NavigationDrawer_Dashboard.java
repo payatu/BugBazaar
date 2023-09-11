@@ -56,15 +56,15 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
 
         // product data
         productList = new ArrayList<>();
-        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,3000));
-        productList.add(new Product("Dumb Watch", getString(R.string.desc_cycle), R.drawable.item_watch,2400));
-        productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,5640));
-        productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,19000));
-        productList.add(new Product("PineApple iPhone", getString(R.string.desc_cycle), R.drawable.item_iphone,69000));
+        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,3400));
+        productList.add(new Product("Dumb Watch", getString(R.string.desc_cycle), R.drawable.item_watch,2700));
+        productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,1600));
+        productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,7040));
+        productList.add(new Product("PineApple iPhone", getString(R.string.desc_cycle), R.drawable.item_iphone,6900));
         productList.add(new Product("Z Box Gaming Controller", getString(R.string.desc_cycle), R.drawable.item_gc,3400));
         productList.add(new Product("A Rat", getString(R.string.desc_cycle), R.drawable.item_mouse,1200));
         productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,4200));
-        productList.add(new Product("VR device", getString(R.string.desc_cycle), R.drawable.item_vr,24000));
+        productList.add(new Product("VR device", getString(R.string.desc_cycle), R.drawable.item_vr,8340));
 
 
         // Create and set the adapter for the GridView
@@ -75,7 +75,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String searchText = String.valueOf(searchEditText.getText());
-                Log.d("amit", String.valueOf(searchText.length()));
 
                 if (searchText.length() <= 30) {
 
@@ -100,7 +99,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
-
+                //DO NOT REMOVEIf you search for empty searchbox and app crashed, it is intentional. It is a "Improper Exception Handling" bug
                 String filteredList = null;
                 Log.d("Excpetion",filteredList);
             }
