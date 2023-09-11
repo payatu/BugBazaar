@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.BugBazaar.R;
 import com.BugBazaar.ui.cart.Cart;
@@ -23,15 +22,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DetailedProductActivity extends AppCompatActivity {
-    private List<CartItem> cartItems = new ArrayList<>();
+public class DetailedProductActivity extends AppCompatActivity  {
+
+    private List<CartItem> cartItems; // Declare cartItems here
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_product);
 
 
         CartDatabaseHelper cartDBHelper = new CartDatabaseHelper(this, "cart.db", null, 1);
-
+        cartItems = cartDBHelper.getAllRecords();
         // Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Product Details");
@@ -65,7 +65,6 @@ public class DetailedProductActivity extends AppCompatActivity {
                 String productName = product.getName();
                 int productPrice = product.getPrice();
                 int productImage = product.getImageResId();
-                int quantity = 1;
 
                 // Check if the item already exists in the cart
                 boolean itemExists = false;
@@ -73,29 +72,34 @@ public class DetailedProductActivity extends AppCompatActivity {
                     if (cartItem.getProductName().equals(productName)) {
                         // If the item exists, update its quantity
                         int existingQuantity = cartItem.getQuantity();
-                        cartItem.setQuantity(existingQuantity + quantity);
-                        itemExists = true;
+                        cartItem.setQuantity(existingQuantity + 1);
+
                         // Update the quantity in the database
-                        cartDBHelper.updateCartItem(cartItem);
+                        int rowsUpdated = cartDBHelper.updateCartItem(cartItem);
+                        itemExists = true;
                         break;
+
                     }
                 }
 
                 if (!itemExists) {
                     // If the item is not already in the cart, add it
-                    CartItem cartItem = new CartItem(productName, productPrice, quantity, productImage);
-                    cartItems.add(cartItem);
+                    CartItem cartItem = new CartItem(productName, productPrice, 1, productImage);
                     // Save the product details to the SQLite database
-                    long recordId = cartDBHelper.saveProductDetails(productName, productPrice, quantity, productImage);
+                    long recordId = cartDBHelper.addCartItem(cartItem); // Add the new item to the database
+                    cartItems.add(cartItem);
+                    cartItem.setId(recordId);
+                    cartItems.add(cartItem); // Add the item to the cartItems list
                 }
-
                 // Start CartActivity without sending the product details as Parcelable
                 Intent intent = new Intent(DetailedProductActivity.this, CartActivity.class);
                 startActivity(intent);
             }
         });
     }
-        // Code to handle back button
+
+
+    // Code to handle back button
     public void onBackButtonClick(View view) {
         onBackPressed(); // Navigate back to the previous activity
     }

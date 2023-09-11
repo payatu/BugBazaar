@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,9 +25,77 @@
         layout="@layout/nav_toolbar_sub"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"></include>
+    <LinearLayout
+        android:id="@+id/emptyLinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="170dp"
+        android:paddingBottom="230dp"
+        android:visibility="gone"
+        >
+
+    <ImageView
+        android:id="@+id/cartEmptyImage"
+        android:layout_height="170dp"
+        android:layout_width="170dp"
+        android:src="@drawable/emptycart"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        >
+
+    </ImageView>
+    <TextView
+        android:id="@+id/cartEmptyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ohh shoot!! Cart is Empty."
+        android:textSize="30dp"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/txtTotalCostText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            android:text="Total Cost: "
+            android:paddingLeft="10dp"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtTotalCostNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:paddingRight="10dp"
+        android:text="$0.00"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/checkoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Checkout"
+        android:textSize="18dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/sharp_button_corners"/>
 </LinearLayout>

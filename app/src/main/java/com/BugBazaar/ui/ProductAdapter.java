@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.BugBazaar.R;
 import com.BugBazaar.ui.DetailedProductActivity;
 import com.BugBazaar.ui.Product;
+import com.BugBazaar.ui.cart.CartItem;
+
 import java.io.Serializable;
 
 import java.util.List;
@@ -69,6 +71,11 @@ public class ProductAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, DetailedProductActivity.class);
                 intent.putExtra("product", product);
                 context.startActivity(intent);
+
+                //Sending intent to CartItem class
+                Intent intToCartItem = new Intent(context, CartItem.class);
+                intent.putExtra("product", product);
+
             }
         });
         return view;
