@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -38,6 +39,24 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer_dashboard);
+
+        Intent getLink = getIntent();
+        Uri data = getLink.getData();
+
+        if (data != null) {
+            String scheme = data.getScheme(); // Get the scheme (should be "bb")
+            String host = data.getHost(); // Get the host (should be "bugbazaar.com")
+            String path = data.getPath(); // Get the path (should be "/dashboard")
+
+            // Check if the deep link matches the expected values
+            if ("bb".equals(scheme) && "bugbazaar.com".equals(host) && "/dashboard".equals(path)) {
+                // Handle the deep link here, e.g., open the dashboard or perform other actions.
+                // You can also extract additional data from the deep link if needed.
+            }
+        }
+
+        // Rest of your activity initialization code
+
         // Hide the keyboard and clear focus from the EditText
         View focusedView = getCurrentFocus();
         if (focusedView != null) {
@@ -148,7 +167,12 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            } else if (itemId == R.id.itemTerms_Conditions) {
+            }else if (itemId == R.id.itemReferUs) {
+                Intent intent = new Intent(NavigationDrawer_Dashboard.this, ReferUs.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }else if (itemId == R.id.itemTerms_Conditions) {
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, TermsAndConditionsActivity.class);
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
