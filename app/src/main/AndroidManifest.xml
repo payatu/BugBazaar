@@ -31,8 +31,8 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
         <activity
-            android:name=".ui.checkout.Checkout"
-            android:exported="false" />
+            android:name=".ui.ReferUs"
+            android:exported="true" />
         <activity
             android:name=".ui.cart.CartActivity"
             android:exported="false" />
@@ -54,16 +54,22 @@
             android:name=".ui.CreatePasscode"
             android:exported="true" />
         <activity
-            android:name=".ui.ProductCatalogActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.NavigationDrawer_Dashboard"
+            android:label="Dashboard Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <data
+                    android:host="bugbazaar"
+                    android:scheme="bb"
+                    android:pathPrefix="/dashboard">
+                </data>
             </intent-filter>
+
         </activity>
         <activity
             android:name=".ui.MyProfile"

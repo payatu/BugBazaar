@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ReferUs"
+    android:orientation="vertical">
+    <include
+        layout="@layout/nav_toolbar_sub"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"></include>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Spread the word!!"
+            android:textSize="45dp"
+            android:textStyle="bold"
+            ></TextView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:cardCornerRadius="7dp"
+            app:cardElevation="1dp"
+        app:cardBackgroundColor="@color/teal_700"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+            android:layout_width="350dp"
+            android:layout_height="190dp"
+            android:src="@drawable/evilkermit"
+            android:padding="0dp" />
+
+
+    </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="90dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/border_txtbox">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="Share via Link"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+
+                <Button
+                    android:id="@+id/btnCopyLink"
+                    android:onClick="onCopyLinkClick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Copy Link"
+                    android:layout_gravity="center"></Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="90dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/border_txtbox">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:text="Share via SMS"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="7dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/border_txtbox">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:text="Share Via Email"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+                <LinearLayout
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                <EditText
+                    android:id="@+id/edtEmailId"
+                    android:layout_marginRight="10dp"
+                    android:ems="12"
+                    android:textSize="17dp"
+                    android:inputType="textEmailAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter email address"></EditText>
+                <Button
+                    android:id="@+id/btnSendEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Send"
+                    android:onClick="openEmailApp"></Button>
+                </LinearLayout>
+            </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
