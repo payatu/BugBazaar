@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -38,6 +39,24 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer_dashboard);
+
+        Intent getLink = getIntent();
+        Uri data = getLink.getData();
+
+        if (data != null) {
+            String scheme = data.getScheme(); // Get the scheme (should be "bb")
+            String host = data.getHost(); // Get the host (should be "bugbazaar.com")
+            String path = data.getPath(); // Get the path (should be "/dashboard")
+
+            // Check if the deep link matches the expected values
+            if ("bb".equals(scheme) && "bugbazaar.com".equals(host) && "/dashboard".equals(path)) {
+                // Handle the deep link here, e.g., open the dashboard or perform other actions.
+                // You can also extract additional data from the deep link if needed.
+            }
+        }
+
+        // Rest of your activity initialization code
+
         // Hide the keyboard and clear focus from the EditText
         View focusedView = getCurrentFocus();
         if (focusedView != null) {
@@ -56,15 +75,15 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
 
         // product data
         productList = new ArrayList<>();
-        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,3000));
-        productList.add(new Product("Dumb Watch", getString(R.string.desc_cycle), R.drawable.item_watch,2400));
-        productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,5640));
-        productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,19000));
-        productList.add(new Product("PineApple iPhone", getString(R.string.desc_cycle), R.drawable.item_iphone,69000));
+        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,3400));
+        productList.add(new Product("Dumb Watch", getString(R.string.desc_cycle), R.drawable.item_watch,2700));
+        productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,1600));
+        productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,7040));
+        productList.add(new Product("PineApple iPhone", getString(R.string.desc_cycle), R.drawable.item_iphone,6900));
         productList.add(new Product("Z Box Gaming Controller", getString(R.string.desc_cycle), R.drawable.item_gc,3400));
         productList.add(new Product("A Rat", getString(R.string.desc_cycle), R.drawable.item_mouse,1200));
         productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,4200));
-        productList.add(new Product("VR device", getString(R.string.desc_cycle), R.drawable.item_vr,24000));
+        productList.add(new Product("VR device", getString(R.string.desc_cycle), R.drawable.item_vr,8340));
 
 
         // Create and set the adapter for the GridView
@@ -75,7 +94,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String searchText = String.valueOf(searchEditText.getText());
-                Log.d("amit", String.valueOf(searchText.length()));
 
                 if (searchText.length() <= 30) {
 
@@ -100,7 +118,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
-
+                //DO NOT REMOVEIf you search for empty searchbox and app crashed, it is intentional. It is a "Improper Exception Handling" bug
                 String filteredList = null;
                 Log.d("Excpetion",filteredList);
             }
@@ -149,7 +167,12 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            } else if (itemId == R.id.itemTerms_Conditions) {
+            }else if (itemId == R.id.itemReferUs) {
+                Intent intent = new Intent(NavigationDrawer_Dashboard.this, ReferUs.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }else if (itemId == R.id.itemTerms_Conditions) {
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, TermsAndConditionsActivity.class);
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);

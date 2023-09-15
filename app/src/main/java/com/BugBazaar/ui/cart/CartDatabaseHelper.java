@@ -1,5 +1,6 @@
 package com.BugBazaar.ui.cart;
 import static com.BugBazaar.ui.cart.CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME;
+import static com.BugBazaar.ui.cart.CartItemDBModel.CartItemEntry.COLUMN_QUANTITY;
 import static com.BugBazaar.ui.cart.CartItemDBModel.CartItemEntry.TABLE_NAME;
 
 import android.content.ContentValues;
@@ -46,49 +47,10 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long saveProductDetails(String ProductName, int ProductPrice, int ProductQuantity, int ProductImage) {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put("product_name", ProductName);
-        cv.put("product_price", ProductPrice);
-        cv.put("product_quantity", ProductQuantity);
-        cv.put("product_image", ProductImage);
-        long recordid = sqLiteDatabase.insert("cart_items", null, cv);
-        return recordid;
-    }
-    public int getQuantityForProduct(String productName) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        int quantity = 0;
-
-        String[] projection = {
-                CartItemDBModel.CartItemEntry.COLUMN_QUANTITY
-        };
-
-        String selection = CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME + " = ?";
-        String[] selectionArgs = { productName };
-
-        Cursor cursor = db.query(
-                CartItemDBModel.CartItemEntry.TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null
-        );
-
-        if (cursor.moveToFirst()) {
-            quantity = cursor.getInt(cursor.getColumnIndexOrThrow(CartItemDBModel.CartItemEntry.COLUMN_QUANTITY));
-        }
-
-        cursor.close();
-        return quantity;
-    }
-
     public int updateCartItem(CartItem cartItem) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("product_quantity", cartItem.getQuantity());
+        values.put(COLUMN_QUANTITY, cartItem.getQuantity());
 
         int rowsAffected = db.update("cart_items", values, "product_name = ?", new String[]{cartItem.getProductName()});
 
@@ -108,15 +70,26 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
         // Insert the new item into the database
         long recordId = sqLiteDatabase.insert(CartItemDBModel.CartItemEntry.TABLE_NAME, null, cv);
         sqLiteDatabase.close(); // Close the database connection
+        cartItem.setId(recordId);
 
         return recordId;
+
+    }
+    public void removeCartItem(CartItem cartItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+            Log.d("removeid",String.valueOf(cartItem.getId()));
+            // Quantity is zero, delete the item from the database
+            db.delete(CartItemDBModel.CartItemEntry.TABLE_NAME,
+                    CartItemDBModel.CartItemEntry._ID + " = ?",
+                    new String[]{String.valueOf(cartItem.getId())});
+        db.close();
     }
 
     public List<CartItem> getAllRecords() {
         List<CartItem> cartItems = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM cart_items", null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM cart_items WHERE " + COLUMN_QUANTITY + " > 0", null);
         CartItem cartItem;
         while (cursor.moveToNext()) {
             String product_name = cursor.getString(1);

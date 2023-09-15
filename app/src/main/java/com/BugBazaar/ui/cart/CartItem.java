@@ -1,5 +1,6 @@
 package com.BugBazaar.ui.cart;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -13,24 +14,16 @@ public class CartItem implements Parcelable {
     private int quantity;
     private long productimage;
     private long id; // Unique identifier for the item in the database
-    private int quantityFromDatabase;
 
-    public CartItem(Product product, String productName, int price, int quantity, long productimage) {
-        this.product = product;
-        this.productName = productName;
-        this.price = price;
-        this.quantity = quantity;
-       this.productimage = productimage;
-    }
 
 // Constructor for creating a CartItem without a Product object
-    public CartItem(String productName, int price, int quantity, long productimage) {
-        this.productName = productName;
-        this.price = price;
-        this.quantity = quantity;
-        this.productimage = productimage;
-        //this.quantityFromDatabase = 0;
-    }
+public CartItem(String productName, int price, int quantity, long productimage) {
+    this.productName = productName;
+    this.price = price;
+    this.quantity = quantity;
+    this.productimage = productimage;
+}
+
 
 
     protected CartItem(Parcel in) {
@@ -41,6 +34,7 @@ public class CartItem implements Parcelable {
         productimage=in.readLong();
     }
 
+    // Constructor for creating a CartItem without a Product object
     public static final Creator<CartItem> CREATOR = new Creator<CartItem>() {
         @Override
         public CartItem createFromParcel(Parcel in) {
@@ -53,9 +47,6 @@ public class CartItem implements Parcelable {
         }
     };
 
-    public Product getProduct() {
-        return product;
-    }
 
     public String getProductName() {
         return productName;
@@ -83,26 +74,45 @@ public class CartItem implements Parcelable {
         this.id = id;
     }
 
+
     // Increment the quantity by 1
-    public void incrementQuantity() {
-        quantity++;
+    public void incrementQuantity(Context context) {
+        if (quantity < Integer.MAX_VALUE) { // To avoid overflow
+            quantity++;
+            // Update the database with the new quantity
+            CartDatabaseHelper dbHelper = new CartDatabaseHelper(context, "cart.db", null, 1);
+            dbHelper.updateCartItem(this);
+        }
     }
 
     // Decrement the quantity by 1
-    public void decrementQuantity() {
+    public void decrementQuantity(Context context) {
         if (quantity > 0) {
             quantity--;
+            if (quantity == 0) {
+                // Remove the product from the database if quantity becomes 0
+                CartDatabaseHelper dbHelper = new CartDatabaseHelper(context, "cart.db", null, 1);
+                dbHelper.removeCartItem(this); // Pass the item's ID for removal
+            } else {
+                // Update the database with the new quantity
+                CartDatabaseHelper dbHelper = new CartDatabaseHelper(context, "cart.db", null, 1);
+                dbHelper.updateCartItem(this);
+            }
         }
     }
+    public void removeItem(Context context){
+        quantity=0;
+        // Update the database with the new quantity
+        CartDatabaseHelper dbHelper = new CartDatabaseHelper(context, "cart.db", null, 1);
+        dbHelper.updateCartItem(this);
+    }
+
 
     @Override
     public int describeContents() {
         return 0;
     }
-    // Add a getter for the quantity from the database
-    public int getQuantityFromDatabase() {
-        return quantityFromDatabase;
-    }
+
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
