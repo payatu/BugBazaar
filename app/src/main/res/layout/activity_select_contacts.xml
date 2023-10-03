@@ -10,15 +10,25 @@
         layout="@layout/nav_toolbar_sub"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"></include>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center">
     <TextView
+        android:id="@+id/selectContactmsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select any contact"
         android:layout_gravity="center"
         android:textStyle="bold"
         android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:textColor="@color/main_theme"
         android:textSize="35dp"></TextView>
+
+
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,5 +42,30 @@
             android:layout_gravity="center"
             android:layout_margin="16dp" />
     </ScrollView>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/imgNoContact"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/baseline_error_24"></ImageView>
+    <TextView
+        android:id="@+id/noContactsMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No contacts found in the device."
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        android:textColor="#667D97"></TextView>
+    </LinearLayout>
 
 </LinearLayout>

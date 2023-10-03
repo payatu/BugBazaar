@@ -50,6 +50,10 @@
             android:enabled="true"
             android:exported="true"
             android:readPermission="@string/app_name" />
+        <provider
+            android:name=".provider.MyContactsProvider"
+            android:authorities="com.bugbazaar.mycontacts"
+            android:exported="true" />
 
         <activity
             android:name=".ui.DetailedProductActivity"
