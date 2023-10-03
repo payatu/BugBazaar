@@ -96,7 +96,6 @@ public class CartActivity extends AppCompatActivity {
                 Toast.makeText(CartActivity.this, "Checkout clicked", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     // Calculate the total cart value

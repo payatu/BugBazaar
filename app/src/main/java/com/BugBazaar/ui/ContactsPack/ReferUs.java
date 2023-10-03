@@ -1,4 +1,4 @@
-package com.BugBazaar.ui;
+package com.BugBazaar.ui.ContactsPack;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,11 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.BugBazaar.R;
+import com.BugBazaar.ui.ContactsPack.SelectContacts;
 
 public class ReferUs extends AppCompatActivity {
 
     Button btnCopyLink;
     Button btnSendEmail;
+    Button openContactButton;
     EditText edtEmailId;
     ClipboardManager clipboardManager;
 
@@ -35,6 +37,7 @@ public class ReferUs extends AppCompatActivity {
         clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         btnSendEmail=findViewById(R.id.btnSendEmail);
         edtEmailId=findViewById(R.id.edtEmailId);
+        openContactButton=findViewById(R.id.openContactButton);
 
     }
     public void onCopyLinkClick(View view){
@@ -61,6 +64,10 @@ public class ReferUs extends AppCompatActivity {
 
         startActivity(Intent.createChooser(iEMail, "Email via: "));
         edtEmailId.setText("");
+    }
+    public void openSelectContacts(View view){
+        Intent intent=new Intent(this, SelectContacts.class);
+        startActivity(intent);
     }
 
 
