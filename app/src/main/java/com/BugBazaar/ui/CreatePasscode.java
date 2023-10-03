@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.BugBazaar.Models.User;
 import com.BugBazaar.R;
 import com.BugBazaar.controller.UserAuthSave;
 
@@ -71,6 +72,8 @@ public class CreatePasscode extends AppCompatActivity {
 
                 UserAuthSave.savepasscode(Integer.parseInt(enteredPasscode));
                 Toast.makeText(CreatePasscode.this, "  New Passcode created!", Toast.LENGTH_SHORT).show();
+                CreateSessiontoken(UserAuthSave.getSavedUsername(),UserAuthSave.getpasscode(),UserAuthSave.getpasscode());
+
                 startActivity(new Intent(getApplicationContext(),NavigationDrawer_Dashboard.class));
 
 
@@ -78,6 +81,13 @@ public class CreatePasscode extends AppCompatActivity {
             }
         });
     }
+
+    private void CreateSessiontoken(String savedUsername, String getpasscode, String getpasscode1) {
+
+
+
+    }
+
     //Numpad click handling
     private View.OnClickListener numpadClickListener = new View.OnClickListener() {
         @Override

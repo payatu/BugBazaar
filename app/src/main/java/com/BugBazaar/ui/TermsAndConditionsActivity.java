@@ -9,6 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.BugBazaar.R;
+import com.BugBazaar.controller.UserAuthSave;
 import com.BugBazaar.utils.AppConstants;
 
 import android.widget.TextView;
@@ -98,6 +99,18 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         public String gettoken(){
 
             return String.valueOf(UUID.randomUUID());
+        }
+
+        @android.webkit.JavascriptInterface
+        public String getusername(){
+
+            return UserAuthSave.getSavedUsername();
+        }
+
+        @android.webkit.JavascriptInterface
+        public String getpassword(){
+
+            return UserAuthSave.getSavedPassword();
         }
 
     }
