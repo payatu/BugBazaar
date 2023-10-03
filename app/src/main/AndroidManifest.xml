@@ -57,7 +57,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.CreatePasscode"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.NavigationDrawer_Dashboard"
             android:exported="true">
@@ -71,7 +71,7 @@
                 <data
                     android:host="bugbazaar"
                     android:pathPrefix="/dashboard"
-                    android:scheme="bb"></data>
+                    android:scheme="bb" />
             </intent-filter>
         </activity>
         <activity
