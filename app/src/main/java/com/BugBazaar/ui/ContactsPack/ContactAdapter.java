@@ -2,6 +2,7 @@ package com.BugBazaar.ui.ContactsPack;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         // Set a background color or other UI indication for selected contacts
         if (contact.isSelected()) {
             holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.selected_contact_bg_color));
+
+            // Use a Handler to delay changing the background color back to TRANSPARENT
+            new Handler().postDelayed(() -> {
+                holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+            }, 2000); // 5000 milliseconds (5 seconds)
         } else {
             holder.itemView.setBackgroundColor(Color.TRANSPARENT);
         }
@@ -45,11 +51,21 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         holder.itemView.setOnClickListener(v -> {
             // Update the selected contact
             contact.setSelected(!contact.isSelected());
-            notifyItemChanged(position);
+            // Reset the background color of all contacts
+            for (Contacts c : contactsList) {
+                if (c != contact) {
+                    c.setSelected(false);
+                }
+            }
+            notifyDataSetChanged();
+
             // Check if the contact is selected
             if (contact.isSelected()) {
                 // Open the SMS app with the selected contact and predefined SMS body
-                openSmsApp(holder.itemView.getContext(), contact.getPhoneNumber(), "ReferMee pls");
+                openSmsApp(holder.itemView.getContext(), contact.getPhoneNumber(), "Hey there, I'm using BugBazaar for all of my bug needs.\n" +
+                        "Check out our new application and you will never have to go back to any other shopping app. \n\n" +
+                        "BugBazaar!! for all your vulnerabilty needs!!");
+
             }
         });
     }
