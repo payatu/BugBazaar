@@ -10,8 +10,11 @@ import android.webkit.WebViewClient;
 
 import com.BugBazaar.R;
 import com.BugBazaar.utils.AppConstants;
-import android.webkit.SafeBrowsingResponse;
+
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.UUID;
 
 public class TermsAndConditionsActivity extends AppCompatActivity {
     WebView webView;
@@ -60,8 +63,8 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
     private void startWebView(String webViewUrl) {
 
         if (webViewUrl.contains("bugbazaar") && webViewUrl.contains("bugbazaar.com")) {
+            webView.addJavascriptInterface(new JavaScriptInterface(), "Androidinterface");
             webView.loadUrl(webViewUrl);
-            return;
 
 
         }
@@ -77,5 +80,25 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
     //Code to handle backbutton
     public void onBackButtonClick(View view) {
         onBackPressed(); // Navigate back to the previous activity
+    }
+
+    private class JavaScriptInterface {
+        @android.webkit.JavascriptInterface
+
+        public String showToast(String message) {
+            // This method can be called from JavaScript
+            // Show a Toast message in the native Android app
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+            return "hello";
+
+        }
+
+        @android.webkit.JavascriptInterface
+        public String gettoken(){
+
+            return String.valueOf(UUID.randomUUID());
+        }
+
     }
 }
