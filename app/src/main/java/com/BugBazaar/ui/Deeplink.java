@@ -29,30 +29,6 @@ public class Deeplink extends AppCompatActivity {
             intentA.putExtra("fetched_item", fetched_item);
             startActivity(intentA);
 
-
-            //Retrieve the product list
-          //  Intent intent_list = getIntent();
-           // List<String> products = intent_list.getStringArrayListExtra("productNames");
-
-          //  boolean isItemPresent = false;
-          //  if (products == null) {
-          //      Log.d("Empty products list:", "Product list is null");
-         //       isItemPresent = false;
-        //    }
-         //    else {
-         //       for (String product : products) {
-           //             isItemPresent = true;
-            //            Log.d("Product name:", product);
-             //           break; // No need to continue searching if found
-           //         }
                 }
-       //     }
-       //     if (isItemPresent) {
-              // Log.d("Condition pass:", "Item found");
-       //     } else {
-       //         Log.d("Condition fail:", "Item not found");
             }
         }
-                // Now, productList contains the array from Class A
-     //   }
- //   }
