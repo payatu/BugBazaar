@@ -75,6 +75,8 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
         return recordId;
 
     }
+
+    //To Debug
     public void removeCartItem(CartItem cartItem) {
         SQLiteDatabase db = this.getWritableDatabase();
             Log.d("removeid",String.valueOf(cartItem.getId()));

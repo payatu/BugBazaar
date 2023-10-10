@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <queries>
         <intent>
@@ -32,6 +32,15 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
         <activity
+            android:name=".ui.payment.OrderSummary"
+            android:exported="true" />
+        <activity
+            android:name=".ui.TestActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.payment.TestRazorPay"
+            android:exported="true" />
+        <activity
             android:name=".ui.ContactsPack.SelectContacts"
             android:exported="true" />
         <activity
@@ -39,7 +48,7 @@
             android:exported="true" />
         <activity
             android:name=".ui.cart.CartActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.cart.Cart"
             android:exported="false" />
@@ -60,7 +69,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.CreatePasscode"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.NavigationDrawer_Dashboard"
             android:exported="true">
@@ -74,7 +83,7 @@
                 <data
                     android:host="bugbazaar"
                     android:pathPrefix="/dashboard"
-                    android:scheme="bb"></data>
+                    android:scheme="bb" />
             </intent-filter>
         </activity>
         <activity
