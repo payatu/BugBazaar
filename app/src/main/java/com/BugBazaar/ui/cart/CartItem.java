@@ -74,7 +74,6 @@ public CartItem(String productName, int price, int quantity, long productimage) 
         this.id = id;
     }
 
-
     // Increment the quantity by 1
     public void incrementQuantity(Context context) {
         if (quantity < Integer.MAX_VALUE) { // To avoid overflow
@@ -93,6 +92,7 @@ public CartItem(String productName, int price, int quantity, long productimage) 
                 // Remove the product from the database if quantity becomes 0
                 CartDatabaseHelper dbHelper = new CartDatabaseHelper(context, "cart.db", null, 1);
                 dbHelper.removeCartItem(this); // Pass the item's ID for removal
+                //clear_item("",0);
             } else {
                 // Update the database with the new quantity
                 CartDatabaseHelper dbHelper = new CartDatabaseHelper(context, "cart.db", null, 1);
@@ -104,7 +104,8 @@ public CartItem(String productName, int price, int quantity, long productimage) 
         quantity=0;
         // Update the database with the new quantity
         CartDatabaseHelper dbHelper = new CartDatabaseHelper(context, "cart.db", null, 1);
-        dbHelper.updateCartItem(this);
+        dbHelper.removeCartItem(this); // Added removeCartItem instead of updateCartItem that was called earlier
+        // dbHelper.updateCartItem(this);
     }
 
 

@@ -24,14 +24,15 @@ import java.util.List;
 
 public class DetailedProductActivity extends AppCompatActivity  {
 
-    private List<CartItem> cartItems; // Declare cartItems here
+   private List<CartItem> cartItems; // Declare cartItems here
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_product);
 
-
         CartDatabaseHelper cartDBHelper = new CartDatabaseHelper(this, "cart.db", null, 1);
         cartItems = cartDBHelper.getAllRecords();
+
         // Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Product Details");
@@ -71,6 +72,7 @@ public class DetailedProductActivity extends AppCompatActivity  {
 
                 // Check if the item already exists in the cart
                 boolean itemExists = false;
+                cartItems = cartDBHelper.getAllRecords();
                 for (CartItem cartItem : cartItems) {
                     if (cartItem.getProductName().equals(productName)) {
                         // If the item exists, update its quantity
