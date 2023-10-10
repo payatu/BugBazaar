@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <queries>
         <intent>
@@ -31,11 +32,26 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
         <activity
-            android:name=".ui.ReferUs"
+            android:name=".ui.payment.OrderHistory"
+            android:exported="false" />
+        <activity
+            android:name=".ui.payment.OrderSummary"
+            android:exported="true" />
+        <activity
+            android:name=".ui.TestActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.payment.TestRazorPay"
+            android:exported="true" />
+        <activity
+            android:name=".ui.ContactsPack.SelectContacts"
+            android:exported="true" />
+        <activity
+            android:name=".ui.ContactsPack.ReferUs"
             android:exported="true" />
         <activity
             android:name=".ui.cart.CartActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.cart.Cart"
             android:exported="false" />
@@ -46,27 +62,31 @@
             android:enabled="true"
             android:exported="true"
             android:readPermission="@string/app_name" />
+        <provider
+            android:name=".provider.MyContactsProvider"
+            android:authorities="com.bugbazaar.mycontacts"
+            android:exported="true" />
 
         <activity
             android:name=".ui.DetailedProductActivity"
             android:exported="false" />
         <activity
             android:name=".ui.CreatePasscode"
-            android:exported="true" >
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".ui.NavigationDrawer_Dashboard"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="bugbazaar"
-                    android:scheme="bb"
-                    android:pathPrefix="/dashboard">
-                </data>
+                    android:pathPrefix="/dashboard"
+                    android:scheme="bb" />
             </intent-filter>
         </activity>
         <activity
@@ -87,9 +107,10 @@
         <activity
             android:name=".ui.Signin"
             android:clearTaskOnLaunch="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
