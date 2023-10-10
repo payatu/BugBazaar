@@ -2,9 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS"> </uses-permission>
+    <permission android:name="com.BugBazaar.permission.contacts"  android:protectionLevel="signature"/>
 
     <queries>
         <intent>
@@ -29,9 +32,13 @@
         android:theme="@style/Theme.BugBazaar"
         android:usesCleartextTraffic="true"
         tools:replace="android:fullBackupContent"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        tools:ignore="CustomPermissionTypo">
         <activity
-            android:name=".ui.ReferUs"
+            android:name=".ui.ContactsPack.SelectContacts"
+            android:exported="true" />
+        <activity
+            android:name=".ui.ContactsPack.ReferUs"
             android:exported="true" />
         <activity
             android:name=".ui.cart.CartActivity"
@@ -46,27 +53,32 @@
             android:enabled="true"
             android:exported="true"
             android:readPermission="@string/app_name" />
+        <provider
+            android:name=".provider.MyContactsProvider"
+            android:authorities="com.bugbazaar.mycontacts"
+            android:permission="com.BugBazaar.permission.contact"
+            android:exported="true" />
 
         <activity
             android:name=".ui.DetailedProductActivity"
             android:exported="false" />
         <activity
             android:name=".ui.CreatePasscode"
-            android:exported="true" >
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".ui.NavigationDrawer_Dashboard"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="bugbazaar"
-                    android:scheme="bb"
-                    android:pathPrefix="/dashboard">
-                </data>
+                    android:pathPrefix="/dashboard"
+                    android:scheme="bb" />
             </intent-filter>
         </activity>
         <activity
@@ -87,9 +99,10 @@
         <activity
             android:name=".ui.Signin"
             android:clearTaskOnLaunch="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -109,6 +122,14 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <service
+            android:name=".MyFirebaseInstanceIDService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

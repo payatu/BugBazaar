@@ -188,6 +188,7 @@ public class MyProfile extends AppCompatActivity {
             if (data != null) {
                 try {
                     Uri selectedImageUri = data.getData();
+                    Log.d("hello amit", String.valueOf(selectedImageUri));
 //                    Uri selectedImageUri = Uri.parse("file:////data/data/com.BugBazaar/shared_prefs/user_auth.xml");
 
                     Log.d("helloamit", String.valueOf(selectedImageUri));

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ReferUs"
+    tools:context=".ui.ContactsPack.ReferUs"
     android:orientation="vertical">
     <include
         layout="@layout/nav_toolbar_sub"
@@ -81,6 +81,13 @@
             android:text="Share via SMS"
             android:textSize="25dp"
             android:textStyle="bold"></TextView>
+            <Button
+                android:id="@+id/openContactButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Select Contacts"
+                android:onClick="openSelectContacts"/>
         </LinearLayout>
             <LinearLayout
                 android:layout_width="350dp"

@@ -1,4 +1,4 @@
-package com.BugBazaar.ui;
+package com.BugBazaar.ui.ContactsPack;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,11 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.BugBazaar.R;
+import com.BugBazaar.ui.ContactsPack.SelectContacts;
 
 public class ReferUs extends AppCompatActivity {
 
     Button btnCopyLink;
     Button btnSendEmail;
+    Button openContactButton;
     EditText edtEmailId;
     ClipboardManager clipboardManager;
 
@@ -35,6 +37,7 @@ public class ReferUs extends AppCompatActivity {
         clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         btnSendEmail=findViewById(R.id.btnSendEmail);
         edtEmailId=findViewById(R.id.edtEmailId);
+        openContactButton=findViewById(R.id.openContactButton);
 
     }
     public void onCopyLinkClick(View view){
@@ -47,9 +50,9 @@ public class ReferUs extends AppCompatActivity {
 
     public void openEmailApp(View view){
         String emailSubject="Invitation to join Bugbazaar!!";
-        String emailContent="Hey there, you friend is using BugBazaar for all of his bugs needs. \n " +
-                "\nCheck it out our new application and you will never have to go back to any other shopping app. " +
-                "\n\nBugBazaar!! for all your vulnerabilty needs!!";
+        String emailContent="Hey there, I'm using BugBazaar for all of my bug needs. \n " +
+                "\nCheck out our new application and you will never have to go back to any other shopping app. " +
+                "\n\nBugBazaar!! for all your vulnerabilty needs!!.";
         String emailAddress= edtEmailId.getText().toString();
         Log.d("emailId",emailAddress);
         //Creating Intent
@@ -61,6 +64,11 @@ public class ReferUs extends AppCompatActivity {
 
         startActivity(Intent.createChooser(iEMail, "Email via: "));
         edtEmailId.setText("");
+    }
+    public void openSelectContacts(View view){
+
+        Intent intent=new Intent(this, SelectContacts.class);
+        startActivity(intent);
     }
 
 
