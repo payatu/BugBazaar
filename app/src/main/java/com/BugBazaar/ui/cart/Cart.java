@@ -22,7 +22,6 @@ public class Cart {
     private SQLiteDatabase database;
 
 
-
     public long addCartItem(CartItem cartItem) {
         ContentValues values = new ContentValues();
         if (cartItems.containsKey(cartItem)) {
