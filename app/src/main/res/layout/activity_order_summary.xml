@@ -292,6 +292,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/sharp_button_corners"
-            android:text="Proceed to Payment" />
+            android:text="Proceed to Payment"
+            android:onClick="gotoPayment"/>
     </LinearLayout>
 </LinearLayout>

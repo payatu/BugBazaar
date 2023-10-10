@@ -3,6 +3,7 @@ package com.BugBazaar.ui.payment;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,14 +12,16 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.BugBazaar.R;
 import com.BugBazaar.ui.cart.CartDatabaseHelper;
 import com.BugBazaar.ui.cart.CartItem;
 import com.BugBazaar.ui.cart.CartItemDBModel;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
 
-import android.database.Cursor;
-import android.widget.Toast;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -31,22 +34,28 @@ public class OrderSummary extends AppCompatActivity {
     private RadioButton rbPayViaWallet;
     private RadioButton rbPayViaRazorpay;
     Button btnProceedPaymentOS;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_summary);
-        //Toolbar title set
+        // Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Order Summary");
-        txtProdQuantityOS=findViewById(R.id.txtProdQuantityOS);
-        txtTotalCostOS=findViewById(R.id.txtTotalCostOS);
-        txtFinalCostOS=findViewById(R.id.txtFinalCostOS);
-        btnProceedPaymentOS=findViewById(R.id.btnProceedPaymentOS);
+        txtProdQuantityOS = findViewById(R.id.txtProdQuantityOS);
+        txtTotalCostOS = findViewById(R.id.txtTotalCostOS);
+        txtFinalCostOS = findViewById(R.id.txtFinalCostOS);
+        btnProceedPaymentOS = findViewById(R.id.btnProceedPaymentOS);
 
         // Initialize the RadioGroup and RadioButton elements
         rbGroupPaymentOptions = findViewById(R.id.rbGroupPaymentOptions);
         rbPayViaWallet = findViewById(R.id.rbPayViaWallet);
         rbPayViaRazorpay = findViewById(R.id.rbPayViaRazorpay);
+
+        // Initialize Razorpay with your API key
+        Checkout.preload(getApplicationContext());
+        Checkout checkout = new Checkout();
+        checkout.setKeyID("rzp_test_YEExgm42Uvy0u1");
 
         // Initialize your CartDatabaseHelper
         CartDatabaseHelper cartDBHelper = new CartDatabaseHelper(this, "cart.db", null, 1);
@@ -62,46 +71,94 @@ public class OrderSummary extends AppCompatActivity {
             // Retrieve the product quantity from the database using a query
             int quantity = getProductQuantityFromDatabase(cartDBHelper, productName);
 
-            // Add the quantity to prodQuantity
-            prodQuantity += quantity;
-            //Set the product quantity
-            txtProdQuantityOS.setText(String.valueOf(prodQuantity));
+        // Add the quantity to prodQuantity
+        prodQuantity += quantity;
+    }
+        // Set the product quantity
+        txtProdQuantityOS.setText(String.valueOf(prodQuantity));
 
 
-            Intent intent = getIntent();
-            int totalCost = intent.getIntExtra("totalPrice", 0);
-            // Format the totalCost and set it in the TextView
-            String formattedTotalCost = formatPrice(totalCost);
-            txtTotalCostOS.setText(formattedTotalCost);
+        Intent intent = getIntent();
+        int totalCost = intent.getIntExtra("totalPrice", 0);
+        // Format the totalCost and set it in the TextView
+        String formattedTotalCost = formatPrice(totalCost);
+        txtTotalCostOS.setText(formattedTotalCost);
 
-            int deliveryCharges=536;
+        int deliveryCharges = 536;
 
-            //Final Cost to be sent to Razorpay or wallet
-            int finalCost = totalCost + deliveryCharges;
-            String formattedFinalCost = formatPrice(finalCost);
-            txtFinalCostOS.setText(formattedFinalCost);
+        // Final Cost to be sent to Razorpay or wallet
+        int finalCost = totalCost + deliveryCharges;
+        String formattedFinalCost = formatPrice(finalCost);
+        txtFinalCostOS.setText(formattedFinalCost);
 
-            // Set an OnCheckedChangeListener to the RadioGroup
-            rbGroupPaymentOptions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
+            // Set an OnClickListener to the "Proceed to Payment" button
+            btnProceedPaymentOS.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    Log.d("RB Intitated","RB Intitated");
-                    if (checkedId == R.id.rbPayViaWallet) {
-                        rbPayViaWallet.setChecked(true);      // Set the "Pay via Wallet" RadioButton as selected
-                        rbPayViaRazorpay.setChecked(false);    // Clear the selection of "Pay via Razorpay"
-                        Toast.makeText(getApplicationContext(),"Pay Via Wallet",Toast.LENGTH_SHORT).show();
-                    } else if (checkedId == R.id.rbPayViaRazorpay) {
-                        rbPayViaWallet.setChecked(false);
-                        rbPayViaRazorpay.setChecked(true);
-                        Toast.makeText(getApplicationContext(),"Pay Via Razorpay",Toast.LENGTH_SHORT).show();
-                    }else
-                        Toast.makeText(getApplicationContext(),"No button selected",Toast.LENGTH_SHORT).show();
+                public void onClick(View v) {
+                    // Check which radio button is selected
+                    int selectedRadioButtonId = rbGroupPaymentOptions.getCheckedRadioButtonId();
+
+                    if (selectedRadioButtonId == R.id.rbPayViaWallet) {
+                        // Handle payment via wallet (if applicable)
+                    } else if (selectedRadioButtonId == R.id.rbPayViaRazorpay) {
+                        int amountInPaise=finalCost*100;
+
+                        try {
+                            // You need to pass a JSONObject with payment details to Razorpay
+                            JSONObject options = new JSONObject();
+                            options.put("name", "BugBazaar Private Limited"); // Replace with your company name
+                            options.put("description", "Order Payment");
+                            options.put("currency", "INR"); // Replace with the appropriate currency code
+                            options.put("amount", amountInPaise); // Amount should be in paise
+                            options.put("prefill.email", "customer@example.com");
+                            options.put("prefill.contact", "1234567890");
+
+                            // Callback URL (optional, can be used for handling payment success or failure)
+                            // options.put("callback_url", "your_callback_url");
+                            checkout.open(OrderSummary.this,options);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        // Open Razorpay payment dialog
+                    }
                 }
             });
+    }
+    public void onPaymentSuccess(String s) {
+        Toast.makeText(this,"Payment Successful",Toast.LENGTH_SHORT).show();
 
+        //Move to Order History Activity
+        //Clear All Cart Items
+    }
+
+    public void onPaymentError(int code, String response) {
+        // Handle payment error
+        // This method is called when there is a payment error
+
+        // Log the error code and response for debugging
+        Log.e("Razorpay Error", "Error Code: " + code);
+        Log.e("Razorpay Error", "Error Response: " + response);
+
+        // You can display an error message to the user or take appropriate action based on the error code and response
+        // For example, you can show a Toast message with the error details:
+      //  Toast.makeText(this, "Payment Error: " + response, Toast.LENGTH_SHORT).show();
+
+        // You can also perform additional error handling based on the error code if needed
+        switch (code) {
+            case Checkout.NETWORK_ERROR:
+                Toast.makeText(this, "Network Error: Please check the internet connection.", Toast.LENGTH_LONG).show();
+                break;
+            case Checkout.INVALID_OPTIONS:
+                // Handle invalid payment options
+                break;
+            case Checkout.PAYMENT_CANCELED:
+                Toast.makeText(this, "Payment Error: Payment Canceled by user.", Toast.LENGTH_LONG).show();
+                break;
+            // Add more cases for specific error codes as needed
         }
     }
+
     // Define a method to retrieve product_quantity from the database based on product name
     private int getProductQuantityFromDatabase(CartDatabaseHelper dbHelper, String productName) {
         int quantity = 0;
@@ -123,10 +180,12 @@ public class OrderSummary extends AppCompatActivity {
 
         return quantity;
     }
+
     private String formatPrice(int price) {
         return String.format("₹%,d", price);
     }
-    //Code to handle backbutton
+
+    // Code to handle back button
     public void onBackButtonClick(View view) {
         onBackPressed(); // Navigate back to the previous activity
     }
