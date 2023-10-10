@@ -52,7 +52,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="35dp"
+                    android:layout_height="34dp"
                     android:layout_weight="1"
                     android:text="Edit"
                     android:textColor="@color/main_theme"
