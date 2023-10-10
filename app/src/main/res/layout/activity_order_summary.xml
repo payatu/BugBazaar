@@ -252,7 +252,7 @@
                             android:contentDescription="Wallet Icon"
                             android:layout_marginBottom="15dp"
                             android:layout_marginEnd="20dp"
-                            android:src="@drawable/icon_wallet3"/>
+                            android:src="@drawable/icon_wallet"/>
                     </RelativeLayout>
 
                     <!-- Razorpay Icon -->

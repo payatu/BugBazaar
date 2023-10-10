@@ -90,6 +90,25 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         // Create and set the adapter for the GridView
         ProductAdapter adapter = new ProductAdapter(this, productList);
         productGridView.setAdapter(adapter);
+
+        //Handle Deeplink intent
+        Intent get_item = getIntent();
+        if (get_item.hasExtra("fetched_item")) {
+            // Check for the "fetched_item" string extra
+            String deeplink_item = get_item.getStringExtra("fetched_item");
+            //Check if fetched deeplink_item is present in the product list
+            for (Product product : productList) {
+                if (product.getName().equals(deeplink_item)) {
+                    Log.d("Product found:", product.getName());
+                    Intent detailed_product = new Intent(this, DetailedProductActivity.class);
+                    detailed_product.putExtra("product", product);
+                    detailed_product.putExtra("autostart", true);
+                    this.startActivity(detailed_product);
+                    break; // No need to continue searching if found
+                }
+            }
+        }
+
         //Adding onClickListener to search button
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override

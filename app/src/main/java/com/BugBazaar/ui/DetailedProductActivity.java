@@ -38,6 +38,8 @@ public class DetailedProductActivity extends AppCompatActivity  {
 
         // Retrieve the product details passed from the adapter
         Product product = getIntent().getParcelableExtra("product");
+        boolean autoclick = false;
+        autoclick = getIntent().getBooleanExtra("autostart", false);
 
         // Use the product details to display the detailed information
         ImageView detailedImage = findViewById(R.id.detailedImage);
@@ -68,6 +70,7 @@ public class DetailedProductActivity extends AppCompatActivity  {
 
                 // Check if the item already exists in the cart
                 boolean itemExists = false;
+                cartItems = cartDBHelper.getAllRecords();
                 for (CartItem cartItem : cartItems) {
                     if (cartItem.getProductName().equals(productName)) {
                         // If the item exists, update its quantity
@@ -96,6 +99,9 @@ public class DetailedProductActivity extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
+        if(autoclick) {
+            addToCartButton.performClick();
+        }
     }
 
 
