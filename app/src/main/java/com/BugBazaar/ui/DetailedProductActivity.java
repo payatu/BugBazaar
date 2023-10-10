@@ -72,7 +72,9 @@ public class DetailedProductActivity extends AppCompatActivity  {
 
                 // Check if the item already exists in the cart
                 boolean itemExists = false;
+                // Check updated records in the db to get current list of cart items
                 cartItems = cartDBHelper.getAllRecords();
+
                 for (CartItem cartItem : cartItems) {
                     if (cartItem.getProductName().equals(productName)) {
                         // If the item exists, update its quantity
