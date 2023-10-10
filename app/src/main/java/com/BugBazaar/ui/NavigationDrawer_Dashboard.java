@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
 import com.BugBazaar.R;
+import com.BugBazaar.ui.ContactsPack.ReferUs;
 import com.BugBazaar.ui.cart.CartActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -122,7 +123,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 String filteredList = null;
                 Log.d("Excpetion",filteredList);
             }
-
         });
 
         //Drawer and Navigation bar layout view find

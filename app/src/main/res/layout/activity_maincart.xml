@@ -87,14 +87,15 @@ android:layout_width="match_parent"
         android:gravity="right"
         android:paddingRight="10dp"
         android:text="$0.00"
-        android:textSize="22sp"
+        android:textSize="22dp"
+        android:textColor="@color/black"
         android:textStyle="bold" />
     </LinearLayout>
     <Button
         android:id="@+id/checkoutButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="Proceed to Payment"
+        android:text="Checkout"
         android:textSize="18dp"
         android:layout_gravity="bottom"
         android:background="@drawable/sharp_button_corners"/>
