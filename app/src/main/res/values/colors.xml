@@ -14,5 +14,6 @@
     <color name="focused_color">#4CAF50</color>
     <color name="default_color">#2196F3</color>
     <color name="selected_contact_bg_color">#AAB4B9</color>
+    <color name="theme_second">#774E94C4</color>
 
 </resources>

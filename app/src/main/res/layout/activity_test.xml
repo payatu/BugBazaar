@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:orientation="vertical">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Dumb Watch"
-    android:textSize="70sp"></TextView>
-    <TextView
+    tools:context=".ui.TestActivity">
+
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="$3200"
-        android:textSize="70sp"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Description, Description, Description, Description, Description, Description, Description, Description"
-        android:textSize="20sp"></TextView>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:text="Save"></Button>
-</LinearLayout>
+        android:id="@+id/radioGroup">
+
+        <!-- First RadioButton -->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton1"
+            android:text="First Radio Button" />
+
+        <!-- Second RadioButton -->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton2"
+            android:text="Second Radio Button" />
+    </RadioGroup>
+
+</RelativeLayout>

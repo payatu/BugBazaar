@@ -173,7 +173,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 String filteredList = null;
                 Log.d("Exception",filteredList);
             }
-
         });
 
         //Drawer and Navigation bar layout view find

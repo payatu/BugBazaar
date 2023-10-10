@@ -2,6 +2,7 @@ package com.BugBazaar.ui.cart;
 
 import android.provider.BaseColumns;
 
+
 public final class CartItemDBModel {
     // To prevent someone from accidentally instantiating the contract class,
     // make the constructor private.

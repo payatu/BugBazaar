@@ -1,4 +1,5 @@
 package com.BugBazaar.ui.cart;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.BugBazaar.R;
+import com.BugBazaar.ui.payment.OrderSummary;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -93,7 +96,9 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Perform the checkout action here
-                Toast.makeText(CartActivity.this, "Checkout clicked", Toast.LENGTH_SHORT).show();
+                Intent intentz=new Intent(CartActivity.this, OrderSummary.class);
+                intentz.putExtra("totalPrice",totalCost);
+                startActivity(intentz);
             }
         });
     }
