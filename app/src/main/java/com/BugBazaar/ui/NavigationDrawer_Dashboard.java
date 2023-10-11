@@ -86,56 +86,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,4200));
         productList.add(new Product("VR device", getString(R.string.desc_cycle), R.drawable.item_vr,8340));
 
-        // Pass the List<String> to Class B
-        //Intent intentB = new Intent(this, Deeplink.class);
-        //intentB.putStringArrayListExtra("productList", (ArrayList<String>) productList); // Need to convert productList to ArrayList<String> data type first
-
-        // Convert List<Product> to List<String> of product names in Class A
-       /* List<String> productNames = new ArrayList<>();
-        for (Product product : productList) {
-            productNames.add(product.getName()); // Assuming 'getName()' returns the product name as a String
-        }*/
-        //Get string extra from Class B
-        //intentB.putStringArrayListExtra("productNames", (ArrayList<String>) productNames);
-        boolean isItemPresent = false;
-        Intent get_item = getIntent();
-        if (get_item.hasExtra("fetched_item")) {
-            // Retrieve the "fetched_item" string extra & Check if deeplink_item is present in the product list
-            String deeplink_item = get_item.getStringExtra("fetched_item");
-            for (Product product : productList) {
-                if (product.getName().equals(deeplink_item)) {
-                    Log.d("Product found:", product.getName());
-                    Intent detailed_product = new Intent(this, DetailedProductActivity.class);
-                    detailed_product.putExtra("product", product);
-                    detailed_product.putExtra("autostart", true);
-                    this.startActivity(detailed_product);
-                    //Sending intent to CartItem class
-                    //Intent intToCartItem = new Intent(this, CartItem.class);
-                    //intToCartItem.putExtra("product", product);
-                    //this.startActivity(intToCartItem);
-                    break; // No need to continue searching if found
-                }
-            }
-            //Check if deeplink_item is present in the product list
-         /*   if (productNames == null) {
-                Log.d("Empty productNames list:", "productNames list is null");
-                isItemPresent = false;
-            }
-            else {
-                for (String product : productNames) {
-                    if (product.equals(deeplink_item)) {
-                        isItemPresent = true;
-                        Log.d("Product name:", product);
-                        break; // No need to continue searching if found
-                    }
-                }
-            }
-            if (isItemPresent) {
-                Log.d("Condition pass:", "Item found");
-            } else {
-                Log.d("Condition fail:", "Item not found");
-            } */
-        }
 
         // Create and set the adapter for the GridView
         ProductAdapter adapter = new ProductAdapter(this, productList);
