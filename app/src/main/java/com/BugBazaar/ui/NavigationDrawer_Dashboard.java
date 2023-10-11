@@ -142,7 +142,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         productGridView.setAdapter(adapter);
 
         //Handle Deeplink intent
-        Intent get_item = getIntent();
+//        Intent get_item = getIntent();
         if (get_item.hasExtra("fetched_item")) {
             // Check for the "fetched_item" string extra
             String deeplink_item = get_item.getStringExtra("fetched_item");
