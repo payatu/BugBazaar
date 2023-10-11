@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.BugBazaar.ui.cart.NotificationHelper;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener; // Import the PaymentResultListener
 import com.BugBazaar.R;
@@ -58,7 +59,9 @@ public class TestRazorPay extends AppCompatActivity implements PaymentResultList
     }
 
     public void onPaymentSuccess(String s) {
-       Toast.makeText(this,"Payment Successful",Toast.LENGTH_SHORT).show();
+
+
+
     }
 
     @Override
