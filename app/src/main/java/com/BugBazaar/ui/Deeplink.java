@@ -29,6 +29,10 @@ public class Deeplink extends AppCompatActivity {
             intentA.putExtra("fetched_item", fetched_item);
             startActivity(intentA);
 
+                }
+            }
+        }
+
 
             //Retrieve the product list
           //  Intent intent_list = getIntent();
