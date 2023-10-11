@@ -82,8 +82,8 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
             Log.d("removeid",String.valueOf(cartItem.getId()));
             // Quantity is zero, delete the item from the database
             db.delete(CartItemDBModel.CartItemEntry.TABLE_NAME,
-                    CartItemDBModel.CartItemEntry._ID + " = ?",
-                    new String[]{String.valueOf(cartItem.getId())});
+                    COLUMN_PRODUCT_NAME + " = ?",
+                    new String[]{String.valueOf(cartItem.getProductName())});
         db.close();
     }
 
