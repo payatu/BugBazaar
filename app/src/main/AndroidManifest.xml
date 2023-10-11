@@ -6,12 +6,9 @@
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.READ_CONTACTS"> </uses-permission>
     <permission android:name="com.BugBazaar.permission.contacts"  android:protectionLevel="signature"/>
-=======
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
->>>>>>> 273b63b5541e94a0ac0db96f7f859239dfae019b
+
 
     <queries>
         <intent>
