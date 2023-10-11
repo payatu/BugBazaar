@@ -38,6 +38,8 @@ public class DetailedProductActivity extends AppCompatActivity  {
 
         // Retrieve the product details passed from the adapter
         Product product = getIntent().getParcelableExtra("product");
+        boolean autoclick = false;
+        autoclick = getIntent().getBooleanExtra("autostart", false);
 
         // Use the product details to display the detailed information
         ImageView detailedImage = findViewById(R.id.detailedImage);
@@ -54,6 +56,7 @@ public class DetailedProductActivity extends AppCompatActivity  {
         // Add to cart button view
         Button addToCartButton = findViewById(R.id.addToCartButton);
 
+        // Auto click addToCartButton if intent passed via deep link
 // Handle "Add to Cart" button click
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +99,9 @@ public class DetailedProductActivity extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
+        if(autoclick) {
+            addToCartButton.performClick();
+        }
     }
 
 
