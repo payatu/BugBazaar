@@ -66,6 +66,7 @@ public class ReferUs extends AppCompatActivity {
         edtEmailId.setText("");
     }
     public void openSelectContacts(View view){
+
         Intent intent=new Intent(this, SelectContacts.class);
         startActivity(intent);
     }

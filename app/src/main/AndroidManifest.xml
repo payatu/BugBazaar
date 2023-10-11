@@ -2,10 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <permission android:name="com.BugBazaar.permission.contacts"  android:protectionLevel="signature"/>
+
 
     <queries>
         <intent>
@@ -30,7 +35,11 @@
         android:theme="@style/Theme.BugBazaar"
         android:usesCleartextTraffic="true"
         tools:replace="android:fullBackupContent"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        tools:ignore="CustomPermissionTypo">
+        <activity
+            android:name=".ui.payment.OrderHistory"
+            android:exported="false" />
         <activity
             android:name=".ui.payment.OrderSummary"
             android:exported="true" />
@@ -62,6 +71,7 @@
         <provider
             android:name=".provider.MyContactsProvider"
             android:authorities="com.bugbazaar.mycontacts"
+            android:permission="com.BugBazaar.permission.contact"
             android:exported="true" />
 
         <activity
@@ -123,9 +133,18 @@
                     android:path="/cart/add"/>
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <service
+            android:name=".MyFirebaseInstanceIDService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

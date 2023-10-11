@@ -56,6 +56,7 @@ public class DetailedProductActivity extends AppCompatActivity  {
         // Add to cart button view
         Button addToCartButton = findViewById(R.id.addToCartButton);
 
+        // Auto click addToCartButton if intent passed via deep link
 // Handle "Add to Cart" button click
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
