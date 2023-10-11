@@ -18,6 +18,7 @@ import com.BugBazaar.R;
 import com.BugBazaar.ui.cart.CartDatabaseHelper;
 import com.BugBazaar.ui.cart.CartItem;
 import com.BugBazaar.ui.cart.CartItemDBModel;
+import com.BugBazaar.ui.cart.NotificationHelper;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
@@ -34,6 +35,7 @@ public class OrderSummary extends AppCompatActivity {
     private RadioButton rbPayViaWallet;
     private RadioButton rbPayViaRazorpay;
     Button btnProceedPaymentOS;
+    StringBuilder productnames = new StringBuilder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class OrderSummary extends AppCompatActivity {
 
         // Add the quantity to prodQuantity
         prodQuantity += quantity;
+        productnames.append(productName);
     }
         // Set the product quantity
         txtProdQuantityOS.setText(String.valueOf(prodQuantity));
@@ -128,6 +131,10 @@ public class OrderSummary extends AppCompatActivity {
     public void onPaymentSuccess(String s) {
         Toast.makeText(this,"Payment Successful",Toast.LENGTH_SHORT).show();
 
+       String message = productnames+"!your order is successful!!";
+        NotificationHelper.showNotification(this, new StringBuilder(message));
+
+
         //Move to Order History Activity
         //Clear All Cart Items
     }
@@ -135,7 +142,8 @@ public class OrderSummary extends AppCompatActivity {
     public void onPaymentError(int code, String response) {
         // Handle payment error
         // This method is called when there is a payment error
-
+        String message = productnames+"!your order is Failed!! try again";
+        NotificationHelper.showNotification(this, new StringBuilder(message));
         // Log the error code and response for debugging
         Log.e("Razorpay Error", "Error Code: " + code);
         Log.e("Razorpay Error", "Error Response: " + response);
