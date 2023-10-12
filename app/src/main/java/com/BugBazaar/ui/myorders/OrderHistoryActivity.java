@@ -50,15 +50,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
             // Add dividers between items
             adapter.addDividers(recyclerView);
         } else {
-            // Use the OrderHistoryDatabaseHelper to fetch order details from the database
             OrderHistoryDatabaseHelper dbHelper = new OrderHistoryDatabaseHelper(this);
-            List<String> productNames = dbHelper.getAllOrderProducts(orderId);
-            int finalCost = dbHelper.getFinalCostForOrder(orderId);
-
-            // Create an OrderHistoryItem with the list of product names and order total
-            OrderHistoryItem combinedOrderItem = new OrderHistoryItem(orderId, productNames, finalCost);
-            List<OrderHistoryItem> orderItems = new ArrayList<>();
-            orderItems.add(combinedOrderItem);
+            List<OrderHistoryItem> orderItems = dbHelper.getAllOrderItemsz();
 
             // Find the RecyclerView in the layout
             RecyclerView recyclerView = findViewById(R.id.orderHistoryRecyclerView);
@@ -75,7 +68,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         }
     }
 
-    private void loadAndLogAllItemsFromDatabase() {
+        private void loadAndLogAllItemsFromDatabase() {
         // Load all items from the database and log them
         OrderHistoryDatabaseHelper dbHelper = new OrderHistoryDatabaseHelper(this);
         List<OrderHistoryItem> allItems = dbHelper.getAllOrderItemsz();

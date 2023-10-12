@@ -54,6 +54,7 @@ public class OrderHistoryDatabaseHelper extends SQLiteOpenHelper {
         // Define the columns to retrieve from the order items table
         String[] projection = {
                 OrderHistoryEntry.COLUMN_PRODUCT_NAME
+
         };
 
         String selection = OrderHistoryEntry.COLUMN_ORDER_ID + " = ?";
@@ -78,6 +79,36 @@ public class OrderHistoryDatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return products;
     }
+    public List<Integer> getAllOrderProductQuantities(String orderId) {
+        List<Integer> quantities = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {
+                OrderHistoryEntry.COLUMN_PRODUCT_QUANTITY
+        };
+
+        String selection = OrderHistoryEntry.COLUMN_ORDER_ID + " = ?";
+        String[] selectionArgs = { orderId };
+
+        Cursor cursor = db.query(
+                OrderHistoryEntry.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        while (cursor.moveToNext()) {
+            int productQuantity = cursor.getInt(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_PRODUCT_QUANTITY));
+            quantities.add(productQuantity);
+        }
+
+        cursor.close();
+        return quantities;
+    }
+
     public int getFinalCostForOrder(String orderId) {
         SQLiteDatabase db = this.getReadableDatabase();
         int finalCost = 0;
@@ -114,6 +145,7 @@ public class OrderHistoryDatabaseHelper extends SQLiteOpenHelper {
         String[] projection = {
                 OrderHistoryEntry.COLUMN_ORDER_ID,
                 OrderHistoryEntry.COLUMN_PRODUCT_NAME,
+                OrderHistoryEntry.COLUMN_PRODUCT_QUANTITY,
                 OrderHistoryEntry.COLUMN_FINAL_COST
         };
 
@@ -125,46 +157,52 @@ public class OrderHistoryDatabaseHelper extends SQLiteOpenHelper {
                 null,  // No selectionArgs
                 null,
                 null,
-                null
+                OrderHistoryEntry.COLUMN_ORDER_ID + " DESC"
         );
 
         String currentOrderID = null;
         List<String> productNames = new ArrayList<>();
+        List<Integer> productQuantities = new ArrayList<>();
         int finalCost = 0;
 
         while (cursor.moveToNext()) {
             String orderID = cursor.getString(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_ORDER_ID));
             String productName = cursor.getString(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_PRODUCT_NAME));
+            int productQuantity = cursor.getInt(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_PRODUCT_QUANTITY));
             int currentFinalCost = cursor.getInt(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_FINAL_COST));
 
             if (currentOrderID == null || !currentOrderID.equals(orderID)) {
                 // If a new order ID is encountered, create a new OrderHistoryItem
                 if (currentOrderID != null) {
-                    OrderHistoryItem orderItem = new OrderHistoryItem(currentOrderID, productNames, finalCost);
+                    OrderHistoryItem orderItem = new OrderHistoryItem(currentOrderID, productNames, productQuantities, finalCost);
                     orderItems.add(orderItem);
                 }
 
                 // Initialize values for the new order
                 currentOrderID = orderID;
                 productNames = new ArrayList<>();
+                productQuantities = new ArrayList<>();
                 finalCost = 0;
             }
 
-            // Add the product name to the list
+            // Add the product name and quantity to the lists
             productNames.add(productName);
+            productQuantities.add(productQuantity);
             // Accumulate the final cost
             finalCost += currentFinalCost;
         }
 
         // Add the last order to the list
         if (currentOrderID != null) {
-            OrderHistoryItem orderItem = new OrderHistoryItem(currentOrderID, productNames, finalCost);
+            OrderHistoryItem orderItem = new OrderHistoryItem(currentOrderID, productNames, productQuantities, finalCost);
             orderItems.add(orderItem);
         }
 
         cursor.close();
         return orderItems;
     }
+
+
 
 
 

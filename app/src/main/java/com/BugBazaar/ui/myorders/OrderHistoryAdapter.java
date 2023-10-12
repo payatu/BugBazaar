@@ -49,16 +49,22 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         String orderIdText = "<b>Order ID:</b> " + orderItem.getOrderID();
         holder.orderIdTextView.setText(Html.fromHtml(orderIdText, Html.FROM_HTML_MODE_COMPACT));
 
-        // Concatenate all product names with bullet points
-        String productsText = "";
-        for (String productName : orderItem.getProductNames()) {
-            productsText += "• " + productName + "\n";
+        // Format the list of products with bullet points including quantity
+        StringBuilder productsText = new StringBuilder();
+        List<String> productNames = orderItem.getProductNames();
+        List<Integer> productQuantities = orderItem.getProductQuantities();
+        for (int i = 0; i < productNames.size(); i++) {
+            String productName = productNames.get(i);
+            int productQuantity = productQuantities.get(i);
+            productsText.append("• ").append(productName).append(" (Qty: ").append(productQuantity).append(")\n");
         }
-        holder.itemsTextView.setText(productsText);
+        holder.itemsTextView.setText(productsText.toString());
+
         String formattedTotalCost = formatPrice(orderItem.getFinalCost());
-        String orderTotal="<b>Order Total:</b> " + formattedTotalCost;
-        holder.orderTotalTextView.setText(Html.fromHtml(orderTotal,Html.FROM_HTML_MODE_COMPACT));
+        String orderTotal = "<b>Order Total:</b> <i>" + formattedTotalCost+"</i>";
+        holder.orderTotalTextView.setText(Html.fromHtml(orderTotal, Html.FROM_HTML_MODE_COMPACT));
     }
+
 
 
 
