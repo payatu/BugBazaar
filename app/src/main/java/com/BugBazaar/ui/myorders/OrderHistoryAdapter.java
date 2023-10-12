@@ -55,7 +55,8 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             productsText += "• " + productName + "\n";
         }
         holder.itemsTextView.setText(productsText);
-        String orderTotal="<b>Order Total:</b> " + orderItem.getFinalCost();
+        String formattedTotalCost = formatPrice(orderItem.getFinalCost());
+        String orderTotal="<b>Order Total:</b> " + formattedTotalCost;
         holder.orderTotalTextView.setText(Html.fromHtml(orderTotal,Html.FROM_HTML_MODE_COMPACT));
     }
 
@@ -89,5 +90,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             orderTotalTextView = itemView.findViewById(R.id.orderTotalTextView);
         }
     }
+    private String formatPrice(int price) {
+        return String.format("₹%,d", price);
+    }
 }
-

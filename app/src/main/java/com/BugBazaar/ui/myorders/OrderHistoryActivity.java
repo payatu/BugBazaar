@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.BugBazaar.R;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderHistoryActivity extends AppCompatActivity {
     @Override
@@ -28,28 +29,65 @@ public class OrderHistoryActivity extends AppCompatActivity {
         String orderId = intent.getStringExtra("order_id");
         Log.d("OrderHistoryActivity", "Order ID: " + orderId);
 
-        // Use the OrderHistoryDatabaseHelper to fetch order details from the database
+        if (orderId == null) {
+            // OrderID is null, fetch and display all orders
+            Toast.makeText(getApplicationContext(), "OrderID is null", Toast.LENGTH_SHORT).show();
+
+            // Use the OrderHistoryDatabaseHelper to fetch all order items from the database
+            OrderHistoryDatabaseHelper dbHelper = new OrderHistoryDatabaseHelper(this);
+            List<OrderHistoryItem> orderItems = dbHelper.getAllOrderItemsz();
+
+            // Find the RecyclerView in the layout
+            RecyclerView recyclerView = findViewById(R.id.orderHistoryRecyclerView);
+            // Create an adapter for the RecyclerView
+            OrderHistoryAdapter adapter = new OrderHistoryAdapter(orderItems, this);
+
+            // Set the adapter for the RecyclerView
+            recyclerView.setAdapter(adapter);
+            // Set the layout manager for the RecyclerView
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+            // Add dividers between items
+            adapter.addDividers(recyclerView);
+        } else {
+            // Use the OrderHistoryDatabaseHelper to fetch order details from the database
+            OrderHistoryDatabaseHelper dbHelper = new OrderHistoryDatabaseHelper(this);
+            List<String> productNames = dbHelper.getAllOrderProducts(orderId);
+            int finalCost = dbHelper.getFinalCostForOrder(orderId);
+
+            // Create an OrderHistoryItem with the list of product names and order total
+            OrderHistoryItem combinedOrderItem = new OrderHistoryItem(orderId, productNames, finalCost);
+            List<OrderHistoryItem> orderItems = new ArrayList<>();
+            orderItems.add(combinedOrderItem);
+
+            // Find the RecyclerView in the layout
+            RecyclerView recyclerView = findViewById(R.id.orderHistoryRecyclerView);
+            // Create an adapter for the RecyclerView
+            OrderHistoryAdapter adapter = new OrderHistoryAdapter(orderItems, this);
+
+            // Set the adapter for the RecyclerView
+            recyclerView.setAdapter(adapter);
+            // Set the layout manager for the RecyclerView
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+            // Add dividers between items
+            adapter.addDividers(recyclerView);
+        }
+    }
+
+    private void loadAndLogAllItemsFromDatabase() {
+        // Load all items from the database and log them
         OrderHistoryDatabaseHelper dbHelper = new OrderHistoryDatabaseHelper(this);
-        List<String> productNames = dbHelper.getAllOrderProducts(orderId);
-        int finalCost = dbHelper.getFinalCostForOrder(orderId); // Make sure you implement this method in the database helper
+        List<OrderHistoryItem> allItems = dbHelper.getAllOrderItemsz();
 
-        // Create an OrderHistoryItem with the list of product names and order total
-        OrderHistoryItem combinedOrderItem = new OrderHistoryItem(orderId, productNames, finalCost);
-        List<OrderHistoryItem> orderItems = new ArrayList<>();
-        orderItems.add(combinedOrderItem);
-
-        // Find the RecyclerView in the layout
-        RecyclerView recyclerView = findViewById(R.id.orderHistoryRecyclerView);
-        // Create an adapter for the RecyclerView
-        OrderHistoryAdapter adapter = new OrderHistoryAdapter(orderItems, this);
-
-        // Set the adapter for the RecyclerView
-        recyclerView.setAdapter(adapter);
-        // Set the layout manager for the RecyclerView
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Add dividers between items
-        adapter.addDividers(recyclerView);
+        for (OrderHistoryItem item : allItems) {
+            Log.d("OrderHistoryActivity", "Order ID: " + item.getOrderID());
+            Log.d("OrderHistoryActivity", "Product Names:");
+            for (String productName : item.getProductNames()) {
+                Log.d("OrderHistoryActivity", "  - " + productName);
+            }
+            Log.d("OrderHistoryActivity", "Order Total: " + item.getFinalCost());
+        }
     }
 
     // Code to handle the back button

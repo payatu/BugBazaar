@@ -106,6 +106,68 @@ public class OrderHistoryDatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return finalCost;
     }
+    public List<OrderHistoryItem> getAllOrderItemsz() {
+        List<OrderHistoryItem> orderItems = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Define the columns to retrieve from the order items table
+        String[] projection = {
+                OrderHistoryEntry.COLUMN_ORDER_ID,
+                OrderHistoryEntry.COLUMN_PRODUCT_NAME,
+                OrderHistoryEntry.COLUMN_FINAL_COST
+        };
+
+        // Query the database to retrieve all order items
+        Cursor cursor = db.query(
+                OrderHistoryEntry.TABLE_NAME,
+                projection,
+                null,  // No selection
+                null,  // No selectionArgs
+                null,
+                null,
+                null
+        );
+
+        String currentOrderID = null;
+        List<String> productNames = new ArrayList<>();
+        int finalCost = 0;
+
+        while (cursor.moveToNext()) {
+            String orderID = cursor.getString(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_ORDER_ID));
+            String productName = cursor.getString(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_PRODUCT_NAME));
+            int currentFinalCost = cursor.getInt(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_FINAL_COST));
+
+            if (currentOrderID == null || !currentOrderID.equals(orderID)) {
+                // If a new order ID is encountered, create a new OrderHistoryItem
+                if (currentOrderID != null) {
+                    OrderHistoryItem orderItem = new OrderHistoryItem(currentOrderID, productNames, finalCost);
+                    orderItems.add(orderItem);
+                }
+
+                // Initialize values for the new order
+                currentOrderID = orderID;
+                productNames = new ArrayList<>();
+                finalCost = 0;
+            }
+
+            // Add the product name to the list
+            productNames.add(productName);
+            // Accumulate the final cost
+            finalCost += currentFinalCost;
+        }
+
+        // Add the last order to the list
+        if (currentOrderID != null) {
+            OrderHistoryItem orderItem = new OrderHistoryItem(currentOrderID, productNames, finalCost);
+            orderItems.add(orderItem);
+        }
+
+        cursor.close();
+        return orderItems;
+    }
+
+
+
 
     public String findLastOrderID(SQLiteDatabase db) {
         String lastOrderID = "ORDER-100"; // A default order ID if no records exist yet
