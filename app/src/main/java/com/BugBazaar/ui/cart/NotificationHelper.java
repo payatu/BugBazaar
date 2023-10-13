@@ -28,7 +28,7 @@ public class NotificationHelper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notification = new Notification.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.drawable.sucessful_order)
-                    .setContentTitle("your Order Summary")
+                    .setContentTitle("Your order for below items has been placed!\n")
                     .setContentText(message)
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true)

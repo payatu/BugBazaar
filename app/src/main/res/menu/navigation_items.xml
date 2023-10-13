@@ -14,11 +14,19 @@
         android:id="@+id/itemWallet"
         android:title="Wallet"
         android:icon="@drawable/baseline_wallet_24"></item>
+    <item
+       android:id="@+id/itemAddresses"
+       android:title="Addresses"
+       android:icon="@drawable/baseline_address"></item>
 
         <item
         android:id="@+id/itemCart"
         android:title="Cart"
         android:icon="@drawable/baseline_shopping_cart_24"></item>
+        <item
+            android:id="@+id/itemMyOrders"
+            android:title="My Orders"
+            android:icon="@drawable/baseline_my_orders"></item>
     <item
         android:id="@+id/itemContactUs"
         android:title="Contact Us"
