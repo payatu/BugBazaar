@@ -2,6 +2,7 @@ package com.BugBazaar.ui.payment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,16 +14,18 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.BugBazaar.ui.cart.NotificationHelper;
 import com.BugBazaar.R;
 import com.BugBazaar.ui.cart.CartDatabaseHelper;
 import com.BugBazaar.ui.cart.CartItem;
 import com.BugBazaar.ui.cart.CartItemDBModel;
-import com.BugBazaar.ui.cart.NotificationHelper;
+import com.BugBazaar.ui.myorders.OrderHistoryActivity;
+import com.BugBazaar.ui.myorders.OrderHistoryDatabaseHelper;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
 import org.json.JSONObject;
+import java.util.Random;
 
 import java.util.List;
 
@@ -35,8 +38,9 @@ public class OrderSummary extends AppCompatActivity {
     private RadioButton rbPayViaWallet;
     private RadioButton rbPayViaRazorpay;
     Button btnProceedPaymentOS;
+    private int finalCost;  // Define finalCost as a class member
+    private String newOrderID; // Declare newOrderID as a class member
     StringBuilder productnames = new StringBuilder();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,8 @@ public class OrderSummary extends AppCompatActivity {
         Checkout checkout = new Checkout();
         checkout.setKeyID("rzp_test_YEExgm42Uvy0u1");
 
+        newOrderID = generateNewOrderID();
+
         // Initialize your CartDatabaseHelper
         CartDatabaseHelper cartDBHelper = new CartDatabaseHelper(this, "cart.db", null, 1);
         // Initialize your cartItems list and populate it with all items from the database
@@ -75,7 +81,8 @@ public class OrderSummary extends AppCompatActivity {
 
         // Add the quantity to prodQuantity
         prodQuantity += quantity;
-        productnames.append(productName);
+        //Product Names String for Notification
+        productnames.append(productName+",\n");
     }
         // Set the product quantity
         txtProdQuantityOS.setText(String.valueOf(prodQuantity));
@@ -90,7 +97,7 @@ public class OrderSummary extends AppCompatActivity {
         int deliveryCharges = 536;
 
         // Final Cost to be sent to Razorpay or wallet
-        int finalCost = totalCost + deliveryCharges;
+        finalCost = totalCost + deliveryCharges;
         String formattedFinalCost = formatPrice(finalCost);
         txtFinalCostOS.setText(formattedFinalCost);
 
@@ -128,21 +135,53 @@ public class OrderSummary extends AppCompatActivity {
                 }
             });
     }
+
     public void onPaymentSuccess(String s) {
         Toast.makeText(this,"Payment Successful",Toast.LENGTH_SHORT).show();
-
-       String message = productnames+"!your order is successful!!";
+        CartDatabaseHelper cartDBHelper = new CartDatabaseHelper(this, "cart.db", null, 1);
+        String message = String.valueOf(productnames);
         NotificationHelper.showNotification(this, new StringBuilder(message));
+        // Generate a new order ID
+        String newOrderID = generateNewOrderID();
+        // Store the new order ID in the database
+        storeOrderIDInDatabase(newOrderID);
+        // Move to the Order History Activity
+        moveToOrderHistoryActivity();
 
 
-        //Move to Order History Activity
-        //Clear All Cart Items
+
+        // Save the order details to the OrderHistory database
+        OrderHistoryDatabaseHelper dbHelper = new OrderHistoryDatabaseHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        // Loop through your cart items and save the details for each item
+        for (CartItem cartItem : cartItems) {
+            String productName = cartItem.getProductName();
+            int quantity = getProductQuantityFromDatabase(cartDBHelper, productName);
+            //int amountInPaise = finalCost * 100; // Modify this as needed
+
+            ContentValues values = new ContentValues();
+            values.put(OrderHistoryDatabaseHelper.OrderHistoryEntry.COLUMN_ORDER_ID, newOrderID);  // Add order ID
+            values.put(OrderHistoryDatabaseHelper.OrderHistoryEntry.COLUMN_PRODUCT_NAME, productName);
+            values.put(OrderHistoryDatabaseHelper.OrderHistoryEntry.COLUMN_PRODUCT_QUANTITY, quantity);
+            values.put(OrderHistoryDatabaseHelper.OrderHistoryEntry.COLUMN_FINAL_COST, finalCost);
+
+            long newRowId = db.insert(OrderHistoryDatabaseHelper.OrderHistoryEntry.TABLE_NAME, null, values);
+            if (newRowId == -1) {
+                // Handle insertion error
+            }
+        }
+
+        // Move to the Order History Activity
+        Intent orderHistoryIntent = new Intent(this, OrderHistoryActivity.class);
+        // Start OrderHistoryActivity
+        startActivity(orderHistoryIntent);
+        // Clear All Cart Items
+        clearCartItems();
     }
 
     public void onPaymentError(int code, String response) {
-        // Handle payment error
         // This method is called when there is a payment error
-        String message = productnames+"!your order is Failed!! try again";
+        String message = "Your payment has been failed. Please try again!";
         NotificationHelper.showNotification(this, new StringBuilder(message));
         // Log the error code and response for debugging
         Log.e("Razorpay Error", "Error Code: " + code);
@@ -150,7 +189,7 @@ public class OrderSummary extends AppCompatActivity {
 
         // You can display an error message to the user or take appropriate action based on the error code and response
         // For example, you can show a Toast message with the error details:
-      //  Toast.makeText(this, "Payment Error: " + response, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Payment Error: " + response, Toast.LENGTH_SHORT).show();
 
         // You can also perform additional error handling based on the error code if needed
         switch (code) {
@@ -187,6 +226,49 @@ public class OrderSummary extends AppCompatActivity {
         }
 
         return quantity;
+    }
+    private String generateNewOrderID() {
+        // Get the last used order ID from the database
+        OrderHistoryDatabaseHelper orderHistoryDBHelper = new OrderHistoryDatabaseHelper(this);
+        SQLiteDatabase db = orderHistoryDBHelper.getWritableDatabase();
+        String lastOrderID = orderHistoryDBHelper.findLastOrderID(db);
+        db.close();
+
+        // Increment the last order ID to generate a new one
+        return orderHistoryDBHelper.incrementOrderID(lastOrderID);
+    }
+
+    private void storeOrderIDInDatabase(String newOrderID) {
+        OrderHistoryDatabaseHelper orderHistoryDBHelper = new OrderHistoryDatabaseHelper(this);
+        SQLiteDatabase db = orderHistoryDBHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(OrderHistoryDatabaseHelper.OrderHistoryEntry.COLUMN_PRODUCT_NAME, newOrderID);
+        values.put(OrderHistoryDatabaseHelper.OrderHistoryEntry.COLUMN_PRODUCT_QUANTITY, 0); // You can set the quantity as needed
+        values.put(OrderHistoryDatabaseHelper.OrderHistoryEntry.COLUMN_FINAL_COST, 0); // You can set the final cost as needed
+
+        long newRowId = db.insert(OrderHistoryDatabaseHelper.OrderHistoryEntry.TABLE_NAME, null, values);
+        db.close();
+    }
+
+    private void moveToOrderHistoryActivity() {
+        // Create an Intent to start the OrderHistoryActivity
+        Intent intent = new Intent(this, OrderHistoryActivity.class);
+
+        // Pass any necessary data to the OrderHistoryActivity
+        // For example, you can pass the new order ID:
+        intent.putExtra("order_id", newOrderID);
+
+        // Start the OrderHistoryActivity
+        startActivity(intent);
+    }
+
+    private void clearCartItems() {
+        // Implement the logic to clear all cart items here
+        // You can use the CartDatabaseHelper to delete all records from the cart database
+        CartDatabaseHelper cartDBHelper = new CartDatabaseHelper(this, "cart.db", null, 1);
+        SQLiteDatabase db = cartDBHelper.getWritableDatabase();
+        db.delete(CartItemDBModel.CartItemEntry.TABLE_NAME, null, null);
+        db.close();
     }
 
     private String formatPrice(int price) {

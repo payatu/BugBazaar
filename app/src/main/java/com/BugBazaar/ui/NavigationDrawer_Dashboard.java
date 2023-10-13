@@ -25,6 +25,8 @@ import com.BugBazaar.ui.ContactsPack.ReferUs;
 import com.BugBazaar.ui.cart.CartActivity;
 import com.BugBazaar.ui.cart.CartItem;
 import com.BugBazaar.ui.cart.NotificationHelper;
+import com.BugBazaar.ui.myorders.OrderHistoryActivity;
+
 import com.BugBazaar.utils.AppInitializationManager;
 import com.BugBazaar.utils.CustomDialog;
 import com.google.android.material.navigation.NavigationView;
@@ -108,7 +110,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         productGridView.setAdapter(adapter);
 
         //Handle Deeplink intent
-//        Intent get_item = getIntent();
+        Intent get_item = getIntent();
         if (get_item.hasExtra("fetched_item")) {
             // Check for the "fetched_item" string extra
             String deeplink_item = get_item.getStringExtra("fetched_item");
@@ -212,7 +214,19 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            } else if (itemId == R.id.itemLoginLogout) {
+            }
+            else if (itemId == R.id.itemWallet) {
+                Intent intent = new Intent(NavigationDrawer_Dashboard.this, TermsAndConditionsActivity.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            } else if (itemId == R.id.itemMyOrders) {
+                Intent intent = new Intent(NavigationDrawer_Dashboard.this, OrderHistoryActivity.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+            else if (itemId == R.id.itemLoginLogout) {
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
