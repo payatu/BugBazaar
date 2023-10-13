@@ -14,7 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.BugBazaar.ui.cart.NotificationHelper;
 import com.BugBazaar.R;
 import com.BugBazaar.ui.cart.CartDatabaseHelper;
 import com.BugBazaar.ui.cart.CartItem;
@@ -40,6 +40,7 @@ public class OrderSummary extends AppCompatActivity {
     Button btnProceedPaymentOS;
     private int finalCost;  // Define finalCost as a class member
     private String newOrderID; // Declare newOrderID as a class member
+    StringBuilder productnames = new StringBuilder();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +81,8 @@ public class OrderSummary extends AppCompatActivity {
 
         // Add the quantity to prodQuantity
         prodQuantity += quantity;
+        //Product Names String for Notification
+        productnames.append(productName+",\n");
     }
         // Set the product quantity
         txtProdQuantityOS.setText(String.valueOf(prodQuantity));
@@ -136,8 +139,8 @@ public class OrderSummary extends AppCompatActivity {
     public void onPaymentSuccess(String s) {
         Toast.makeText(this,"Payment Successful",Toast.LENGTH_SHORT).show();
         CartDatabaseHelper cartDBHelper = new CartDatabaseHelper(this, "cart.db", null, 1);
-
-        //Create order-id logic here
+        String message = String.valueOf(productnames);
+        NotificationHelper.showNotification(this, new StringBuilder(message));
         // Generate a new order ID
         String newOrderID = generateNewOrderID();
         // Store the new order ID in the database
@@ -145,7 +148,7 @@ public class OrderSummary extends AppCompatActivity {
         // Move to the Order History Activity
         moveToOrderHistoryActivity();
 
-        // Clear All Cart Items
+
 
         // Save the order details to the OrderHistory database
         OrderHistoryDatabaseHelper dbHelper = new OrderHistoryDatabaseHelper(this);
@@ -172,19 +175,21 @@ public class OrderSummary extends AppCompatActivity {
         Intent orderHistoryIntent = new Intent(this, OrderHistoryActivity.class);
         // Start OrderHistoryActivity
         startActivity(orderHistoryIntent);
+        // Clear All Cart Items
+        clearCartItems();
     }
 
     public void onPaymentError(int code, String response) {
-        // Handle payment error
         // This method is called when there is a payment error
-
+        String message = "Your payment has been failed. Please try again!";
+        NotificationHelper.showNotification(this, new StringBuilder(message));
         // Log the error code and response for debugging
         Log.e("Razorpay Error", "Error Code: " + code);
         Log.e("Razorpay Error", "Error Response: " + response);
 
         // You can display an error message to the user or take appropriate action based on the error code and response
         // For example, you can show a Toast message with the error details:
-      //  Toast.makeText(this, "Payment Error: " + response, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Payment Error: " + response, Toast.LENGTH_SHORT).show();
 
         // You can also perform additional error handling based on the error code if needed
         switch (code) {

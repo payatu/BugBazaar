@@ -46,7 +46,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         OrderHistoryItem orderItem = orderItems.get(position);
 
         // Use HTML formatting to make "Order ID" text bold
-        String orderIdText = "<b>Order ID:</b> " + orderItem.getOrderID();
+        String orderIdText = "<b>" + orderItem.getOrderID()+"</b>";
         holder.orderIdTextView.setText(Html.fromHtml(orderIdText, Html.FROM_HTML_MODE_COMPACT));
 
         // Format the list of products with bullet points including quantity
