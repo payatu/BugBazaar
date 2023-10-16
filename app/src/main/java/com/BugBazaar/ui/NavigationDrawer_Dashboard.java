@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.BugBazaar.R;
 import com.BugBazaar.ui.ContactsPack.ReferUs;
 import com.BugBazaar.ui.cart.CartActivity;
+import com.BugBazaar.ui.cart.CartItem;
 import com.BugBazaar.ui.cart.NotificationHelper;
 import com.BugBazaar.ui.myorders.OrderHistoryActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -46,15 +47,18 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         Uri data = getLink.getData();
 
         if (data != null) {
-            String scheme = data.getScheme();
-            String host = data.getHost();
-            String path = data.getPath();
+            String scheme = data.getScheme(); // Get the scheme (should be "bb")
+            String host = data.getHost(); // Get the host (should be "bugbazaar.com")
+            String path = data.getPath(); // Get the path (should be "/dashboard")
+
             // Check if the deep link matches the expected values
             if ("bb".equals(scheme) && "bugbazaar.com".equals(host) && "/dashboard".equals(path)) {
                 // Handle the deep link here, e.g., open the dashboard or perform other actions.
-
+                // You can also extract additional data from the deep link if needed.
             }
         }
+
+        // Rest of your activity initialization code
 
         // Hide the keyboard and clear focus from the EditText
         View focusedView = getCurrentFocus();
@@ -171,6 +175,8 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
+            } else if (itemId == R.id.itemWallet) {
+                Toast.makeText(this, "Wallet is clicked", Toast.LENGTH_SHORT).show();
             }
             else if (itemId == R.id.itemCart) {
                 Intent intent =new Intent(this, CartActivity.class);
@@ -194,7 +200,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 return true;
             }
             else if (itemId == R.id.itemWallet) {
-                Intent intent = new Intent(NavigationDrawer_Dashboard.this, Wallet.class);
+                Intent intent = new Intent(NavigationDrawer_Dashboard.this, TermsAndConditionsActivity.class);
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
