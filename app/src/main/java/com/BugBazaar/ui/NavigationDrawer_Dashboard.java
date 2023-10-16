@@ -198,12 +198,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            }
-            else if (itemId == R.id.itemWallet) {
-                Intent intent = new Intent(NavigationDrawer_Dashboard.this, TermsAndConditionsActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(GravityCompat.START);
-                return true;
             } else if (itemId == R.id.itemMyOrders) {
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, OrderHistoryActivity.class);
                 startActivity(intent);
