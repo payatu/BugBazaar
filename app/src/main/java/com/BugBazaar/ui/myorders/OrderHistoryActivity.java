@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.BugBazaar.R;
+import com.BugBazaar.ui.NavigationDrawer_Dashboard;
 
 import org.w3c.dom.Text;
 
@@ -105,6 +106,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
     // Code to handle the back button
     public void onBackButtonClick(View view) {
-        onBackPressed(); // Navigate back to the previous activity
+        Intent intent = new Intent(OrderHistoryActivity.this, NavigationDrawer_Dashboard.class);
+        startActivity(intent);
     }
 }
