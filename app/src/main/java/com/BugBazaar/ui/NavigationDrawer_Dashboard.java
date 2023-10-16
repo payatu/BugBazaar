@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -25,6 +26,8 @@ import com.BugBazaar.ui.cart.CartActivity;
 import com.BugBazaar.ui.cart.CartItem;
 import com.BugBazaar.ui.cart.NotificationHelper;
 import com.BugBazaar.ui.myorders.OrderHistoryActivity;
+import com.BugBazaar.utils.AppInitializationManager;
+import com.BugBazaar.utils.CustomDialog;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -43,21 +46,14 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer_dashboard);
 
-        Intent getLink = getIntent();
-        Uri data = getLink.getData();
+        if (AppInitializationManager.isFirstRun(this)) {
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(),0);
 
-        if (data != null) {
-            String scheme = data.getScheme(); // Get the scheme (should be "bb")
-            String host = data.getHost(); // Get the host (should be "bugbazaar.com")
-            String path = data.getPath(); // Get the path (should be "/dashboard")
-
-            // Check if the deep link matches the expected values
-            if ("bb".equals(scheme) && "bugbazaar.com".equals(host) && "/dashboard".equals(path)) {
-                // Handle the deep link here, e.g., open the dashboard or perform other actions.
-                // You can also extract additional data from the deep link if needed.
-            }
+            // This is the first run, show your notification
+            AppInitializationManager.showNotification(this);
+            CustomDialog.showCustomDialog(this, " \uD83C\uDF89 Congratulations \uD83C\uDF89", "You've received a Rs 200 voucher.Login to Redeem",pendingIntent);
+            AppInitializationManager.markFirstRunDone(this);
         }
-
         // Rest of your activity initialization code
 
         // Hide the keyboard and clear focus from the EditText
