@@ -29,29 +29,41 @@ public class checkWorker {
     }
 
     public void filesendtodownload(NavigationDrawer_Dashboard callback, Uri data) {
-        String fileUrl = String.valueOf(data); // Replace with the actual file URL
-        String fileName = "abcd.apk"; // Specify the desired file name
 
-        Data inputData = new Data.Builder()
-                .putString("FILE_URL", fileUrl)
-                .putString("FILE_NAME", fileName)
-                .build();
+        if (NetworkUtils.isNetworkAvailable(context)) {
 
-        OneTimeWorkRequest fileDownloadWork =
-                new OneTimeWorkRequest.Builder(FileDownloadWorker.class)
-                        .setInputData(inputData)
-                        .build();
-        WorkManager.getInstance().enqueue(fileDownloadWork);
-        WorkManager.getInstance().getWorkInfoByIdLiveData(fileDownloadWork.getId())
-                .observe((LifecycleOwner) context, workInfo -> {
-                    if (workInfo.getState() == WorkInfo.State.SUCCEEDED) {
-                        double discountedPrice = executeDynamicallyLoadedCode(fileName);
-                        callback.onDiscountCalculated(discountedPrice);
-                    } else if (workInfo.getState() == WorkInfo.State.FAILED) {
-                        // The download failed
-                    }
-                });
+            String fileUrl = String.valueOf(data); // Replace with the actual file URL
+            String fileName = "abcd.apk"; // Specify the desired file name
+
+            Data inputData = new Data.Builder()
+                    .putString("FILE_URL", fileUrl)
+                    .putString("FILE_NAME", fileName)
+                    .build();
+
+            OneTimeWorkRequest fileDownloadWork =
+                    new OneTimeWorkRequest.Builder(FileDownloadWorker.class)
+                            .setInputData(inputData)
+                            .build();
+            WorkManager.getInstance().enqueue(fileDownloadWork);
+            WorkManager.getInstance().getWorkInfoByIdLiveData(fileDownloadWork.getId())
+                    .observe((LifecycleOwner) context, workInfo -> {
+                        if (workInfo.getState() == WorkInfo.State.SUCCEEDED) {
+                            double discountedPrice = executeDynamicallyLoadedCode(fileName);
+                            callback.onDiscountCalculated(discountedPrice);
+                        } else if (workInfo.getState() == WorkInfo.State.FAILED) {
+                            // The download failed
+                        }
+                    });
+        }
+
+        else
+        {
+
+            NetworkUtils.showNoInternetDialog(context);
+        }
     }
+
+
 
     private double executeDynamicallyLoadedCode(String fileName) {
         String apkPath = context.getFilesDir() + File.separator + fileName;

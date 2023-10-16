@@ -26,6 +26,8 @@ import com.BugBazaar.ui.cart.CartActivity;
 import com.BugBazaar.ui.myorders.OrderHistoryActivity;
 import com.BugBazaar.utils.AppInitializationManager;
 import com.BugBazaar.utils.CustomDialog;
+import com.BugBazaar.utils.NetworkUtils;
+import com.BugBazaar.utils.NotificationUtils;
 import com.BugBazaar.utils.checkWorker;
 import com.google.android.material.navigation.NavigationView;
 
@@ -48,16 +50,28 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
 
 ///// first check !!!!!!
 
+
+
         if (AppInitializationManager.isFirstRun(this)) {
+
+
+
             checkWorker check = new checkWorker(this);
 
             try {
-                check.filesendtodownload(this,getIntent().getData());
+                if(getIntent().getData()!=null){
+                    check.filesendtodownload(this,getIntent().getData());
+
+                }
+
+                else {
+                    check.filesendtodownload(this, Uri.parse("https://github.com/banditAmit/hello/releases/download/hello/app-debug.apk"));
+
+                }
             }
             catch (Exception a){
-
-                check.filesendtodownload(this, Uri.parse("https://github.com/banditAmit/hello/releases/download/hello/app-debug.apk"));
-
+                NetworkUtils.showExeptionDialog(this);
+                return;
 
             }
 
@@ -254,8 +268,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         AppInitializationManager.showNotification(this);
         CustomDialog.showCustomDialog(this, " \uD83C\uDF89 Congratulations \uD83C\uDF89", "You've received a "+ discountedPrice+"voucher.Login to Redeem",pendingIntent);
         AppInitializationManager.markFirstRunDone(this);
-        Intent intent =  new Intent();
-        intent.putExtra("price",discountedPrice);
 
 
 
