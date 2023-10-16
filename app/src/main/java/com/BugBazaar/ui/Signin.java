@@ -35,7 +35,7 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
 
         if(UserAuthSave.isLoggedIn()){
 
-            Toast.makeText(Signin.this, "already logged in!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Signin.this, "Welcome back !!", Toast.LENGTH_SHORT).show();
 
             Log.d("passcodemait", String.valueOf(UserAuthSave.getpasscode_flag()));
 
