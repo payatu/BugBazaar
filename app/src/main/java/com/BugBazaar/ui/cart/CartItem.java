@@ -13,7 +13,10 @@ public class CartItem implements Parcelable {
     private int price;
     private int quantity;
     private long productimage;
-    private long id; // Unique identifier for the item in the database
+    private long id;
+
+
+    // Unique identifier for the item in the database
 
 
 // Constructor for creating a CartItem without a Product object
@@ -32,6 +35,7 @@ public CartItem(String productName, int price, int quantity, long productimage) 
         price = in.readInt();
         quantity = in.readInt();
         productimage=in.readLong();
+
     }
 
     // Constructor for creating a CartItem without a Product object
@@ -73,6 +77,8 @@ public CartItem(String productName, int price, int quantity, long productimage) 
     public void setId(long id) {
         this.id = id;
     }
+
+
 
     // Increment the quantity by 1
     public void incrementQuantity(Context context) {
@@ -124,6 +130,7 @@ public CartItem(String productName, int price, int quantity, long productimage) 
         parcel.writeInt(price);
         parcel.writeInt(quantity);
         long imageResID=productimage;
+
         parcel.writeLong(imageResID);
     }
 }

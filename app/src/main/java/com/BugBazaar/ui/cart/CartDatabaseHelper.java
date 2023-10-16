@@ -15,6 +15,8 @@ import android.util.Log;
 
 
 public class CartDatabaseHelper extends SQLiteOpenHelper {
+    long currentTimeMillis = System.currentTimeMillis();
+
     private static final String DATABASE_NAME = "cart.db";
     private static final int DATABASE_VERSION = 1;
 
@@ -66,6 +68,7 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
         cv.put(CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_PRICE, cartItem.getPrice());
         cv.put(CartItemDBModel.CartItemEntry.COLUMN_QUANTITY, cartItem.getQuantity());
         cv.put(CartItemDBModel.CartItemEntry.COLUMN_PRODIMAGE, cartItem.getImage());
+
 
         // Insert the new item into the database
         long recordId = sqLiteDatabase.insert(CartItemDBModel.CartItemEntry.TABLE_NAME, null, cv);
