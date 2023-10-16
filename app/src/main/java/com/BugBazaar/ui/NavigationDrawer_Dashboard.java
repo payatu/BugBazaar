@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -25,6 +26,8 @@ import com.BugBazaar.ui.cart.CartActivity;
 import com.BugBazaar.ui.cart.CartItem;
 import com.BugBazaar.ui.cart.NotificationHelper;
 import com.BugBazaar.ui.myorders.OrderHistoryActivity;
+import com.BugBazaar.utils.AppInitializationManager;
+import com.BugBazaar.utils.CustomDialog;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -43,21 +46,14 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer_dashboard);
 
-        Intent getLink = getIntent();
-        Uri data = getLink.getData();
+        if (AppInitializationManager.isFirstRun(this)) {
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(),0);
 
-        if (data != null) {
-            String scheme = data.getScheme(); // Get the scheme (should be "bb")
-            String host = data.getHost(); // Get the host (should be "bugbazaar.com")
-            String path = data.getPath(); // Get the path (should be "/dashboard")
-
-            // Check if the deep link matches the expected values
-            if ("bb".equals(scheme) && "bugbazaar.com".equals(host) && "/dashboard".equals(path)) {
-                // Handle the deep link here, e.g., open the dashboard or perform other actions.
-                // You can also extract additional data from the deep link if needed.
-            }
+            // This is the first run, show your notification
+            AppInitializationManager.showNotification(this);
+            CustomDialog.showCustomDialog(this, " \uD83C\uDF89 Congratulations \uD83C\uDF89", "You've received a Rs 200 voucher.Login to Redeem",pendingIntent);
+            AppInitializationManager.markFirstRunDone(this);
         }
-
         // Rest of your activity initialization code
 
         // Hide the keyboard and clear focus from the EditText
@@ -88,13 +84,63 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,4200));
         productList.add(new Product("VR device", getString(R.string.desc_cycle), R.drawable.item_vr,8340));
 
+        // Pass the List<String> to Class B
+        //Intent intentB = new Intent(this, Deeplink.class);
+        //intentB.putStringArrayListExtra("productList", (ArrayList<String>) productList); // Need to convert productList to ArrayList<String> data type first
+
+        // Convert List<Product> to List<String> of product names in Class A
+       /* List<String> productNames = new ArrayList<>();
+        for (Product product : productList) {
+            productNames.add(product.getName()); // Assuming 'getName()' returns the product name as a String
+        }*/
+        //Get string extra from Class B
+        //intentB.putStringArrayListExtra("productNames", (ArrayList<String>) productNames);
+        boolean isItemPresent = false;
+        Intent get_item = getIntent();
+        if (get_item.hasExtra("fetched_item")) {
+            // Retrieve the "fetched_item" string extra & Check if deeplink_item is present in the product list
+            String deeplink_item = get_item.getStringExtra("fetched_item");
+            for (Product product : productList) {
+                if (product.getName().equals(deeplink_item)) {
+                    Log.d("Product found:", product.getName());
+                    Intent detailed_product = new Intent(this, DetailedProductActivity.class);
+                    detailed_product.putExtra("product", product);
+                    detailed_product.putExtra("autostart", true);
+                    this.startActivity(detailed_product);
+                    //Sending intent to CartItem class
+                    //Intent intToCartItem = new Intent(this, CartItem.class);
+                    //intToCartItem.putExtra("product", product);
+                    //this.startActivity(intToCartItem);
+                    break; // No need to continue searching if found
+                }
+            }
+            //Check if deeplink_item is present in the product list
+         /*   if (productNames == null) {
+                Log.d("Empty productNames list:", "productNames list is null");
+                isItemPresent = false;
+            }
+            else {
+                for (String product : productNames) {
+                    if (product.equals(deeplink_item)) {
+                        isItemPresent = true;
+                        Log.d("Product name:", product);
+                        break; // No need to continue searching if found
+                    }
+                }
+            }
+            if (isItemPresent) {
+                Log.d("Condition pass:", "Item found");
+            } else {
+                Log.d("Condition fail:", "Item not found");
+            } */
+        }
 
         // Create and set the adapter for the GridView
         ProductAdapter adapter = new ProductAdapter(this, productList);
         productGridView.setAdapter(adapter);
 
         //Handle Deeplink intent
-        Intent get_item = getIntent();
+//        Intent get_item = getIntent();
         if (get_item.hasExtra("fetched_item")) {
             // Check for the "fetched_item" string extra
             String deeplink_item = get_item.getStringExtra("fetched_item");
@@ -198,12 +244,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            }
-            else if (itemId == R.id.itemWallet) {
-                Intent intent = new Intent(NavigationDrawer_Dashboard.this, TermsAndConditionsActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(GravityCompat.START);
-                return true;
             } else if (itemId == R.id.itemMyOrders) {
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, OrderHistoryActivity.class);
                 startActivity(intent);
@@ -211,6 +251,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 return true;
             }
             else if (itemId == R.id.itemLoginLogout) {
+
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
