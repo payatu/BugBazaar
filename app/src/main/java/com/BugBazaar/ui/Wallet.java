@@ -21,6 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.BugBazaar.ui.payment.OrderSummary;
+import com.BugBazaar.utils.AppInitializationManager;
+import com.BugBazaar.utils.DiscountDataManager;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import org.json.JSONObject;
@@ -36,7 +38,11 @@ public class Wallet extends AppCompatActivity implements PaymentResultListener {
     private TextView finalAmountW;
     private int edtWalletAmount=0;
     int additionalAmount=0;
-    int promoCodeAmount=10000;
+boolean promoredeem;
+    double promoCodeAmount = DiscountDataManager.getInstance().getDiscountPrice();
+
+// Now you can use the 'discountPrice' in your destination activity.
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +93,17 @@ public class Wallet extends AppCompatActivity implements PaymentResultListener {
         });
 
         // Add a listener for the promoCheckbox
+
+
+
+
         promoCheckboxW.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 try {
                     int enteredAmount = Integer.parseInt(enterAmountW.getText().toString());
                     if (isChecked) {
-                        enteredAmount += 10000;
+                        enteredAmount += promoCodeAmount*100;
                     }
                     // Calculate the new amount in paise
                     newAmount = enteredAmount * 100;
@@ -103,6 +113,9 @@ public class Wallet extends AppCompatActivity implements PaymentResultListener {
                 }
             }
         });
+
+
+    
         enterAmountW.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -113,7 +126,7 @@ public class Wallet extends AppCompatActivity implements PaymentResultListener {
                 try {
                     int enteredAmount = Integer.parseInt(s.toString());
                     if (promoCheckboxW.isChecked()) {
-                        enteredAmount += 10000;
+                        enteredAmount += promoCodeAmount*100;
                     }
                     // Calculate the new amount in paise
                     newAmount = enteredAmount * 100;
@@ -184,6 +197,8 @@ public class Wallet extends AppCompatActivity implements PaymentResultListener {
     }
 
     public void onPaymentSuccess(String s) {
+        promoredeem =true;
+
         // Clear the EditText after a successful payment
         EditText enterAmountEditText = findViewById(R.id.enterAmountW);
         enterAmountEditText.setText("");
