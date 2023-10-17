@@ -29,7 +29,6 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
         setContentView(R.layout.activity_main);
 
 
-
         UserAuthSave userAuthSave = new UserAuthSave(getApplicationContext()); // 'this' refers to the Activity's context
 
 
