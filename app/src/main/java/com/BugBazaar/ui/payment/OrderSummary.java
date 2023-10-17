@@ -3,7 +3,9 @@ package com.BugBazaar.ui.payment;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -23,9 +25,7 @@ import com.BugBazaar.ui.myorders.OrderHistoryActivity;
 import com.BugBazaar.ui.myorders.OrderHistoryDatabaseHelper;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
-
 import org.json.JSONObject;
-import java.util.Random;
 
 import java.util.List;
 
@@ -52,6 +52,14 @@ public class OrderSummary extends AppCompatActivity {
         txtTotalCostOS = findViewById(R.id.txtTotalCostOS);
         txtFinalCostOS = findViewById(R.id.txtFinalCostOS);
         btnProceedPaymentOS = findViewById(R.id.btnProceedPaymentOS);
+        // Get a reference to the txtWalletBalance TextView
+        TextView txtWalletBalance = findViewById(R.id.txtWalletBalance);
+        // Update the balance dynamically (you need to retrieve the actual balance)
+        int walletBalance = getWalletBalance(); // Replace with your logic to retrieve the wallet balance
+        String formattedBalance=formatPrice(walletBalance);
+        formattedBalance= "Wallet Balance: \n" + formattedBalance; // Format the balance string
+
+        txtWalletBalance.setText(formattedBalance);
 
         // Initialize the RadioGroup and RadioButton elements
         rbGroupPaymentOptions = findViewById(R.id.rbGroupPaymentOptions);
@@ -109,8 +117,20 @@ public class OrderSummary extends AppCompatActivity {
                     int selectedRadioButtonId = rbGroupPaymentOptions.getCheckedRadioButtonId();
 
                     if (selectedRadioButtonId == R.id.rbPayViaWallet) {
-                        // Handle payment via wallet (if applicable)
-                    } else if (selectedRadioButtonId == R.id.rbPayViaRazorpay) {
+
+                        int walletBalance = getWalletBalance(); // Replace with your logic to retrieve the wallet balance
+                        if (walletBalance >= finalCost) {
+                            // Deduct the payment amount from the wallet balance
+                            int newWalletBalance = walletBalance - finalCost;
+                            // Update the wallet balance (you need to implement this method)
+                            updateWalletBalance(newWalletBalance);
+
+                            // Proceed with the order (you may want to move this code to a separate method)
+                            onPaymentSuccess("Wallet Payment Successful");
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Insufficient balance in wallet",Toast.LENGTH_SHORT).show();
+                        }
+                    }else if (selectedRadioButtonId == R.id.rbPayViaRazorpay) {
                         int amountInPaise=finalCost*100;
 
                         try {
@@ -130,7 +150,9 @@ public class OrderSummary extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        // Open Razorpay payment dialog
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Please select payment method",Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -178,6 +200,8 @@ public class OrderSummary extends AppCompatActivity {
         // Clear All Cart Items
         clearCartItems();
     }
+
+
 
     public void onPaymentError(int code, String response) {
         // This method is called when there is a payment error
@@ -273,6 +297,34 @@ public class OrderSummary extends AppCompatActivity {
 
     private String formatPrice(int price) {
         return String.format("₹%,d", price);
+    }
+
+    private int getWalletBalance() {
+        // Retrieve the wallet balance from SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MyWalletPrefs", Context.MODE_PRIVATE);
+        int walletBalance = sharedPreferences.getInt("wallet_balance", 12000); // Replace "wallet_balance" with your actual key
+        return walletBalance;
+    }
+    private void updateWalletBalance(int changeInBalance) {
+        // Retrieve the current wallet balance from where it's stored (e.g., SharedPreferences or a local database)
+        int currentBalance = getCurrentWalletBalance();
+
+        // Calculate the new wallet balance after the change
+        int updatedBalance = currentBalance - finalCost; // Add or deduct the change in balance
+
+        // Store the updated balance back in the appropriate storage (e.g., SharedPreferences or a local database)
+        storeWalletBalance(updatedBalance);
+    }
+
+    private int getCurrentWalletBalance() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyWalletPrefs", Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("wallet_balance", 12000);
+    }
+    public void storeWalletBalance(int newBalance) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyWalletPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("wallet_balance", newBalance);
+        editor.apply();
     }
 
     // Code to handle back button
