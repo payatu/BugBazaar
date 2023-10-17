@@ -7,6 +7,7 @@ public class AppInitializationManager {
     private static final String PREF_NAME = "MyAppPreferences";
 
     public static boolean isFirstRun(Context context) {
+
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean("isFirstRun", true);
     }

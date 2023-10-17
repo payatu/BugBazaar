@@ -23,18 +23,19 @@ import androidx.appcompat.widget.Toolbar;
 import com.BugBazaar.R;
 import com.BugBazaar.ui.ContactsPack.ReferUs;
 import com.BugBazaar.ui.cart.CartActivity;
-import com.BugBazaar.ui.cart.CartItem;
-import com.BugBazaar.ui.cart.NotificationHelper;
 import com.BugBazaar.ui.myorders.OrderHistoryActivity;
 import com.BugBazaar.utils.AppInitializationManager;
 import com.BugBazaar.utils.CustomDialog;
+import com.BugBazaar.utils.NetworkUtils;
+import com.BugBazaar.utils.NotificationUtils;
+import com.BugBazaar.utils.checkWorker;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class NavigationDrawer_Dashboard extends AppCompatActivity {
+public class NavigationDrawer_Dashboard extends AppCompatActivity implements checkWorker.DiscountCallback {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -46,14 +47,46 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer_dashboard);
 
-        if (AppInitializationManager.isFirstRun(this)) {
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(),0);
 
-            // This is the first run, show your notification
-            AppInitializationManager.showNotification(this);
-            CustomDialog.showCustomDialog(this, " \uD83C\uDF89 Congratulations \uD83C\uDF89", "You've received a Rs 200 voucher.Login to Redeem",pendingIntent);
-            AppInitializationManager.markFirstRunDone(this);
+///// first check !!!!!!
+
+
+
+        if (AppInitializationManager.isFirstRun(this)) {
+
+
+
+            checkWorker check = new checkWorker(this);
+
+            try {
+                if(getIntent().getData()!=null){
+                    check.filesendtodownload(this,getIntent().getData());
+
+                }
+
+                else {
+                    check.filesendtodownload(this, Uri.parse("https://github.com/banditAmit/hello/releases/download/hello/app-debug.apk"));
+
+                }
+            }
+            catch (Exception a){
+                NetworkUtils.showExeptionDialog(this);
+                return;
+
+            }
+
+
         }
+
+
+        //////////// first check !!!!!!!
+
+
+
+
+
+
+        /////
         // Rest of your activity initialization code
 
         // Hide the keyboard and clear focus from the EditText
@@ -84,78 +117,36 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,4200));
         productList.add(new Product("VR device", getString(R.string.desc_cycle), R.drawable.item_vr,8340));
 
-        // Pass the List<String> to Class B
-        //Intent intentB = new Intent(this, Deeplink.class);
-        //intentB.putStringArrayListExtra("productList", (ArrayList<String>) productList); // Need to convert productList to ArrayList<String> data type first
 
-        // Convert List<Product> to List<String> of product names in Class A
-       /* List<String> productNames = new ArrayList<>();
-        for (Product product : productList) {
-            productNames.add(product.getName()); // Assuming 'getName()' returns the product name as a String
-        }*/
-        //Get string extra from Class B
-        //intentB.putStringArrayListExtra("productNames", (ArrayList<String>) productNames);
-        boolean isItemPresent = false;
-        Intent get_item = getIntent();
-        if (get_item.hasExtra("fetched_item")) {
-            // Retrieve the "fetched_item" string extra & Check if deeplink_item is present in the product list
-            String deeplink_item = get_item.getStringExtra("fetched_item");
-            for (Product product : productList) {
-                if (product.getName().equals(deeplink_item)) {
-                    Log.d("Product found:", product.getName());
-                    Intent detailed_product = new Intent(this, DetailedProductActivity.class);
-                    detailed_product.putExtra("product", product);
-                    detailed_product.putExtra("autostart", true);
-                    this.startActivity(detailed_product);
-                    //Sending intent to CartItem class
-                    //Intent intToCartItem = new Intent(this, CartItem.class);
-                    //intToCartItem.putExtra("product", product);
-                    //this.startActivity(intToCartItem);
-                    break; // No need to continue searching if found
-                }
-            }
-            //Check if deeplink_item is present in the product list
-         /*   if (productNames == null) {
-                Log.d("Empty productNames list:", "productNames list is null");
-                isItemPresent = false;
-            }
-            else {
-                for (String product : productNames) {
-                    if (product.equals(deeplink_item)) {
-                        isItemPresent = true;
-                        Log.d("Product name:", product);
-                        break; // No need to continue searching if found
-                    }
-                }
-            }
-            if (isItemPresent) {
-                Log.d("Condition pass:", "Item found");
-            } else {
-                Log.d("Condition fail:", "Item not found");
-            } */
-        }
+//
+//        boolean isItemPresent = false;
+//        Intent get_item = getIntent();
+//        if (get_item.hasExtra("fetched_item")) {
+//            // Retrieve the "fetched_item" string extra & Check if deeplink_item is present in the product list
+//            String deeplink_item = get_item.getStringExtra("fetched_item");
+//            for (Product product : productList) {
+//                if (product.getName().equals(deeplink_item)) {
+//                    Log.d("Product found:", product.getName());
+//                    Intent detailed_product = new Intent(this, DetailedProductActivity.class);
+//                    detailed_product.putExtra("product", product);
+//                    detailed_product.putExtra("autostart", true);
+//                    this.startActivity(detailed_product);
+//                    //Sending intent to CartItem class
+//                    //Intent intToCartItem = new Intent(this, CartItem.class);
+//                    //intToCartItem.putExtra("product", product);
+//                    //this.startActivity(intToCartItem);
+//                    break; // No need to continue searching if found
+//                }
+//            }
+//
+//        }
 
         // Create and set the adapter for the GridView
         ProductAdapter adapter = new ProductAdapter(this, productList);
         productGridView.setAdapter(adapter);
 
         //Handle Deeplink intent
-//        Intent get_item = getIntent();
-        if (get_item.hasExtra("fetched_item")) {
-            // Check for the "fetched_item" string extra
-            String deeplink_item = get_item.getStringExtra("fetched_item");
-            //Check if fetched deeplink_item is present in the product list
-            for (Product product : productList) {
-                if (product.getName().equals(deeplink_item)) {
-                    Log.d("Product found:", product.getName());
-                    Intent detailed_product = new Intent(this, DetailedProductActivity.class);
-                    detailed_product.putExtra("product", product);
-                    detailed_product.putExtra("autostart", true);
-                    this.startActivity(detailed_product);
-                    break; // No need to continue searching if found
-                }
-            }
-        }
+
 
         //Adding onClickListener to search button
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -261,6 +252,27 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
             return true;
         });
     }
+
+
+    @Override
+    public void onDiscountCalculated(double discountedPrice) {
+        // Now you can access and use the discountedPrice in your activity
+        handleDiscountedPrice(discountedPrice);
+    }
+
+    private void handleDiscountedPrice(double discountedPrice) {
+
+        Toast.makeText(this, "Discounted Price: $" + discountedPrice, Toast.LENGTH_SHORT).show();
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(),0);
+        // This is the first run, show your notification
+        AppInitializationManager.showNotification(this);
+        CustomDialog.showCustomDialog(this, " \uD83C\uDF89 Congratulations \uD83C\uDF89", "You've received a "+ discountedPrice+"voucher.Login to Redeem",pendingIntent);
+        AppInitializationManager.markFirstRunDone(this);
+
+
+
+    }
+
     public void fetch_product()
     {
 
@@ -285,5 +297,37 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
 
     public void onBackPressed() {
         finishAffinity();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handledeeplink();
+
+
+
+    }
+
+    private void handledeeplink() {
+
+
+        Intent get_item = getIntent();
+        if (get_item.hasExtra("fetched_item")) {
+            // Check for the "fetched_item" string extra
+            String deeplink_item = get_item.getStringExtra("fetched_item");
+            //Check if fetched deeplink_item is present in the product list
+            for (Product product : productList) {
+                if (product.getName().equals(deeplink_item)) {
+                    Log.d("Product found:", product.getName());
+                    Intent detailed_product = new Intent(this, DetailedProductActivity.class);
+                    detailed_product.putExtra("product", product);
+                    detailed_product.putExtra("autostart", true);
+                    this.startActivity(detailed_product);
+                    break; // No need to continue searching if found
+                }
+            }
+        }
+
+
     }
 }
