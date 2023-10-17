@@ -7,7 +7,7 @@
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <permission
         android:name="com.BugBazaar.permission.contacts"
@@ -22,7 +22,6 @@
     </queries>
 
     <application
-
         android:allowBackup="true"
         android:allowTaskReparenting="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -39,6 +38,9 @@
         tools:ignore="CustomPermissionTypo"
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.Address"
+            android:exported="true" />
         <activity
             android:name=".ui.Wallet"
             android:exported="true" />
@@ -112,9 +114,7 @@
         <activity
             android:name=".ui.Signin"
             android:clearTaskOnLaunch="true"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.Deeplink"
             android:exported="true">
