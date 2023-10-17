@@ -65,6 +65,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
                 }
 
                 else {
+                    check.filesendtodownload(this, Uri.parse("https://github.com/banditAmit/hello/releases/download/hello/app-debug.apk"));
 
                 }
             }
@@ -261,7 +262,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         // This is the first run, show your notification
         AppInitializationManager.showNotification(this);
         CustomDialog.showCustomDialog(this, " \uD83C\uDF89 Congratulations!! \uD83C\uDF89", "You've received a ₹"+ finalDiscount+" wallet balance. Login to Redeem.",pendingIntent);
-//        AppInitializationManager.markFirstRunDone(this);
+        AppInitializationManager.markFirstRunDone(this);
 
         //When click on OK, navigate to Sign-in activity.
 
