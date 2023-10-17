@@ -17,6 +17,7 @@ import com.BugBazaar.ui.cart.CartActivity;
 import com.BugBazaar.ui.cart.CartAdapter;
 import com.BugBazaar.ui.cart.CartDatabaseHelper;
 import com.BugBazaar.ui.cart.CartItem;
+import com.BugBazaar.ui.cart.addtimestamp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,8 +94,12 @@ public class DetailedProductActivity extends AppCompatActivity  {
                     long recordId = cartDBHelper.addCartItem(cartItem); // Add the new item to the database
                     cartItems.add(cartItem);
                     cartItem.setId(recordId);
-                    cartItems.add(cartItem); // Add the item to the cartItems list
+                    cartItems.add(cartItem);
+                    Log.d("hello amit",productName);
+
+                    // Add the item to the cartItems list
                 }
+
                 // Start CartActivity without sending the product details as Parcelable
                 Intent intent = new Intent(DetailedProductActivity.this, CartActivity.class);
                 startActivity(intent);
