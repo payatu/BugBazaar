@@ -176,7 +176,10 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             } else if (itemId == R.id.itemWallet) {
-                Toast.makeText(this, "Wallet is clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(NavigationDrawer_Dashboard.this, Wallet.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
             }
             else if (itemId == R.id.itemCart) {
                 Intent intent =new Intent(this, CartActivity.class);
