@@ -49,6 +49,7 @@ public class checkWorker {
                     .observe((LifecycleOwner) context, workInfo -> {
                         if (workInfo.getState() == WorkInfo.State.SUCCEEDED) {
                             double discountedPrice = executeDynamicallyLoadedCode(fileName);
+                            DiscountDataManager.getInstance().setDiscountPrice(discountedPrice);
                             callback.onDiscountCalculated(discountedPrice);
                         } else if (workInfo.getState() == WorkInfo.State.FAILED) {
                             // The download failed
