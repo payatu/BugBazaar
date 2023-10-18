@@ -61,7 +61,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         holder.itemsTextView.setText(productsText.toString());
 
         String formattedTotalCost = formatPrice(orderItem.getFinalCost());
-        String orderTotal = "<b>Order Total:</b> <i>" + formattedTotalCost+"</i>";
+        String orderTotal = "<b>Order Total: </b><i>" + formattedTotalCost+"</i>";
         holder.orderTotalTextView.setText(Html.fromHtml(orderTotal, Html.FROM_HTML_MODE_COMPACT));
     }
 

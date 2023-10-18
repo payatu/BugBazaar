@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/txtSelectAddressMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please select address from below:"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:padding="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/main_theme" />
+
+    <ListView
+        android:id="@+id/addressListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/summary_box"/>
+
+</LinearLayout>

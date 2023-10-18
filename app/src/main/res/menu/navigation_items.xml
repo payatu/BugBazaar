@@ -43,5 +43,10 @@
         android:id="@+id/itemLoginLogout"
         android:title="Login"
         android:icon="@drawable/baseline_login_24"></item>
+        <item
+            android:id="@+id/itemRASP_Settings"
+            android:title="RASP Settings"
+            android:icon="@drawable/baseline_security_24"></item>
     </group>
+
 </menu>

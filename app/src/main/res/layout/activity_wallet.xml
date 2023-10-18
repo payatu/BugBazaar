@@ -102,7 +102,8 @@
                 android:layout_marginLeft="10dp"
                 android:paddingStart="10dp"
                 android:textSize="15dp"
-                android:text="Apply promocode"></CheckBox>
+                android:text="Apply promocode"
+                android:visibility="gone"></CheckBox>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

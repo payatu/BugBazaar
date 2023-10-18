@@ -1,5 +1,6 @@
 package com.BugBazaar.ui.myorders;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,6 +40,7 @@ public class OrderHistoryDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
+        insertInitialOrders(db);
     }
 
     @Override
@@ -47,96 +49,7 @@ public class OrderHistoryDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public List<String> getAllOrderProducts(String orderId) {
-        List<String> products = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
 
-        // Define the columns to retrieve from the order items table
-        String[] projection = {
-                OrderHistoryEntry.COLUMN_PRODUCT_NAME
-
-        };
-
-        String selection = OrderHistoryEntry.COLUMN_ORDER_ID + " = ?";
-        String[] selectionArgs = { orderId };
-        // Query the database to retrieve order products for the specified order ID
-        Cursor cursor = db.query(
-                OrderHistoryEntry.TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null
-        );
-
-        // Iterate through the cursor to create a list of product names
-        while (cursor.moveToNext()) {
-            String productName = cursor.getString(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_PRODUCT_NAME));
-            products.add(productName);
-        }
-
-        cursor.close();
-        return products;
-    }
-    public List<Integer> getAllOrderProductQuantities(String orderId) {
-        List<Integer> quantities = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String[] projection = {
-                OrderHistoryEntry.COLUMN_PRODUCT_QUANTITY
-        };
-
-        String selection = OrderHistoryEntry.COLUMN_ORDER_ID + " = ?";
-        String[] selectionArgs = { orderId };
-
-        Cursor cursor = db.query(
-                OrderHistoryEntry.TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null
-        );
-
-        while (cursor.moveToNext()) {
-            int productQuantity = cursor.getInt(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_PRODUCT_QUANTITY));
-            quantities.add(productQuantity);
-        }
-
-        cursor.close();
-        return quantities;
-    }
-
-    public int getFinalCostForOrder(String orderId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        int finalCost = 0;
-
-        String[] projection = {
-                OrderHistoryEntry.COLUMN_FINAL_COST
-        };
-
-        String selection = OrderHistoryEntry.COLUMN_ORDER_ID + " = ?";
-        String[] selectionArgs = { orderId };
-
-        Cursor cursor = db.query(
-                OrderHistoryEntry.TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null
-        );
-
-        if (cursor.moveToFirst()) {
-            finalCost = cursor.getInt(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_FINAL_COST));
-        }
-
-        cursor.close();
-        return finalCost;
-    }
     public List<OrderHistoryItem> getAllOrderItemsz() {
         List<OrderHistoryItem> orderItems = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -149,12 +62,13 @@ public class OrderHistoryDatabaseHelper extends SQLiteOpenHelper {
                 OrderHistoryEntry.COLUMN_FINAL_COST
         };
 
-        // Query the database to retrieve all order items
+        // Query the database to retrieve all order items, excluding those with ORDER-9
+        String selection = OrderHistoryEntry.COLUMN_ORDER_ID + " NOT LIKE '%ORDER-9%'";
         Cursor cursor = db.query(
                 OrderHistoryEntry.TABLE_NAME,
                 projection,
-                null,  // No selection
-                null,  // No selectionArgs
+                selection,
+                null,
                 null,
                 null,
                 OrderHistoryEntry.COLUMN_ORDER_ID + " DESC"
@@ -202,12 +116,58 @@ public class OrderHistoryDatabaseHelper extends SQLiteOpenHelper {
         return orderItems;
     }
 
+    public List<OrderHistoryItem> searchOrdersByOrderID(String orderID) {
+        List<OrderHistoryItem> orderItems = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Define the raw SQL query
+        // Define the raw SQL query to exclude orders containing "99"
+        String query = "SELECT * FROM " + OrderHistoryEntry.TABLE_NAME +
+                " WHERE " + OrderHistoryEntry.COLUMN_ORDER_ID + " LIKE '%" + orderID + "%' AND " +
+                OrderHistoryEntry.COLUMN_ORDER_ID + " NOT LIKE '%ORDER-9%'";
 
 
+        // Execute the raw SQL query
+        Cursor cursor = db.rawQuery(query, null);
 
+        String currentOrderID = null;
+        List<String> productNames = new ArrayList<>();
+        List<Integer> productQuantities = new ArrayList<>();
+        int finalCost = 0;
 
+        while (cursor.moveToNext()) {
+            String queriedOrderID = cursor.getString(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_ORDER_ID));
+            String productName = cursor.getString(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_PRODUCT_NAME));
+            int productQuantity = cursor.getInt(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_PRODUCT_QUANTITY));
+            int currentFinalCost = cursor.getInt(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_FINAL_COST));
 
-    public String findLastOrderID(SQLiteDatabase db) {
+            if (currentOrderID == null || !currentOrderID.equals(queriedOrderID)) {
+                if (currentOrderID != null) {
+                    OrderHistoryItem orderItem = new OrderHistoryItem(currentOrderID, productNames, productQuantities, finalCost);
+                    orderItems.add(orderItem);
+                }
+
+                currentOrderID = queriedOrderID;
+                productNames = new ArrayList<>();
+                productQuantities = new ArrayList<>();
+                finalCost = 0;
+            }
+
+            productNames.add(productName);
+            productQuantities.add(productQuantity);
+            finalCost += currentFinalCost;
+        }
+
+        if (currentOrderID != null) {
+            OrderHistoryItem orderItem = new OrderHistoryItem(currentOrderID, productNames, productQuantities, finalCost);
+            orderItems.add(orderItem);
+        }
+
+        cursor.close();
+        return orderItems;
+    }
+
+       public String findLastOrderID(SQLiteDatabase db) {
         String lastOrderID = "ORDER-100"; // A default order ID if no records exist yet
         Cursor cursor = db.query(
                 OrderHistoryEntry.TABLE_NAME,
@@ -222,10 +182,40 @@ public class OrderHistoryDatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             lastOrderID = cursor.getString(cursor.getColumnIndexOrThrow(OrderHistoryEntry.COLUMN_ORDER_ID));
+            // Check if the lastOrderID contains "99"
+            if (lastOrderID.contains("99")) {
+                // Extract the numeric part of the lastOrderID
+                String numericPart = lastOrderID.substring("ORDER-".length());
+                try {
+                    int lastOrderNumber = Integer.parseInt(numericPart);
+                    // Increment the order number
+                    lastOrderNumber++;
+                    lastOrderID = "ORDER-" + lastOrderNumber;
+                } catch (NumberFormatException e) {
+                    // Handle the case where the order ID doesn't have a valid number
+                    lastOrderID = "ORDER-101"; // Fallback to a default number
+                }
+            }
         }
 
         cursor.close();
         return lastOrderID;
+    }
+    private void insertInitialOrders(SQLiteDatabase db) {
+        String[][] initialData = {
+                {"ORDER-99", "Product Name 1", "3", "200"}
+                // Add more initial data here
+        };
+
+        // Insert initial data into the database
+        for (String[] data : initialData) {
+            ContentValues values = new ContentValues();
+            values.put(OrderHistoryEntry.COLUMN_ORDER_ID, data[0]);
+            values.put(OrderHistoryEntry.COLUMN_PRODUCT_NAME, data[1]);
+            values.put(OrderHistoryEntry.COLUMN_PRODUCT_QUANTITY, data[2]);
+            values.put(OrderHistoryEntry.COLUMN_FINAL_COST, data[3]);
+            db.insert(OrderHistoryEntry.TABLE_NAME, null, values);
+        }
     }
 
 

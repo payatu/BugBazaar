@@ -38,11 +38,10 @@ public class Wallet extends AppCompatActivity implements PaymentResultListener {
     private TextView finalAmountW;
     private int edtWalletAmount=0;
     int additionalAmount=0;
-boolean promoredeem;
+    boolean promoredeem=true;
     double promoCodeAmount = DiscountDataManager.getInstance().getDiscountPrice();
 
 // Now you can use the 'discountPrice' in your destination activity.
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +50,9 @@ boolean promoredeem;
 
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("MyWalletPrefs", Context.MODE_PRIVATE);
+
+        // Fetch the promoredeem value from shared preferences with a default of false
+        promoredeem = sharedPreferences.getBoolean("promoredeem", false);
 
         // Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
@@ -94,22 +96,32 @@ boolean promoredeem;
 
         // Add a listener for the promoCheckbox
 
-
+        if(!promoredeem){
+            CheckBox promoCheckboxWW=findViewById(R.id.promoCheckboxW);
+            promoCheckboxWW.setVisibility(View.VISIBLE);
+            promoCheckboxWW.setChecked(true);
+        }
 
 
         promoCheckboxW.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                try {
-                    int enteredAmount = Integer.parseInt(enterAmountW.getText().toString());
-                    if (isChecked) {
-                        enteredAmount += promoCodeAmount*100;
+                if (!promoredeem) {
+                    try {
+                        int enteredAmount = Integer.parseInt(enterAmountW.getText().toString());
+                        if (isChecked) {
+                            enteredAmount += promoCodeAmount * 100;
+
+                        }
+                        // Calculate the new amount in paise
+                        newAmount = enteredAmount * 100;
+                        updateFinalAmount(Integer.toString(enteredAmount));
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getApplicationContext(), "Invalid amount entered.", Toast.LENGTH_SHORT).show();
                     }
-                    // Calculate the new amount in paise
-                    newAmount = enteredAmount * 100;
-                    updateFinalAmount(Integer.toString(enteredAmount));
-                } catch (NumberFormatException e) {
-                    Toast.makeText(getApplicationContext(), "Invalid amount entered.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    promoCheckboxW.setVisibility(View.GONE);
                 }
             }
         });
@@ -163,7 +175,7 @@ boolean promoredeem;
                     try {
                         edtWalletAmount = Integer.parseInt(enteredValue);
                         if (promoCheckboxW.isChecked()) {
-                            edtWalletAmount += promoCodeAmount;
+                            edtWalletAmount += promoCodeAmount*100;
                         }
                         int amountInPaise = edtWalletAmount * 100;
                         newAmount = amountInPaise;
@@ -197,7 +209,15 @@ boolean promoredeem;
     }
 
     public void onPaymentSuccess(String s) {
-        promoredeem =true;
+        if (!promoredeem) { // Only set it to true if it's not already true
+            promoredeem = true; // Set promoredeem to true
+
+            // Store the updated promoredeem value in SharedPreferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("promoredeem", true);
+            editor.apply();
+
+        }
 
         // Clear the EditText after a successful payment
         EditText enterAmountEditText = findViewById(R.id.enterAmountW);
@@ -267,4 +287,13 @@ boolean promoredeem;
             finalAmountW.setText("₹");
         }
     }
+    private void setPromoRedeem(boolean value) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("promoredeem", value);
+        editor.apply();
+    }
+    private boolean getPromoRedeem() {
+        return sharedPreferences.getBoolean("promoredeem", false); // The second parameter is the default value if it's not found in shared preferences
+    }
+
 }
