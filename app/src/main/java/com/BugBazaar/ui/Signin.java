@@ -115,4 +115,13 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
 
     }
 
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,NavigationDrawer_Dashboard.class));
+
+
+    }
+
+
 }

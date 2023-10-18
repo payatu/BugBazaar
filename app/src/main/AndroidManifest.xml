@@ -114,7 +114,8 @@
         <activity
             android:name=".ui.Signin"
             android:clearTaskOnLaunch="true"
-            android:exported="true"></activity>
+            android:launchMode="singleTop"
+            android:exported="true" />
         <activity
             android:name=".ui.Deeplink"
             android:exported="true">

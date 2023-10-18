@@ -20,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.BugBazaar.controller.checkAuth;
 import com.BugBazaar.ui.payment.OrderSummary;
 import com.BugBazaar.utils.AppInitializationManager;
 import com.BugBazaar.utils.DiscountDataManager;
@@ -27,7 +28,7 @@ import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import org.json.JSONObject;
 
-public class Wallet extends AppCompatActivity implements PaymentResultListener {
+public class Wallet extends checkAuth implements PaymentResultListener {
     private static final String WALLET_BALANCE_KEY = "wallet_balance";
     private TextView walletBalanceW;
     private RadioGroup rbGroupPaymentOptionsW;
