@@ -1,5 +1,6 @@
 package com.BugBazaar.ui.payment;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -11,11 +12,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.BugBazaar.ui.addresses.AddressDatabaseHelper;
+import com.BugBazaar.ui.addresses.AddressItem;
 import com.BugBazaar.ui.cart.NotificationHelper;
 import com.BugBazaar.R;
 import com.BugBazaar.ui.cart.CartDatabaseHelper;
@@ -38,6 +45,9 @@ public class OrderSummary extends AppCompatActivity {
     private RadioButton rbPayViaWallet;
     private RadioButton rbPayViaRazorpay;
     Button btnProceedPaymentOS;
+    private List<AddressItem> addressList;
+    private AlertDialog alertDialog;
+    private AddressDatabaseHelper addressDBHelper;
     private int finalCost;  // Define finalCost as a class member
     private String newOrderID; // Declare newOrderID as a class member
     StringBuilder productnames = new StringBuilder();
@@ -52,6 +62,18 @@ public class OrderSummary extends AppCompatActivity {
         txtTotalCostOS = findViewById(R.id.txtTotalCostOS);
         txtFinalCostOS = findViewById(R.id.txtFinalCostOS);
         btnProceedPaymentOS = findViewById(R.id.btnProceedPaymentOS);
+
+        // Retrieve all addresses from the AddressDB database
+        addressDBHelper = new AddressDatabaseHelper(this);
+        addressList = addressDBHelper.getAllAddresses();
+        // Find the default address named "Home"
+        String defaultAddress = findDefaultAddress(addressList);
+        // Set the default address in the TextView
+        TextView txtAddressBox = findViewById(R.id.txtAddressBox);
+        txtAddressBox.setText(defaultAddress);
+
+        TextView editAddressBtn = findViewById(R.id.editAddressBtn); // Make sure to use the correct ID
+
         // Get a reference to the txtWalletBalance TextView
         TextView txtWalletBalance = findViewById(R.id.txtWalletBalance);
         // Update the balance dynamically (you need to retrieve the actual balance)
@@ -156,7 +178,62 @@ public class OrderSummary extends AppCompatActivity {
                     }
                 }
             });
+
+        editAddressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddressSelectionPopup();
+            }
+        });
     }
+    private void showAddressSelectionPopup() {
+        // Inflate the dialog layout
+        View popupView = getLayoutInflater().inflate(R.layout.address_popup, null);
+
+        // Create the AlertDialog
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setView(popupView);
+
+        // Get the ListView from the layout
+        ListView addressListView = popupView.findViewById(R.id.addressListView);
+
+        // Retrieve the list of addresses from your database
+        List<AddressItem> addressList = addressDBHelper.getAllAddresses(); // Implement this method
+
+        // Create an adapter to display the addresses in the ListView
+        ArrayAdapter<AddressItem> addressAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, addressList);
+
+        // Set the adapter for the ListView
+        addressListView.setAdapter(addressAdapter);
+
+        // Set a click listener for the items in the ListView
+        addressListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Handle the address selection here
+                AddressItem selectedAddress = addressList.get(position);
+
+                // Update the UI with the selected address
+                updateAddressOnUI(selectedAddress);
+
+                // Dismiss the popup
+                alertDialog.dismiss();
+            }
+        });
+
+        // Create and show the AlertDialog
+        alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+    private void updateAddressOnUI(AddressItem selectedAddress) {
+        // Assuming you have a TextView to display the selected address
+        TextView addressTextView = findViewById(R.id.txtAddressBox); // Change to the actual ID of your TextView
+
+        // Update the TextView with the selected address
+        String addressText = selectedAddress.getNickname() + ": " + selectedAddress.getAddress();
+        addressTextView.setText(addressText);
+    }
+
 
     public void onPaymentSuccess(String s) {
         Toast.makeText(this,"Payment Successful",Toast.LENGTH_SHORT).show();
@@ -325,6 +402,15 @@ public class OrderSummary extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("wallet_balance", newBalance);
         editor.apply();
+    }
+    private String findDefaultAddress(List<AddressItem> addressList) {
+        for (AddressItem addressItem : addressList) {
+            if ("Home".equals(addressItem.getNickname())) {
+                return (addressItem.getNickname()+": "+addressItem.getAddress());
+            }
+        }
+        // If the default address is not found, you can return a default message or handle it as needed.
+        return "Default address not found";
     }
 
     // Code to handle back button

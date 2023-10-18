@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.BugBazaar.R;
 import com.BugBazaar.ui.ContactsPack.ReferUs;
+import com.BugBazaar.ui.addresses.Address;
 import com.BugBazaar.ui.cart.CartActivity;
 import com.BugBazaar.ui.myorders.OrderHistoryActivity;
 import com.BugBazaar.utils.AppInitializationManager;
@@ -235,10 +236,20 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
+            } else if (itemId == R.id.itemAddresses) {
+                Intent intent = new Intent(NavigationDrawer_Dashboard.this, Address.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
             }
             else if (itemId == R.id.itemLoginLogout) {
 
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }else if (itemId == R.id.itemRASP_Settings){
+                Intent intent = new Intent(NavigationDrawer_Dashboard.this, RASPSettings.class);
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;

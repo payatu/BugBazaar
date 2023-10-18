@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.payment.OrderSummary"
@@ -45,16 +45,20 @@
                 <TextView
                     android:id="@+id/txtAddressBox"
                     android:layout_width="0dp"
-                    android:layout_weight="6"
+                    android:paddingStart="5dp"
+                    android:layout_weight="7"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:text="221B, Baker Street, Pune, Maharashtra, Pin-411013" />
+                    android:textSize="17dp"
+                    android:text="Placeholder Address" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/editAddressBtn"
+                    android:layout_width="0dp"
                     android:layout_height="34dp"
                     android:layout_weight="1"
                     android:text="Edit"
+                    android:gravity="center"
+                    android:layout_gravity="center"
                     android:textColor="@color/main_theme"
                     android:textSize="13dp" />
             </LinearLayout>
