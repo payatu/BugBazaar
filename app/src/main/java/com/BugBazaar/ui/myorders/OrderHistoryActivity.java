@@ -64,7 +64,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 String searchText = searchBoxOrders.getText().toString();
 
                 // Check if the search text contains the blocked characters (single quote or hyphen) SQLi Challange.
-                if (!searchText.contains("'") && !searchText.contains("-")) {
+                if (!searchText.contains("'") && !searchText.contains("!")) {
                     // If the search text is valid, perform the search
                     filterOrdersByOrderID(searchText);
                 } else {
