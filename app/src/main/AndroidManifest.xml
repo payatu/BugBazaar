@@ -39,7 +39,10 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
         <activity
-            android:name=".ui.Address"
+            android:name=".ui.RASPSettings"
+            android:exported="false" />
+        <activity
+            android:name=".ui.addresses.Address"
             android:exported="true" />
         <activity
             android:name=".ui.Wallet"
