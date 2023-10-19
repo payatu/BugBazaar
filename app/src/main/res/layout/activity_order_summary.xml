@@ -218,7 +218,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pay Via Wallet"
-                        android:textSize="20dp"
+                        android:textSize="19dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginBottom="10dp"
                         android:textStyle="bold"
@@ -230,7 +230,7 @@
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:text="Pay Via Razorpay"
-                        android:textSize="20dp"
+                        android:textSize="19dp"
                         android:layout_marginStart="5dp"
                         android:textStyle="bold"
                         android:layout_gravity="center_vertical"/>
