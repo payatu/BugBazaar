@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -21,15 +22,21 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.BugBazaar.R;
 import com.BugBazaar.ui.ContactsPack.ReferUs;
+import com.BugBazaar.ui.addresses.Address;
 import com.BugBazaar.ui.cart.CartActivity;
-import com.BugBazaar.ui.cart.CartItem;
+import com.BugBazaar.ui.myorders.OrderHistoryActivity;
+import com.BugBazaar.utils.AppInitializationManager;
+import com.BugBazaar.utils.CustomDialog;
+import com.BugBazaar.utils.NetworkUtils;
+import com.BugBazaar.utils.NotificationUtils;
+import com.BugBazaar.utils.checkWorker;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class NavigationDrawer_Dashboard extends AppCompatActivity {
+public class NavigationDrawer_Dashboard extends AppCompatActivity implements checkWorker.DiscountCallback {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -41,21 +48,38 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer_dashboard);
 
-        Intent getLink = getIntent();
-        Uri data = getLink.getData();
 
-        if (data != null) {
-            String scheme = data.getScheme(); // Get the scheme (should be "bb")
-            String host = data.getHost(); // Get the host (should be "bugbazaar.com")
-            String path = data.getPath(); // Get the path (should be "/dashboard")
+///// first check !!!!!!
 
-            // Check if the deep link matches the expected values
-            if ("bb".equals(scheme) && "bugbazaar.com".equals(host) && "/dashboard".equals(path)) {
-                // Handle the deep link here, e.g., open the dashboard or perform other actions.
-                // You can also extract additional data from the deep link if needed.
+
+
+        if (AppInitializationManager.isFirstRun(this)) {
+
+
+
+            checkWorker check = new checkWorker(this);
+
+            try {
+                if(getIntent().getData()!=null){
+                    check.filesendtodownload(this,getIntent().getData());
+
+                }
+
+                else {
+                    check.filesendtodownload(this, Uri.parse("https://github.com/banditAmit/hello/releases/download/hello/app-debug.apk"));
+
+                }
             }
+            catch (Exception a){
+                NetworkUtils.showExeptionDialog(this);
+                return;
+
+            }
+
+
         }
 
+        /////
         // Rest of your activity initialization code
 
         // Hide the keyboard and clear focus from the EditText
@@ -174,7 +198,10 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             } else if (itemId == R.id.itemWallet) {
-                Toast.makeText(this, "Wallet is clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(NavigationDrawer_Dashboard.this, Wallet.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
             }
             else if (itemId == R.id.itemCart) {
                 Intent intent =new Intent(this, CartActivity.class);
@@ -196,8 +223,25 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            } else if (itemId == R.id.itemLoginLogout) {
+            } else if (itemId == R.id.itemMyOrders) {
+                Intent intent = new Intent(NavigationDrawer_Dashboard.this, OrderHistoryActivity.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            } else if (itemId == R.id.itemAddresses) {
+                Intent intent = new Intent(NavigationDrawer_Dashboard.this, Address.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+            else if (itemId == R.id.itemLoginLogout) {
+
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }else if (itemId == R.id.itemRASP_Settings){
+                Intent intent = new Intent(NavigationDrawer_Dashboard.this, RASPSettings.class);
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
@@ -206,10 +250,27 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
             return true;
         });
     }
-    public void fetch_product()
-    {
+
+
+    @Override
+    public void onDiscountCalculated(double discountedPrice) {
+        // Now you can access and use the discountedPrice in your activity
+        handleDiscountedPrice(discountedPrice);
+    }
+
+    private void handleDiscountedPrice(double discountedPrice) {
+        double finalDiscount=discountedPrice*100;
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,Signin.class),0);
+        // This is the first run, show your notification
+        AppInitializationManager.showNotification(this);
+        CustomDialog.showCustomDialog(this, " \uD83C\uDF89 Congratulations!! \uD83C\uDF89", "You've received a ₹"+ finalDiscount+" wallet balance. Login to Redeem.",pendingIntent);
+        AppInitializationManager.markFirstRunDone(this);
+
+        //When click on OK, navigate to Sign-in activity.
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -231,4 +292,10 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity {
     public void onBackPressed() {
         finishAffinity();
     }
+
+
+
+
+
+
 }
