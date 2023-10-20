@@ -18,9 +18,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import java.util.List;
 
 import com.BugBazaar.R;
+import com.BugBazaar.ui.BaseActivity;
 import com.BugBazaar.ui.NavigationDrawer_Dashboard;
 
-public class OrderHistoryActivity extends AppCompatActivity {
+public class OrderHistoryActivity extends BaseActivity {
     private EditText searchBoxOrders;
     private RecyclerView recyclerView;
     private Button btnSearchOrders;

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DetailedProductActivity extends AppCompatActivity  {
+public class DetailedProductActivity extends BaseActivity  {
 
     private List<CartItem> cartItems; // Declare cartItems here
     protected void onCreate(Bundle savedInstanceState) {

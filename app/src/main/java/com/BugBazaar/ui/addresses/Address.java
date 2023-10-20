@@ -1,4 +1,5 @@
 package com.BugBazaar.ui.addresses;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 import android.content.ContentValues;
@@ -16,10 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.BugBazaar.R;
+import com.BugBazaar.ui.BaseActivity;
+import com.BugBazaar.ui.SessionManager;
+import com.BugBazaar.ui.Signin;
+
 import java.util.List;
 
-public class Address extends AppCompatActivity {
-
+public class Address extends BaseActivity {
+    private SessionManager sessionManager;
     private EditText editTextNewAddrNickName;
     private EditText editTextNewAddress;
     private EditText searchBoxEditText;
@@ -33,6 +38,15 @@ public class Address extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         addressListLayout = findViewById(R.id.addressListLayout);
+        //Session check
+        sessionManager = new SessionManager(this);
+        if (sessionManager.getUserToken()==null) {
+            Toast.makeText(getApplicationContext(),"Please login first",Toast.LENGTH_SHORT).show();
+            // The user is not logged in; redirect to the login activity
+            startActivity(new Intent(this, Signin.class));
+            finish();  // Prevent going back to the previous activity
+        }
+
         //Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Addresses");

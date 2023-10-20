@@ -3,6 +3,7 @@ package com.BugBazaar.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,7 +28,7 @@ import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import org.json.JSONObject;
 
-public class Wallet extends AppCompatActivity implements PaymentResultListener {
+public class Wallet extends BaseActivity implements PaymentResultListener {
     private static final String WALLET_BALANCE_KEY = "wallet_balance";
     private TextView walletBalanceW;
     private RadioGroup rbGroupPaymentOptionsW;
@@ -40,7 +41,6 @@ public class Wallet extends AppCompatActivity implements PaymentResultListener {
     int additionalAmount=0;
     boolean promoredeem=true;
     double promoCodeAmount = DiscountDataManager.getInstance().getDiscountPrice();
-
 // Now you can use the 'discountPrice' in your destination activity.
 
     @Override

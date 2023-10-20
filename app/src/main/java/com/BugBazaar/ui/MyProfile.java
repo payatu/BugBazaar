@@ -34,7 +34,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyProfile extends AppCompatActivity {
+public class MyProfile extends BaseActivity {
     private FirebaseStorage firebaseStorage;
 
     private static final int SELECT_PHOTO_REQUEST = 1;
