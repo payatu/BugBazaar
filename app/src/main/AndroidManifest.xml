@@ -50,6 +50,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.BaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.RASPSettings"
             android:exported="false" />
         <activity
@@ -66,9 +69,6 @@
             android:exported="true" />
         <activity
             android:name=".ui.TestActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.payment.TestRazorPay"
             android:exported="true" />
         <activity
             android:name=".ui.ContactsPack.SelectContacts"

@@ -15,9 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.BugBazaar.R;
+import com.BugBazaar.ui.BaseActivity;
 import com.BugBazaar.ui.ContactsPack.SelectContacts;
 
-public class ReferUs extends AppCompatActivity {
+public class ReferUs extends BaseActivity {
 
     Button btnCopyLink;
     Button btnSendEmail;

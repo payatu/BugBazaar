@@ -26,7 +26,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Contact_us extends AppCompatActivity {
+public class Contact_us extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
