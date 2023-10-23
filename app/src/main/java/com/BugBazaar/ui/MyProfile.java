@@ -69,14 +69,14 @@ public class MyProfile extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myprofile);
 
-        UserAuthSave userAuthSave = new UserAuthSave(getApplicationContext());
-
-        if (!UserAuthSave.isLoggedIn()) {
-
-            startActivity(new Intent(this, Signin.class));
-
-
-        }
+//        UserAuthSave userAuthSave = new UserAuthSave(getApplicationContext());
+//
+//        if (!UserAuthSave.isLoggedIn()) {
+//
+//            startActivity(new Intent(this, Signin.class));
+//
+//
+//        }
 
 
         //Firebase

@@ -7,6 +7,7 @@ public class SessionManager {
     private static final String PREF_NAME = "SessionStorage";
     private static final String KEY_USER_TOKEN = "userToken";
     private static final String KEY_LOGGED_IN = "loggedIn";
+    private static final String KEY_PROMOTIONAL_NOTIF_SENT="isPromotionalNotifSent";
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -18,6 +19,10 @@ public class SessionManager {
 
     public void setLoggedIn(boolean loggedIn) {
         editor.putBoolean(KEY_LOGGED_IN, loggedIn);
+        editor.apply();
+    }
+    public void setKeyPromotionalNotifSent(boolean isPromotionalNotifSent){
+        editor.putBoolean(KEY_PROMOTIONAL_NOTIF_SENT,isPromotionalNotifSent);
         editor.apply();
     }
 
@@ -33,6 +38,7 @@ public class SessionManager {
     public String getUserToken() {
         return sharedPreferences.getString(KEY_USER_TOKEN, null);
     }
+    public boolean getIsPromotionalNotifSent(){return sharedPreferences.getBoolean(KEY_PROMOTIONAL_NOTIF_SENT,false);}
 
     public void logout() {
         editor.remove(KEY_LOGGED_IN);
