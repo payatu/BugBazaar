@@ -20,7 +20,9 @@ public class BaseActivity extends AppCompatActivity {
         // Check the session status
         if (sessionManager.getUserToken() == null) {
             Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, Signin.class));
+            Intent intent = new Intent(this, Signin.class);
+            intent.putExtra("isNavigatedhere",true);
+            startActivity(intent);
             finish();
         }
     }

@@ -44,15 +44,22 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
     private Toolbar toolbar;
     private GridView productGridView;
     private List<Product> productList;
+    private Menu menu;
+    private MenuItem loginMenuItem;
     private SessionManager sessionManager;  // Move the initialization to a constructor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer_dashboard);
 
+        navigationView = findViewById(R.id.mainNavView);
+        menu = navigationView.getMenu();
+        loginMenuItem = menu.findItem(R.id.itemLoginButton);
+
         //session Check
         sessionManager = new SessionManager(this);
-        if(sessionManager.getUserToken()!=null){
+
+        if(sessionManager.isLoggedIn()){
             sessionManager.setLoggedIn(true);
             updateLoginMenuItem(sessionManager.isLoggedIn());
         }else{
@@ -260,6 +267,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
                     startActivity(intent);
                 }else{
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
+                intent.putExtra("isNavigatedhere",true);
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;}
@@ -274,10 +282,9 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         });
 
 
+
     }
     private void updateLoginMenuItem(boolean isLoggedIn) {
-        Menu menu = navigationView.getMenu();
-        MenuItem loginMenuItem = menu.findItem(R.id.itemLoginButton);
 
         if (loginMenuItem != null) {
             if (isLoggedIn) {
