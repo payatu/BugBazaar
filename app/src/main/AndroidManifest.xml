@@ -2,15 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <permission android:name="com.BugBazaar.permission.contacts"  android:protectionLevel="signature"/>
-
+    <permission
+        android:name="com.BugBazaar.permission.contacts"
+        android:protectionLevel="signature" />
 
     <queries>
         <intent>
@@ -34,12 +35,21 @@
         android:testOnly="true"
         android:theme="@style/Theme.BugBazaar"
         android:usesCleartextTraffic="true"
+        tools:ignore="CustomPermissionTypo"
         tools:replace="android:fullBackupContent"
-        tools:targetApi="31"
-        tools:ignore="CustomPermissionTypo">
+        tools:targetApi="31">
         <activity
-            android:name=".ui.payment.OrderHistory"
+            android:name=".ui.RASPSettings"
             android:exported="false" />
+        <activity
+            android:name=".ui.addresses.Address"
+            android:exported="true" />
+        <activity
+            android:name=".ui.Wallet"
+            android:exported="true" />
+        <activity
+            android:name=".ui.myorders.OrderHistoryActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.payment.OrderSummary"
             android:exported="true" />
@@ -71,8 +81,8 @@
         <provider
             android:name=".provider.MyContactsProvider"
             android:authorities="com.bugbazaar.mycontacts"
-            android:permission="com.BugBazaar.permission.contact"
-            android:exported="true" />
+            android:exported="true"
+            android:permission="com.BugBazaar.permission.contact" />
 
         <activity
             android:name=".ui.DetailedProductActivity"
@@ -84,16 +94,9 @@
             android:name=".ui.NavigationDrawer_Dashboard"
             android:exported="true">
             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="bugbazaar"
-                    android:pathPrefix="/dashboard"
-                    android:scheme="bb" />
             </intent-filter>
         </activity>
         <activity
@@ -114,37 +117,42 @@
         <activity
             android:name=".ui.Signin"
             android:clearTaskOnLaunch="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ui.Deeplink"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="bb"
+
+                <data
                     android:host="bugbazaar"
-                    android:path="/cart/add"/>
+                    android:path="/cart/add"
+                    android:scheme="bb" />
+                <data
+                    android:host="bugbazaar"
+                    android:path="/offers"
+                    android:scheme="bb" />
+                <data
+                    android:host="bugbazaar"
+                    android:path="/web"
+                    android:scheme="bb" />
             </intent-filter>
         </activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <service
             android:name=".MyFirebaseInstanceIDService"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>
