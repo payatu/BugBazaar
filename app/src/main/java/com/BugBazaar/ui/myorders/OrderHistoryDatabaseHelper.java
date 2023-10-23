@@ -203,7 +203,7 @@ public class OrderHistoryDatabaseHelper extends SQLiteOpenHelper {
     }
     private void insertInitialOrders(SQLiteDatabase db) {
         String[][] initialData = {
-                {"ORDER-99", "Product Name 1", "3", "200"}
+                {"ORDER-99", "Hidden Secret Order.Yay!! you found it!! ", "2", "200"}
                 // Add more initial data here
         };
 

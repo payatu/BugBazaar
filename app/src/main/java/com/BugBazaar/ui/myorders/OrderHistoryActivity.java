@@ -18,9 +18,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import java.util.List;
 
 import com.BugBazaar.R;
+import com.BugBazaar.ui.BaseActivity;
 import com.BugBazaar.ui.NavigationDrawer_Dashboard;
 
-public class OrderHistoryActivity extends AppCompatActivity {
+public class OrderHistoryActivity extends BaseActivity {
     private EditText searchBoxOrders;
     private RecyclerView recyclerView;
     private Button btnSearchOrders;
@@ -64,7 +65,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 String searchText = searchBoxOrders.getText().toString();
 
                 // Check if the search text contains the blocked characters (single quote or hyphen) SQLi Challange.
-                if (!searchText.contains("'") && !searchText.contains("-")) {
+                if (!searchText.contains("'--") && !searchText.contains("' or ''='")&& !searchText.contains("' OR ''='") && !searchText.contains("' Or ''='") && !searchText.contains("' oR ''='")) {
                     // If the search text is valid, perform the search
                     filterOrdersByOrderID(searchText);
                 } else {

@@ -19,8 +19,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="Enter Passcode"
-            android:textSize="34sp"
-            android:textStyle="bold" />
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/main_theme"/>
 
         <LinearLayout
             android:layout_width="346dp"

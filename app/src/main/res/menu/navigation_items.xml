@@ -40,9 +40,10 @@
         android:title="Terms and Conditions"
         android:icon="@drawable/baseline_termsandconditions"></item>
     <item
-        android:id="@+id/itemLoginLogout"
+        android:id="@+id/itemLoginButton"
         android:title="Login"
         android:icon="@drawable/baseline_login_24"></item>
+
         <item
             android:id="@+id/itemRASP_Settings"
             android:title="RASP Settings"

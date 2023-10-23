@@ -3,6 +3,7 @@ package com.BugBazaar.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,12 +28,13 @@ import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import org.json.JSONObject;
 
-public class Wallet extends AppCompatActivity implements PaymentResultListener {
+public class Wallet extends BaseActivity implements PaymentResultListener {
     private static final String WALLET_BALANCE_KEY = "wallet_balance";
     private TextView walletBalanceW;
     private RadioGroup rbGroupPaymentOptionsW;
 
     private SharedPreferences sharedPreferences;
+    private SharedPreferences sessionManager;
     private int newAmount;
     private EditText enterAmountW;
     private TextView finalAmountW;
@@ -40,7 +42,6 @@ public class Wallet extends AppCompatActivity implements PaymentResultListener {
     int additionalAmount=0;
     boolean promoredeem=true;
     double promoCodeAmount = DiscountDataManager.getInstance().getDiscountPrice();
-
 // Now you can use the 'discountPrice' in your destination activity.
 
     @Override
@@ -93,13 +94,14 @@ public class Wallet extends AppCompatActivity implements PaymentResultListener {
             public void afterTextChanged(Editable s) {
             }
         });
-
+        SessionManager sessionManager=new SessionManager (this);
+        boolean isPromotionNofiyToUser = sessionManager.getIsPromotionalNotifSent();
+        Log.d("isPromotionNofiyToUser",String.valueOf(isPromotionNofiyToUser));
         // Add a listener for the promoCheckbox
 
-        if(!promoredeem){
+        if(!promoredeem && isPromotionNofiyToUser==true){
             CheckBox promoCheckboxWW=findViewById(R.id.promoCheckboxW);
             promoCheckboxWW.setVisibility(View.VISIBLE);
-            promoCheckboxWW.setChecked(true);
         }
 
 
@@ -295,5 +297,4 @@ public class Wallet extends AppCompatActivity implements PaymentResultListener {
     private boolean getPromoRedeem() {
         return sharedPreferences.getBoolean("promoredeem", false); // The second parameter is the default value if it's not found in shared preferences
     }
-
 }
