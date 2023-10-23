@@ -9,7 +9,11 @@ android {
     namespace 'com.BugBazaar'
     compileSdk 32
 
-
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
 
     defaultConfig {
         applicationId "com.BugBazaar"
@@ -68,5 +72,6 @@ dependencies {
     implementation group: 'com.cloudinary', name: 'cloudinary-android', version: '1.24.0'
     implementation 'com.google.android.material:material:1.4.0' // Use the latest version
     implementation 'com.razorpay:checkout:1.6.33'
+    implementation 'com.scottyab:rootbeer-lib:0.1.0'
 
 }

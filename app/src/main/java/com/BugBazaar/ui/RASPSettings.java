@@ -1,6 +1,7 @@
 package com.BugBazaar.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -46,11 +47,13 @@ public class RASPSettings extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("switch1_state", isChecked);
                 editor.apply();
+                restartApplication();
 
                 // If switch1 is turned on, turn off other switches
                 if (isChecked) {
                     switch2.setChecked(false);
                     switch3.setChecked(false);
+
                 }
             }
         });
@@ -61,7 +64,7 @@ public class RASPSettings extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("switch2_state", isChecked);
                 editor.apply();
-
+                restartApplication();
                 // If switch1 is turned on, turn off other switches
                 if (isChecked) {
                     switch1.setChecked(false);
@@ -76,7 +79,7 @@ public class RASPSettings extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("switch3_state", isChecked);
                 editor.apply();
-
+                restartApplication();
                 // If switch1 is turned on, turn off other switches
                 if (isChecked) {
                     switch1.setChecked(false);
@@ -99,7 +102,9 @@ public class RASPSettings extends AppCompatActivity {
                 if (switchView == switch1) {
                     switch2.setChecked(false);
                     switch3.setChecked(false);
-                    showToast("Switch 1 is turned on!");
+                    showToast("EASY PROTECTION IS ON!!!");
+
+
                 } else if (switchView == switch2) {
                     switch1.setChecked(false);
                     switch3.setChecked(false);
@@ -113,11 +118,21 @@ public class RASPSettings extends AppCompatActivity {
         }
     }
 
+    private void restartApplication() {
+        Intent intent = new Intent(this, NavigationDrawer_Dashboard.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
     //Code to handle backbutton
     public void onBackButtonClick(View view) {
         onBackPressed(); // Navigate back to the previous activity
     }
+
+
 }
