@@ -310,7 +310,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
     private void handleDiscountedPrice(double discountedPrice) {
         double finalDiscount=discountedPrice*100;
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,Signin.class),0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,Signin.class),PendingIntent.FLAG_MUTABLE);
         // This is the first run, show your notification
         AppInitializationManager.showNotification(this);
 
