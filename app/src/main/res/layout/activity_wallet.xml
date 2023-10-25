@@ -99,10 +99,10 @@
                 android:id="@+id/promoCheckboxW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:paddingStart="10dp"
+                android:layout_marginLeft="8dp"
+                android:paddingStart="4dp"
                 android:textSize="15dp"
-                android:text="Apply promocode"
+                android:text="Apply promotional balance"
                 android:visibility="gone"></CheckBox>
         </LinearLayout>
         <LinearLayout

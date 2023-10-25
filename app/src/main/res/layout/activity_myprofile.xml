@@ -71,7 +71,6 @@
             android:layout_height="39dp"
             android:clickable="true"
             android:focusable="true"
-            android:fontFamily="@font/secular_one"
             android:gravity="center_vertical"
             android:text="Name:"
             android:textSize="18dp"
@@ -170,7 +169,7 @@
         <TextView
             android:id="@+id/txtViewEmail"
             android:layout_width="223dp"
-            android:layout_height="38dp"
+            android:layout_height="47dp"
             android:background="@drawable/border_txtbox"
             android:clickable="true"
             android:focusable="true"

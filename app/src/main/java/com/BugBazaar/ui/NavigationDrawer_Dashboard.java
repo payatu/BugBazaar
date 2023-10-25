@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -43,19 +44,32 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
     private Toolbar toolbar;
     private GridView productGridView;
     private List<Product> productList;
+    private Menu menu;
+    private MenuItem loginMenuItem;
+    private SessionManager sessionManager;  // Move the initialization to a constructor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer_dashboard);
 
+        navigationView = findViewById(R.id.mainNavView);
+        menu = navigationView.getMenu();
+        loginMenuItem = menu.findItem(R.id.itemLoginButton);
 
-///// first check !!!!!!
+        //session Check
+        sessionManager = new SessionManager(this);
+
+        if(sessionManager.isLoggedIn()){
+            sessionManager.setLoggedIn(true);
+            updateLoginMenuItem(sessionManager.isLoggedIn());
+        }else{
+            sessionManager.setLoggedIn(false);
+            updateLoginMenuItem(sessionManager.isLoggedIn());
+        }
 
 
-
+        ///// first check !!!!!!
         if (AppInitializationManager.isFirstRun(this)) {
-
-
 
             checkWorker check = new checkWorker(this);
 
@@ -100,15 +114,19 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
 
         // product data
         productList = new ArrayList<>();
-        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,3400));
-        productList.add(new Product("Dumb Watch", getString(R.string.desc_cycle), R.drawable.item_watch,2700));
-        productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,1600));
-        productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,7040));
-        productList.add(new Product("PineApple iPhone", getString(R.string.desc_cycle), R.drawable.item_iphone,6900));
-        productList.add(new Product("Z Box Gaming Controller", getString(R.string.desc_cycle), R.drawable.item_gc,3400));
-        productList.add(new Product("A Rat", getString(R.string.desc_cycle), R.drawable.item_mouse,1200));
-        productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,4200));
-        productList.add(new Product("VR device", getString(R.string.desc_cycle), R.drawable.item_vr,8340));
+        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,2499));
+        productList.add(new Product("Dumb Watch", getString(R.string.desc_cycle), R.drawable.item_watch,2499));
+        productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,1659));
+        productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,7049));
+        productList.add(new Product("PineApple iPhone", getString(R.string.desc_cycle), R.drawable.item_iphone,6999));
+        productList.add(new Product("Z Box Gaming Controller", getString(R.string.desc_cycle), R.drawable.item_gc,3499));
+        productList.add(new Product("A Rat", getString(R.string.desc_cycle), R.drawable.item_mouse,1199));
+        productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,4199));
+        productList.add(new Product("Skull phone", getString(R.string.desc_cycle), R.drawable.item_headphones,3599));
+        productList.add(new Product("Mac'N Cheese book", getString(R.string.desc_cycle), R.drawable.item_mmacbook_air,88389));
+        productList.add(new Product("Useless Trimmer", getString(R.string.desc_cycle), R.drawable.item_trimmer,799));
+
+
 
 
 //
@@ -192,7 +210,8 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
 
 
 
-        //Adding actions for each items in navigation drawer
+
+      //Adding actions for each items in navigation drawer
         navigationView.setNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.itemHome) {
@@ -242,12 +261,20 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
-            else if (itemId == R.id.itemLoginLogout) {
-
+            else if (itemId == R.id.itemLoginButton) {
+                if(sessionManager.isLoggedIn()) {
+                    //Logout the user
+                    sessionManager.setLoggedIn(false);
+                    sessionManager.setUserToken(null);
+                    Toast.makeText(getApplicationContext(),"You have been logged out successfully!!",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
+                    startActivity(intent);
+                }else{
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
+                intent.putExtra("isNavigatedhere",true);
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
-                return true;
+                return true;}
             }else if (itemId == R.id.itemRASP_Settings){
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, RASPSettings.class);
                 startActivity(intent);
@@ -257,8 +284,22 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
+
+
     }
 
+    private void updateLoginMenuItem(boolean isLoggedIn) {
+
+        if (loginMenuItem != null) {
+            if (isLoggedIn) {
+                loginMenuItem.setTitle("Logout");
+                loginMenuItem.setIcon(R.drawable.baseline_logout_24);
+            } else {
+                loginMenuItem.setTitle("Login");
+                loginMenuItem.setIcon(R.drawable.baseline_login_24);
+            }
+        }
+    }
 
     @Override
     public void onDiscountCalculated(double discountedPrice) {
@@ -272,11 +313,13 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,Signin.class),0);
         // This is the first run, show your notification
         AppInitializationManager.showNotification(this);
-        CustomDialog.showCustomDialog(this, " \uD83C\uDF89 Congratulations!! \uD83C\uDF89", "You've received a ₹"+ finalDiscount+" wallet balance. Login to Redeem.",pendingIntent);
+
+        CustomDialog.showCustomDialog(this, " \uD83C\uDF89 Congratulations!! \uD83C\uDF89", "You've received a ₹"+ finalDiscount+" worth of promotional wallet balance. Login and goto Wallet to redeem.",pendingIntent);
         AppInitializationManager.markFirstRunDone(this);
 
+        sessionManager = new SessionManager(this);
+        sessionManager.setKeyPromotionalNotifSent(true);
         //When click on OK, navigate to Sign-in activity.
-
     }
 
     @Override
