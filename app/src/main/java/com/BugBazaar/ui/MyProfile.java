@@ -417,7 +417,5 @@ public class MyProfile extends BaseActivity {
                 editProfileBtn.setVisibility(View.VISIBLE);
             }
             //Code to handle backbutton
-            public void onBackButtonClick(View view) {
-                onBackPressed(); // Navigate back to the previous activity
-            }
+
         }

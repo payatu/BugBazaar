@@ -129,14 +129,15 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
 
     }
 
+
+
+    @Override
     public void onBackPressed() {
-        // Create an Intent to start the desired activity
-        Intent intentw = new Intent(this, NavigationDrawer_Dashboard.class);
-
-        // Start the desired activity
-        startActivity(intentw);
-
-        // Finish the current activity
+        startActivity(new Intent(this,NavigationDrawer_Dashboard.class));
         finish();
+
+
     }
+
+
 }
