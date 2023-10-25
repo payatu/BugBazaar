@@ -19,12 +19,17 @@ import com.BugBazaar.ui.payment.OrderSummary;
 import java.util.List;
 import java.util.Locale;
 
-public class CartActivity extends BaseActivity {
+public class CartActivity extends BaseActivity implements CartAdapter.UpdateTotalCostListener {
+    private int totalCostq=2;
+    public void updateTotalCost() {
+
+    }
 
     private RecyclerView cartRecyclerView;
     private CartAdapter cartAdapter;
     private List<CartItem> cartItems;
     private CartDatabaseHelper cartDBHelper;
+    TextView txtTotalCostNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +51,7 @@ public class CartActivity extends BaseActivity {
 
         //TotalCost
         TextView txtTotalCostText=findViewById(R.id.txtTotalCostText);
-        TextView txtTotalCostNumber=findViewById(R.id.txtTotalCostNumber);
+        txtTotalCostNumber=findViewById(R.id.txtTotalCostNumber);
 
         // Find the RecyclerView in the layout
         cartRecyclerView = findViewById(R.id.cartRecyclerView);
@@ -55,7 +60,7 @@ public class CartActivity extends BaseActivity {
         cartItems = cartDBHelper.getAllRecords();
 
         // Create and set up the adapter
-        cartAdapter = new CartAdapter(this, cartItems, cartDBHelper);
+        cartAdapter = new CartAdapter(this, cartItems, cartDBHelper,this);
 
         cartRecyclerView.setAdapter(cartAdapter);
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -88,7 +93,9 @@ public class CartActivity extends BaseActivity {
             // Show the RecyclerView
             cartRecyclerView.setVisibility(View.VISIBLE);
         }
+
         // Calculate the total cart value and update the txtTotalCostNumber TextView
+        //This does not refresh price real time on UI
         int totalCost = calculateTotalCost(cartItems);
         String formattedTotalCost = formatTotalCost(totalCost);
         txtTotalCostNumber.setText(formattedTotalCost);
@@ -96,9 +103,12 @@ public class CartActivity extends BaseActivity {
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                totalCostq = calculateTotalCost(cartItems);
+                String formattedTotalCost = formatTotalCost(totalCostq);
+                txtTotalCostNumber.setText(formattedTotalCost);
                 // Perform the checkout action here
                 Intent intentz=new Intent(CartActivity.this, OrderSummary.class);
-                intentz.putExtra("totalPrice",totalCost);
+                intentz.putExtra("totalPrice",totalCostq);
                 startActivity(intentz);
             }
         });

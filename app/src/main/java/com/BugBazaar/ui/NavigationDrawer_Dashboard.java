@@ -114,7 +114,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
 
         // product data
         productList = new ArrayList<>();
-        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,2499));
+        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,3199));
         productList.add(new Product("Dumb Watch", getString(R.string.desc_cycle), R.drawable.item_watch,2499));
         productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,1659));
         productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,7049));
@@ -270,11 +270,11 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
                     Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
                     startActivity(intent);
                 }else{
-                Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
-                intent.putExtra("isNavigatedhere",true);
-                startActivity(intent);
-                drawerLayout.closeDrawer(GravityCompat.START);
-                return true;}
+                    Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
+                    intent.putExtra("isNavigatedhere",true);
+                    startActivity(intent);
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    return true;}
             }else if (itemId == R.id.itemRASP_Settings){
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, RASPSettings.class);
                 startActivity(intent);

@@ -1,5 +1,6 @@
 package com.BugBazaar.ui.cart;
 import static com.BugBazaar.ui.cart.CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_NAME;
+import static com.BugBazaar.ui.cart.CartItemDBModel.CartItemEntry.COLUMN_PRODUCT_PRICE;
 import static com.BugBazaar.ui.cart.CartItemDBModel.CartItemEntry.COLUMN_QUANTITY;
 import static com.BugBazaar.ui.cart.CartItemDBModel.CartItemEntry.TABLE_NAME;
 
@@ -54,7 +55,7 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_QUANTITY, cartItem.getQuantity());
 
-        int rowsAffected = db.update("cart_items", values, "product_name = ?", new String[]{cartItem.getProductName()});
+        int rowsAffected = db.update(TABLE_NAME, values, COLUMN_PRODUCT_NAME + " = ?", new String[]{cartItem.getProductName()});
 
         db.close();
         return rowsAffected;
