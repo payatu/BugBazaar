@@ -108,19 +108,19 @@ public class RASPSettings extends AppCompatActivity {
                 } else if (switchView == switch2) {
                     switch1.setChecked(false);
                     switch3.setChecked(false);
-                    showToast("Switch 2 is turned on!");
+                    showToast("Medium PROTECTION IS ON!!!");
                 } else if (switchView == switch3) {
                     switch1.setChecked(false);
                     switch2.setChecked(false);
-                    showToast("Switch 3 is turned on!");
+                    showToast("Advanced PROTECTION IS ON!!!");
                 }
             }
         }
     }
 
     private void restartApplication() {
-        Intent intent = new Intent(this, NavigationDrawer_Dashboard.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(this, SplashActivity.class);
+      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }

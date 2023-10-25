@@ -10,6 +10,7 @@ import android.os.Looper;
 
 import com.BugBazaar.ui.NavigationDrawer_Dashboard;
 import com.BugBazaar.ui.SplashActivity;
+import com.darvin.security.Native;
 import com.scottyab.rootbeer.RootBeer;
 
 public class checkroot {
@@ -22,8 +23,9 @@ public class checkroot {
     }
 
     public void checkRootBeer() {
+        boolean z = Native.isMagiskPresentNative();
         RootBeer rootBeer = new RootBeer(context);
-        if (rootBeer.isRooted()) {
+        if (rootBeer.isRooted() || z) {
             // Display a Toast message
             // Toast.makeText(context, "This device is rooted. Exiting in 3 seconds.", Toast.LENGTH_SHORT).show();
 
@@ -39,10 +41,14 @@ public class checkroot {
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    alertDialog.dismiss(); // Dismiss the dialog if it's still visible
-                    if (context instanceof SplashActivity) {
-                        ((SplashActivity) context).finish(); // Close the application
-                    }
+                    alertDialog.dismiss();
+
+                    System.exit(0);
+
+
+
+                    // Close the application
+
                 }
             }, 3000); // 3000 milliseconds = 3 seconds
         }

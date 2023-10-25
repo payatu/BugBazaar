@@ -6,18 +6,25 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.RemoteException;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.BugBazaar.R;
 import com.BugBazaar.ui.detectAppInt.checkroot;
+import com.BugBazaar.utils.AlertDialogManager;
+import com.darvin.security.DetectMagisk;
 import com.darvin.security.Native;
+import com.google.android.material.snackbar.Snackbar;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity  implements DetectMagisk.DetectionListener {
 
     private static final int SPLASH_TIMEOUT = 2000; // 2 seconds
+    AlertDialogManager alertDialogManager = new AlertDialogManager();
+
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -49,15 +56,27 @@ public class SplashActivity extends AppCompatActivity {
                 } else if (switch2State) {
 
                    boolean z = Native.isMagiskPresentNative();
-                    Log.d("hello", String.valueOf(z));
 
-                    if (z) {
 
-                        Log.d("coolamit", String.valueOf(z));
-                    }
-                    Intent mainIntent = new Intent(SplashActivity.this, NavigationDrawer_Dashboard.class);
-                    startActivity(mainIntent);
-                    finish();
+                    DetectMagisk detectMagisk = new DetectMagisk(getApplicationContext());
+                    detectMagisk.setDetectionListener(SplashActivity.this);
+                    // Start Magisk detection
+                    detectMagisk.startMagiskDetection();
+
+
+
+//                    try {
+//                       Log.d("helloamit", String.valueOf(detectMagisk.serviceBinder.isMagiskPresent()));
+//                    } catch (RemoteException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    if (z) {
+//
+//                        Log.d("coolamit", String.valueOf(z));
+//                    }
+//                    Intent mainIntent = new Intent(SplashActivity.this, NavigationDrawer_Dashboard.class);
+//                    startActivity(mainIntent);
+//                    finish();
 
                 }
 
@@ -96,5 +115,24 @@ public class SplashActivity extends AppCompatActivity {
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onMagiskDetected() {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"Magisk ");
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onMagiskNotDetected() {
+
     }
 }
