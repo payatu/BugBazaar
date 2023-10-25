@@ -39,13 +39,19 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
         <activity
-            android:name=".ui.BaseActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.RASPSettings"
             android:exported="false" />
         <activity
             android:name=".ui.addresses.Address"
+            android:exported="true" />
+        <activity
+            android:name=".ui.Wallet"
+            android:exported="true" />
+        <activity
+            android:name=".ui.myorders.OrderHistoryActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.payment.OrderSummary"
             android:exported="true" />
         <activity
             android:name=".ui.Wallet"
@@ -93,8 +99,6 @@
         <activity
             android:name=".ui.NavigationDrawer_Dashboard"
             android:exported="true">
-
-
         </activity>
         <activity
             android:name=".ui.MyProfile"
@@ -114,12 +118,13 @@
         <activity
             android:name=".ui.Signin"
             android:clearTaskOnLaunch="true"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
 
         <activity
             android:name=".ui.Deeplink"
@@ -134,9 +139,16 @@
                     android:host="bugbazaar"
                     android:path="/cart/add"
                     android:scheme="bb" />
+                <data
+                    android:host="bugbazaar"
+                    android:path="/offers"
+                    android:scheme="bb" />
+                <data
+                    android:host="bugbazaar"
+                    android:path="/web"
+                    android:scheme="bb" />
             </intent-filter>
         </activity>
-
         <service
             android:name=".MyFirebaseInstanceIDService"
             android:exported="true">

@@ -211,7 +211,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
 
 
 
-        //Adding actions for each items in navigation drawer
+      //Adding actions for each items in navigation drawer
         navigationView.setNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.itemHome) {
@@ -286,8 +286,8 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         });
 
 
-
     }
+
     private void updateLoginMenuItem(boolean isLoggedIn) {
 
         if (loginMenuItem != null) {
@@ -313,13 +313,13 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,Signin.class),0);
         // This is the first run, show your notification
         AppInitializationManager.showNotification(this);
+
         CustomDialog.showCustomDialog(this, " \uD83C\uDF89 Congratulations!! \uD83C\uDF89", "You've received a ₹"+ finalDiscount+" worth of promotional wallet balance. Login and goto Wallet to redeem.",pendingIntent);
         AppInitializationManager.markFirstRunDone(this);
 
         sessionManager = new SessionManager(this);
         sessionManager.setKeyPromotionalNotifSent(true);
         //When click on OK, navigate to Sign-in activity.
-
     }
 
     @Override
