@@ -20,15 +20,21 @@ import java.util.List;
 
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
+    public interface UpdateTotalCostListener {
+        void updateTotalCost();
+    }
     private Context context;
     private List<CartItem> cartItems;
     private CartDatabaseHelper cartDBHelper;
+    private UpdateTotalCostListener listener;
 
-    public CartAdapter(Context context, List<CartItem> cartItems, CartDatabaseHelper cartDBHelper) {
+    public CartAdapter(Context context, List<CartItem> cartItems, CartDatabaseHelper cartDBHelper, UpdateTotalCostListener listener) {
         this.context = context;
         this.cartItems = cartItems;
         this.cartDBHelper = cartDBHelper;
+        this.listener = listener;
     }
+
 
     @NonNull
     @Override
@@ -50,15 +56,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         // Set click listeners for increment and decrement buttons
         holder.incrementButton.setOnClickListener(v -> {
-            // Increment the quantity of the current item
             cartItem.incrementQuantity(context); // Pass the context to update the database
             notifyDataSetChanged(); // Update the UI
+            listener.updateTotalCost(); // Update the total cost
         });
 
         holder.decrementButton.setOnClickListener(v -> {
             // Decrement the quantity of the current item
             cartItem.decrementQuantity(context); // Pass the context to update the database
             notifyDataSetChanged(); // Update the UI
+            listener.updateTotalCost(); // Update the total cost
         });
         holder.removeFromCart.setOnClickListener(v -> {
                 // Remove the item from the database
@@ -71,6 +78,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         });
 
     }
+
 
     @Override
     public int getItemCount() {
