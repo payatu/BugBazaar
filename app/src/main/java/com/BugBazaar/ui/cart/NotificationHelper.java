@@ -21,7 +21,7 @@ public class NotificationHelper {
         createNotificationChannel(context);
 
 //        Intent intent = new Intent("com.bugbazaar.payment");
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(), 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(), PendingIntent.FLAG_MUTABLE);
 
         // Build the notification
         Notification notification = null;
