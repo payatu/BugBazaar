@@ -96,7 +96,6 @@ public class Wallet extends BaseActivity implements PaymentResultListener {
         });
         SessionManager sessionManager=new SessionManager (this);
         boolean isPromotionNofiyToUser = sessionManager.getIsPromotionalNotifSent();
-        Log.d("isPromotionNofiyToUser",String.valueOf(isPromotionNofiyToUser));
         // Add a listener for the promoCheckbox
 
         if(!promoredeem && isPromotionNofiyToUser==true){

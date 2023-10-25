@@ -44,15 +44,22 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
     private Toolbar toolbar;
     private GridView productGridView;
     private List<Product> productList;
+    private Menu menu;
+    private MenuItem loginMenuItem;
     private SessionManager sessionManager;  // Move the initialization to a constructor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer_dashboard);
 
+        navigationView = findViewById(R.id.mainNavView);
+        menu = navigationView.getMenu();
+        loginMenuItem = menu.findItem(R.id.itemLoginButton);
+
         //session Check
         sessionManager = new SessionManager(this);
-        if(sessionManager.getUserToken()!=null){
+
+        if(sessionManager.isLoggedIn()){
             sessionManager.setLoggedIn(true);
             updateLoginMenuItem(sessionManager.isLoggedIn());
         }else{
@@ -107,15 +114,19 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
 
         // product data
         productList = new ArrayList<>();
-        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,3400));
-        productList.add(new Product("Dumb Watch", getString(R.string.desc_cycle), R.drawable.item_watch,2700));
-        productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,1600));
-        productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,7040));
-        productList.add(new Product("PineApple iPhone", getString(R.string.desc_cycle), R.drawable.item_iphone,6900));
-        productList.add(new Product("Z Box Gaming Controller", getString(R.string.desc_cycle), R.drawable.item_gc,3400));
-        productList.add(new Product("A Rat", getString(R.string.desc_cycle), R.drawable.item_mouse,1200));
-        productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,4200));
-        productList.add(new Product("VR device", getString(R.string.desc_cycle), R.drawable.item_vr,8340));
+        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,2499));
+        productList.add(new Product("Dumb Watch", getString(R.string.desc_cycle), R.drawable.item_watch,2499));
+        productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,1659));
+        productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,7049));
+        productList.add(new Product("PineApple iPhone", getString(R.string.desc_cycle), R.drawable.item_iphone,6999));
+        productList.add(new Product("Z Box Gaming Controller", getString(R.string.desc_cycle), R.drawable.item_gc,3499));
+        productList.add(new Product("A Rat", getString(R.string.desc_cycle), R.drawable.item_mouse,1199));
+        productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,4199));
+        productList.add(new Product("Skull phone", getString(R.string.desc_cycle), R.drawable.item_headphones,3599));
+        productList.add(new Product("Mac'N Cheese book", getString(R.string.desc_cycle), R.drawable.item_mmacbook_air,88389));
+        productList.add(new Product("Useless Trimmer", getString(R.string.desc_cycle), R.drawable.item_trimmer,799));
+
+
 
 
 //
@@ -260,6 +271,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
                     startActivity(intent);
                 }else{
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
+                intent.putExtra("isNavigatedhere",true);
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;}
@@ -274,10 +286,9 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         });
 
 
+
     }
     private void updateLoginMenuItem(boolean isLoggedIn) {
-        Menu menu = navigationView.getMenu();
-        MenuItem loginMenuItem = menu.findItem(R.id.itemLoginButton);
 
         if (loginMenuItem != null) {
             if (isLoggedIn) {

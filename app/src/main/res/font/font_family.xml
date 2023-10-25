@@ -3,5 +3,5 @@
     <font
         app:fontStyle="normal"
         app:fontWeight="400"
-        app:font="@font/ptsansregular" />
+        app:font="@font/ubunturegular" />
 </font-family>
