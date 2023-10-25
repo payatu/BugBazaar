@@ -26,7 +26,6 @@
         android:allowTaskReparenting="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:debuggable="true"
-        android:extractNativeLibs="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -39,31 +38,14 @@
         tools:ignore="CustomPermissionTypo"
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
-        <service android:name="com.darvin.security.IsolatedService" android:enabled="true" android:process=":tmpService" android:isolatedProcess="true"/>
-
         <activity
-            android:name=".ui.SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".ui.BaseActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.RASPSettings"
             android:exported="false" />
         <activity
             android:name=".ui.addresses.Address"
-            android:exported="true" />
-        <activity
-            android:name=".ui.Wallet"
-            android:exported="true" />
-        <activity
-            android:name=".ui.myorders.OrderHistoryActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.payment.OrderSummary"
             android:exported="true" />
         <activity
             android:name=".ui.Wallet"
@@ -111,16 +93,8 @@
         <activity
             android:name=".ui.NavigationDrawer_Dashboard"
             android:exported="true">
-<<<<<<< HEAD
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-=======
->>>>>>> 0e7df25cb0b07fcb1d45350389331aa368e1e1a3
         </activity>
         <activity
             android:name=".ui.MyProfile"
@@ -140,19 +114,13 @@
         <activity
             android:name=".ui.Signin"
             android:clearTaskOnLaunch="true"
-<<<<<<< HEAD
-            android:exported="true"
-            android:launchMode="singleTop" />
-=======
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-
->>>>>>> 0e7df25cb0b07fcb1d45350389331aa368e1e1a3
         <activity
             android:name=".ui.Deeplink"
             android:exported="true">
@@ -166,16 +134,9 @@
                     android:host="bugbazaar"
                     android:path="/cart/add"
                     android:scheme="bb" />
-                <data
-                    android:host="bugbazaar"
-                    android:path="/offers"
-                    android:scheme="bb" />
-                <data
-                    android:host="bugbazaar"
-                    android:path="/web"
-                    android:scheme="bb" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".MyFirebaseInstanceIDService"
             android:exported="true">
