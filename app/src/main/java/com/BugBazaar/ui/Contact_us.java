@@ -26,14 +26,16 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Contact_us extends AppCompatActivity {
+public class Contact_us extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);
         //Toolbar title set
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView toolbarTitle = findViewById(R.id.toolbarTitle);
+        TextView toolbarTitle = findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText("Contact us");
+
         WebView webView = findViewById(R.id.webview2);
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
@@ -136,5 +138,9 @@ public class Contact_us extends AppCompatActivity {
 
 
         }
+    }
+    //Code to handle backbutton
+    public void onBackButtonClick(View view) {
+        onBackPressed(); // Navigate back to the previous activity
     }
 }

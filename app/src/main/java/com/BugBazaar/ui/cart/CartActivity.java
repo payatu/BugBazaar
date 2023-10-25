@@ -13,12 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.BugBazaar.R;
+import com.BugBazaar.ui.BaseActivity;
 import com.BugBazaar.ui.payment.OrderSummary;
 
 import java.util.List;
 import java.util.Locale;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends BaseActivity {
 
     private RecyclerView cartRecyclerView;
     private CartAdapter cartAdapter;

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.RASPSettings">
+    <include
+        layout="@layout/nav_toolbar_sub"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"></include>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RASP Library Settings"
+        android:textSize="28sp"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/main_theme"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your difficulty level:"
+        android:textSize="25sp"
+        android:paddingStart="12dp"
+        android:paddingTop="12dp"
+        android:textStyle="bold"
+        android:textColor="@color/main_theme"></TextView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Easy Level"
+        android:padding="15dp"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Intermittent Level"
+        android:padding="15dp"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
+
+    <Switch
+        android:id="@+id/switch3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Advance Level"
+        android:padding="15dp"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
+    </LinearLayout>
+</LinearLayout>

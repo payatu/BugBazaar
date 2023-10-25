@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Wallet"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/nav_toolbar_sub"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"></include>
+    <LinearLayout
+        android:id="@+id/walletBalance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/summary_box"
+        android:paddingBottom="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingBottom="10dp"
+            android:text="Wallet Balance"
+            android:textColor="@color/main_theme"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            ></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+        <TextView
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:text="Your wallet balance:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            ></TextView>
+
+            <TextView
+                android:id="@+id/walletBalanceW"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:text="₹"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"></TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--Add money to wallet-->
+    <LinearLayout
+        android:id="@+id/addMoney"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="13"
+        android:orientation="vertical"
+        android:background="@drawable/summary_box"
+        android:paddingBottom="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingBottom="20dp"
+            android:text="Add money to wallet"
+            android:textColor="@color/main_theme"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            ></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
+        <EditText
+            android:id="@+id/enterAmountW"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:paddingStart="5dp"
+            android:inputType="number"
+            android:hint="Enter Amount"
+            android:textSize="20sp">
+        </EditText>
+            <CheckBox
+                android:id="@+id/promoCheckboxW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:paddingStart="4dp"
+                android:textSize="15dp"
+                android:text="Apply promotional balance"
+                android:visibility="gone"></CheckBox>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!-- Radio Buttons -->
+            <RadioGroup
+                android:id="@+id/rbGroupPaymentOptionsW"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <!-- Second RadioButton -->
+                <RadioButton
+                    android:id="@+id/walletPayViaRazorpayW"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Pay Via Razorpay"
+                    android:textSize="20dp"
+                    android:checked="true"
+                    android:textStyle="bold" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- Razorpay Icon -->
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end">
+
+                    <ImageView
+                        android:id="@+id/imgRazorpayIcon"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="20dp"
+                        android:contentDescription="Razorpay Icon"
+                        android:src="@drawable/icon_razorpay" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <TextView
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Final Amount to be added: "
+            android:textSize="20sp"
+            android:textStyle="bold"></TextView>
+        <TextView
+            android:id="@+id/finalAmountW"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="₹"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="2">
+
+        <Button
+            android:id="@+id/btnProceedWallet"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/sharp_button_corners"
+            android:text="Proceed to Payment"
+            android:onClick="gotoPayment"/>
+    </LinearLayout>
+</LinearLayout>

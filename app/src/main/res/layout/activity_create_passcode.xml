@@ -19,8 +19,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="Create New Passcode"
-            android:textSize="27dp"
-            android:textStyle="bold" />
+            android:textSize="29dp"
+            android:textStyle="bold"
+            android:textColor="@color/main_theme"/>
 
         <LinearLayout
             android:layout_width="346dp"

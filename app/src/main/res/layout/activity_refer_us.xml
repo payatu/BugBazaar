@@ -25,6 +25,7 @@
             android:text="Spread the word!!"
             android:textSize="45dp"
             android:textStyle="bold"
+            android:textColor="@color/main_theme"
             ></TextView>
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
@@ -57,7 +58,8 @@
             android:layout_marginTop="5dp"
             android:text="Share via Link"
             android:textSize="25dp"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold"
+            android:textColor="@color/main_theme"></TextView>
 
                 <Button
                     android:id="@+id/btnCopyLink"
@@ -80,7 +82,8 @@
             android:layout_margin="5dp"
             android:text="Share via SMS"
             android:textSize="25dp"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold"
+            android:textColor="@color/main_theme"></TextView>
             <Button
                 android:id="@+id/openContactButton"
                 android:layout_width="wrap_content"
@@ -103,7 +106,8 @@
             android:layout_margin="5dp"
             android:text="Share Via Email"
             android:textSize="25dp"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold"
+            android:textColor="@color/main_theme"></TextView>
                 <LinearLayout
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"

@@ -64,28 +64,17 @@ public class CreatePasscode extends AppCompatActivity {
                 String enteredPasscode = editTextPasscode.getText().toString();
 
                 if(enteredPasscode.length()!=4){
-
                     Toast.makeText(CreatePasscode.this, "Passcode of 4 numbers!", Toast.LENGTH_SHORT).show();
                     return;
 
+                }else{
+                    UserAuthSave.savepasscode(Integer.parseInt(enteredPasscode));
+                    Toast.makeText(CreatePasscode.this, "  New Passcode created!", Toast.LENGTH_SHORT).show();
                 }
-
-                UserAuthSave.savepasscode(Integer.parseInt(enteredPasscode));
-                Toast.makeText(CreatePasscode.this, "  New Passcode created!", Toast.LENGTH_SHORT).show();
-                CreateSessiontoken(UserAuthSave.getSavedUsername(),UserAuthSave.getpasscode(),UserAuthSave.getpasscode());
-
                 startActivity(new Intent(getApplicationContext(),NavigationDrawer_Dashboard.class));
-
-
 
             }
         });
-    }
-
-    private void CreateSessiontoken(String savedUsername, String getpasscode, String getpasscode1) {
-
-
-
     }
 
     //Numpad click handling

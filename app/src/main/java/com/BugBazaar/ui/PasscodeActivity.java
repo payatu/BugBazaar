@@ -21,7 +21,7 @@ public class PasscodeActivity extends AppCompatActivity {
     private ImageView btnBackspace; // Declare the ImageView for backspace button
     private Button btnValidate; // Declare the Button for validate button
 
-    private String desiredPasscode = "1234"; // Replace with your desired passcode
+    private String desiredPasscode = ""; // Replace with your desired passcode
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +61,9 @@ public class PasscodeActivity extends AppCompatActivity {
                 if (enteredPasscode.equals(passcode)) {
                     // Passcode is correct, proceed to the next activity. Add next activity here....
                     Toast.makeText(PasscodeActivity.this, "Passcode correct!", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(getApplicationContext(), NavigationDrawer_Dashboard.class);
+                    Intent newInt=new Intent(getApplicationContext(),NavigationDrawer_Dashboard.class);
+                    startActivity(newInt);
 
-                    startActivity(new Intent(getApplicationContext(),NavigationDrawer_Dashboard.class));
                     // Implement your logic to proceed to the next activity here
                 } else {
                     // Passcode is incorrect, show an error message
