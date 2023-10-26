@@ -93,7 +93,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
 
         }
 
-        /////
         // Rest of your activity initialization code
 
         // Hide the keyboard and clear focus from the EditText
@@ -114,7 +113,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
 
         // product data
         productList = new ArrayList<>();
-        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,2499));
+        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,3199));
         productList.add(new Product("Dumb Watch", getString(R.string.desc_cycle), R.drawable.item_watch,2499));
         productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,1659));
         productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,7049));
@@ -127,36 +126,27 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         productList.add(new Product("Useless Trimmer", getString(R.string.desc_cycle), R.drawable.item_trimmer,799));
 
 
-
-
-//
-//        boolean isItemPresent = false;
-//        Intent get_item = getIntent();
-//        if (get_item.hasExtra("fetched_item")) {
-//            // Retrieve the "fetched_item" string extra & Check if deeplink_item is present in the product list
-//            String deeplink_item = get_item.getStringExtra("fetched_item");
-//            for (Product product : productList) {
-//                if (product.getName().equals(deeplink_item)) {
-//                    Log.d("Product found:", product.getName());
-//                    Intent detailed_product = new Intent(this, DetailedProductActivity.class);
-//                    detailed_product.putExtra("product", product);
-//                    detailed_product.putExtra("autostart", true);
-//                    this.startActivity(detailed_product);
-//                    //Sending intent to CartItem class
-//                    //Intent intToCartItem = new Intent(this, CartItem.class);
-//                    //intToCartItem.putExtra("product", product);
-//                    //this.startActivity(intToCartItem);
-//                    break; // No need to continue searching if found
-//                }
-//            }
-//
-//        }
+        //Handle Deeplink intent
+        Intent get_item = getIntent();
+        if (get_item.hasExtra("fetched_item")) {
+            // Check for the "fetched_item" string extra
+            String deeplink_item = get_item.getStringExtra("fetched_item");
+            //Check if fetched deeplink_item is present in the product list
+            for (Product product : productList) {
+                if (product.getName().equals(deeplink_item)) {
+                    Log.d("Product found:", product.getName());
+                    Intent detailed_product = new Intent(this, DetailedProductActivity.class);
+                    detailed_product.putExtra("product", product);
+                    detailed_product.putExtra("autostart", true);
+                    this.startActivity(detailed_product);
+                    break; // No need to continue searching if found
+                }
+            }
+        }
 
         // Create and set the adapter for the GridView
         ProductAdapter adapter = new ProductAdapter(this, productList);
         productGridView.setAdapter(adapter);
-
-        //Handle Deeplink intent
 
 
         //Adding onClickListener to search button
@@ -270,11 +260,11 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
                     Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
                     startActivity(intent);
                 }else{
-                Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
-                intent.putExtra("isNavigatedhere",true);
-                startActivity(intent);
-                drawerLayout.closeDrawer(GravityCompat.START);
-                return true;}
+                    Intent intent = new Intent(NavigationDrawer_Dashboard.this, Signin.class);
+                    intent.putExtra("isNavigatedhere",true);
+                    startActivity(intent);
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    return true;}
             }else if (itemId == R.id.itemRASP_Settings){
                 Intent intent = new Intent(NavigationDrawer_Dashboard.this, RASPSettings.class);
                 startActivity(intent);
@@ -310,7 +300,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
     private void handleDiscountedPrice(double discountedPrice) {
         double finalDiscount=discountedPrice*100;
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,Signin.class),0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,Signin.class),PendingIntent.FLAG_MUTABLE);
         // This is the first run, show your notification
         AppInitializationManager.showNotification(this);
 
@@ -344,35 +334,10 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         finishAffinity();
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        handledeeplink();
 
 
 
-    }
-
-    private void handledeeplink() {
 
 
-        Intent get_item = getIntent();
-        if (get_item.hasExtra("fetched_item")) {
-            // Check for the "fetched_item" string extra
-            String deeplink_item = get_item.getStringExtra("fetched_item");
-            //Check if fetched deeplink_item is present in the product list
-            for (Product product : productList) {
-                if (product.getName().equals(deeplink_item)) {
-                    Log.d("Product found:", product.getName());
-                    Intent detailed_product = new Intent(this, DetailedProductActivity.class);
-                    detailed_product.putExtra("product", product);
-                    detailed_product.putExtra("autostart", true);
-                    this.startActivity(detailed_product);
-                    break; // No need to continue searching if found
-                }
-            }
-        }
 
-
-    }
 }

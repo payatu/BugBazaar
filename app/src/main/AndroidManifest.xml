@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
     <permission
         android:name="com.BugBazaar.permission.contacts"
         android:protectionLevel="signature" />
-
     <queries>
         <intent>
             <action android:name="android.intent.action.PICK" />
-
             <data android:mimeType="*/*" />
         </intent>
     </queries>
-
     <application
         android:allowBackup="true"
         android:allowTaskReparenting="true"
@@ -39,6 +34,9 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
         <activity
+            android:name=".ui.BaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.RASPSettings"
             android:exported="false" />
         <activity
@@ -54,18 +52,6 @@
             android:name=".ui.payment.OrderSummary"
             android:exported="true" />
         <activity
-            android:name=".ui.Wallet"
-            android:exported="true" />
-        <activity
-            android:name=".ui.myorders.OrderHistoryActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.payment.OrderSummary"
-            android:exported="true" />
-        <activity
-            android:name=".ui.TestActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.ContactsPack.SelectContacts"
             android:exported="true" />
         <activity
@@ -78,6 +64,9 @@
             android:name=".ui.cart.Cart"
             android:exported="false" />
 
+        <activity
+            android:name=".ui.SplashActivity"
+            android:exported="true" />
         <provider
             android:name=".provider.UserProfileProvider"
             android:authorities="com.BugBazaar.UserProfile"
@@ -89,7 +78,6 @@
             android:authorities="com.bugbazaar.mycontacts"
             android:exported="true"
             android:permission="com.BugBazaar.permission.contact" />
-
         <activity
             android:name=".ui.DetailedProductActivity"
             android:exported="false" />
@@ -99,6 +87,7 @@
         <activity
             android:name=".ui.NavigationDrawer_Dashboard"
             android:exported="true">
+
         </activity>
         <activity
             android:name=".ui.MyProfile"
@@ -106,9 +95,6 @@
         <activity
             android:name=".ui.TermsAndConditionsActivity"
             android:exported="true" />
-        <activity
-            android:name=".ui.TermsOfService"
-            android:exported="false" />
         <activity
             android:name=".ui.Contact_us"
             android:exported="true" />
@@ -118,23 +104,19 @@
         <activity
             android:name=".ui.Signin"
             android:clearTaskOnLaunch="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".ui.Deeplink"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data
                     android:host="bugbazaar"
                     android:path="/cart/add"
@@ -157,5 +139,4 @@
             </intent-filter>
         </service>
     </application>
-
 </manifest>
