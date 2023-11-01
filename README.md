@@ -28,7 +28,7 @@ vulnerable Application !!
 
 ### Injections
 
- - ABCD
+ - SQL Injection
 
 
 
