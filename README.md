@@ -28,7 +28,7 @@ vulnerable Application !!
 
 ### Injections
 
- - SQL Injection
+ - SQL Injection via user input
 
 
 
