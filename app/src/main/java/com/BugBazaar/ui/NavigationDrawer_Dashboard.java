@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,7 +30,6 @@ import com.BugBazaar.ui.myorders.OrderHistoryActivity;
 import com.BugBazaar.utils.AppInitializationManager;
 import com.BugBazaar.utils.CustomDialog;
 import com.BugBazaar.utils.NetworkUtils;
-import com.BugBazaar.utils.NotificationUtils;
 import com.BugBazaar.utils.checkWorker;
 import com.google.android.material.navigation.NavigationView;
 
@@ -47,6 +47,8 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
     private Menu menu;
     private MenuItem loginMenuItem;
     private SessionManager sessionManager;  // Move the initialization to a constructor
+    private static final int PERMISSION_REQUEST_CODE = 123; // You can use any integer value you like
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,9 +127,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         productList.add(new Product("Skull phone", getString(R.string.desc_cycle), R.drawable.item_headphones,3599));
         productList.add(new Product("Mac'N Cheese book", getString(R.string.desc_cycle), R.drawable.item_mmacbook_air,88389));
         productList.add(new Product("Useless Trimmer", getString(R.string.desc_cycle), R.drawable.item_trimmer,799));
-
-
-
 
 //
 //        boolean isItemPresent = false;
@@ -211,7 +210,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
 
 
 
-      //Adding actions for each items in navigation drawer
+        //Adding actions for each items in navigation drawer
         navigationView.setNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.itemHome) {
@@ -286,6 +285,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         });
 
 
+
     }
 
     private void updateLoginMenuItem(boolean isLoggedIn) {
@@ -310,7 +310,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
     private void handleDiscountedPrice(double discountedPrice) {
         double finalDiscount=discountedPrice*100;
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,Signin.class),0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,Signin.class),PendingIntent.FLAG_MUTABLE);
         // This is the first run, show your notification
         AppInitializationManager.showNotification(this);
 

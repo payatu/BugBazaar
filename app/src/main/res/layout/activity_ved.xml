@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.components.ved"
+    android:orientation="vertical"
+    android:gravity="top">
+    <include
+        layout="@layout/nav_toolbar_sub"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"></include>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center">
+<pl.droidsonroids.gif.GifImageView
+    android:layout_width="288dp"
+    android:layout_height="201dp"
+    android:background="@drawable/border_txtbox"
+    android:src="@drawable/cid"></pl.droidsonroids.gif.GifImageView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Congrats, you found our hidden broadcast receiver!!"
+        android:textSize="20sp"
+        android:textColor="@color/main_theme"
+        android:textStyle="bold"></TextView></LinearLayout>
+</LinearLayout>

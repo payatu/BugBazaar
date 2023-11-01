@@ -73,5 +73,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0' // Use the latest version
     implementation 'com.razorpay:checkout:1.6.33'
     implementation 'com.scottyab:rootbeer-lib:0.1.0'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
 
 }
