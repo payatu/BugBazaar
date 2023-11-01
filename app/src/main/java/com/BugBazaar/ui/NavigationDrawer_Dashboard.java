@@ -8,7 +8,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +29,7 @@ import com.BugBazaar.ui.myorders.OrderHistoryActivity;
 import com.BugBazaar.utils.AppInitializationManager;
 import com.BugBazaar.utils.CustomDialog;
 import com.BugBazaar.utils.NetworkUtils;
+import com.BugBazaar.utils.NotificationUtils;
 import com.BugBazaar.utils.checkWorker;
 import com.google.android.material.navigation.NavigationView;
 
@@ -47,8 +47,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
     private Menu menu;
     private MenuItem loginMenuItem;
     private SessionManager sessionManager;  // Move the initialization to a constructor
-    private static final int PERMISSION_REQUEST_CODE = 123; // You can use any integer value you like
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +93,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
 
         }
 
-        /////
         // Rest of your activity initialization code
 
         // Hide the keyboard and clear focus from the EditText
@@ -128,34 +125,28 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         productList.add(new Product("Mac'N Cheese book", getString(R.string.desc_cycle), R.drawable.item_mmacbook_air,88389));
         productList.add(new Product("Useless Trimmer", getString(R.string.desc_cycle), R.drawable.item_trimmer,799));
 
-//
-//        boolean isItemPresent = false;
-//        Intent get_item = getIntent();
-//        if (get_item.hasExtra("fetched_item")) {
-//            // Retrieve the "fetched_item" string extra & Check if deeplink_item is present in the product list
-//            String deeplink_item = get_item.getStringExtra("fetched_item");
-//            for (Product product : productList) {
-//                if (product.getName().equals(deeplink_item)) {
-//                    Log.d("Product found:", product.getName());
-//                    Intent detailed_product = new Intent(this, DetailedProductActivity.class);
-//                    detailed_product.putExtra("product", product);
-//                    detailed_product.putExtra("autostart", true);
-//                    this.startActivity(detailed_product);
-//                    //Sending intent to CartItem class
-//                    //Intent intToCartItem = new Intent(this, CartItem.class);
-//                    //intToCartItem.putExtra("product", product);
-//                    //this.startActivity(intToCartItem);
-//                    break; // No need to continue searching if found
-//                }
-//            }
-//
-//        }
+
+        //Handle Deeplink intent
+        Intent get_item = getIntent();
+        if (get_item.hasExtra("fetched_item")) {
+            // Check for the "fetched_item" string extra
+            String deeplink_item = get_item.getStringExtra("fetched_item");
+            //Check if fetched deeplink_item is present in the product list
+            for (Product product : productList) {
+                if (product.getName().equals(deeplink_item)) {
+                    Log.d("Product found:", product.getName());
+                    Intent detailed_product = new Intent(this, DetailedProductActivity.class);
+                    detailed_product.putExtra("product", product);
+                    detailed_product.putExtra("autostart", true);
+                    this.startActivity(detailed_product);
+                    break; // No need to continue searching if found
+                }
+            }
+        }
 
         // Create and set the adapter for the GridView
         ProductAdapter adapter = new ProductAdapter(this, productList);
         productGridView.setAdapter(adapter);
-
-        //Handle Deeplink intent
 
 
         //Adding onClickListener to search button
@@ -210,7 +201,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
 
 
 
-        //Adding actions for each items in navigation drawer
+      //Adding actions for each items in navigation drawer
         navigationView.setNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.itemHome) {
@@ -285,7 +276,6 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
         });
 
 
-
     }
 
     private void updateLoginMenuItem(boolean isLoggedIn) {
@@ -343,19 +333,12 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
     public void onBackPressed() {
         finishAffinity();
     }
-
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         handledeeplink();
-
-
-
     }
-
     private void handledeeplink() {
-
-
         Intent get_item = getIntent();
         if (get_item.hasExtra("fetched_item")) {
             // Check for the "fetched_item" string extra
@@ -372,7 +355,5 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
                 }
             }
         }
-
-
     }
 }
