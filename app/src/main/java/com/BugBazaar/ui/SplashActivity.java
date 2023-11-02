@@ -124,7 +124,13 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
     @Override
     public void onMagiskNotDetected() {
 
-        Log.d("hello","hello");
+checkfrida();
+
+    }
+
+    private void checkfrida() {
+
+
 
 
     }
