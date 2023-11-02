@@ -120,10 +120,8 @@ public class RASPSettings extends AppCompatActivity {
 
     private void restartApplication() {
         Intent intent = new Intent(this, SplashActivity.class);
-      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        finish();
-    }
+finishAffinity();    }
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
