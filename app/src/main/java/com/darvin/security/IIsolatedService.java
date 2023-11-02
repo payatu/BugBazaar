@@ -29,7 +29,7 @@ public interface IIsolatedService extends IInterface {
                 return null;
             }
             IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIsolatedService)) {
+            if ((queryLocalInterface instanceof IIsolatedService)) {
                 return (IIsolatedService) queryLocalInterface;
             }
             return new Proxy(iBinder);

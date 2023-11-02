@@ -74,7 +74,14 @@
             android:exported="false" />
         <activity
             android:name=".ui.SplashActivity"
-            android:exported="true" />
+            android:exported="true" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name=".provider.UserProfileProvider"
@@ -96,7 +103,7 @@
             android:exported="true" />
         <activity
             android:name=".ui.NavigationDrawer_Dashboard"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.MyProfile"
             android:exported="true" />
@@ -113,11 +120,7 @@
             android:name=".ui.Signin"
             android:clearTaskOnLaunch="true"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.Deeplink"
@@ -142,6 +145,8 @@
                 <action android:name="com.BugBazaar.CUSTOMACT" />
             </intent-filter>
         </receiver>
+
+        <service android:name="com.darvin.security.IsolatedService" android:enabled="true" android:process=":tmpService" android:isolatedProcess="true"/>
 
         <service
             android:name=".MyFirebaseInstanceIDService"
