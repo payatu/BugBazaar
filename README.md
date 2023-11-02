@@ -8,6 +8,7 @@ vulnerable Application !!
 - Stealing User token Via javascript Interface
 - Access of Arbitrary files via insecure Flags
 - Stealing of Arbitrary files via Insecure `WebResourceResponse`
+- Account Takeover via Steal Session id
     
 ### INTENT
 - Intent interception
