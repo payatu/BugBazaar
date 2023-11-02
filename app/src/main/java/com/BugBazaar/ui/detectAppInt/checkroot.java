@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.BugBazaar.ui.NavigationDrawer_Dashboard;
+import com.BugBazaar.ui.Signin;
 import com.BugBazaar.ui.SplashActivity;
 import com.darvin.security.Native;
 import com.scottyab.rootbeer.RootBeer;
@@ -43,19 +45,17 @@ public class checkroot {
                 public void run() {
                     alertDialog.dismiss();
 
-                    System.exit(0);
-
-
-
-                    // Close the application
-
+                     System.exit(0);
                 }
             }, 3000); // 3000 milliseconds = 3 seconds
         }
         else {
-            Intent mainIntent = new Intent(context.getApplicationContext(), NavigationDrawer_Dashboard.class);
+
+            Log.d("hello","hello");
+
+            Intent mainIntent = new Intent(context.getApplicationContext(), Signin.class);
             context.startActivity(mainIntent);
-            ((SplashActivity) context).finish();
+
 
         }
     }

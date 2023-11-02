@@ -33,6 +33,7 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
         setContentView(R.layout.activity_splash);
 
 
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -55,28 +56,15 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
 
                 } else if (switch2State) {
 
-                   boolean z = Native.isMagiskPresentNative();
 
+                    Log.d("hacker","hacker");
 
                     DetectMagisk detectMagisk = new DetectMagisk(getApplicationContext());
                     detectMagisk.setDetectionListener(SplashActivity.this);
                     // Start Magisk detection
                     detectMagisk.startMagiskDetection();
+                    Log.d("hacker","cool");
 
-
-
-//                    try {
-//                       Log.d("helloamit", String.valueOf(detectMagisk.serviceBinder.isMagiskPresent()));
-//                    } catch (RemoteException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    if (z) {
-//
-//                        Log.d("coolamit", String.valueOf(z));
-//                    }
-//                    Intent mainIntent = new Intent(SplashActivity.this, NavigationDrawer_Dashboard.class);
-//                    startActivity(mainIntent);
-//                    finish();
 
                 }
 
@@ -85,12 +73,12 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
 
                 else if (switch3State) {
 
-                    // switch1 is in the "OFF" state, perform a different operation if needed
                 }
 
                 else {
 
-                    Intent mainIntent = new Intent(SplashActivity.this, NavigationDrawer_Dashboard.class);
+                    Log.d("hello","hello");
+                    Intent mainIntent = new Intent(SplashActivity.this, Signin.class);
                     startActivity(mainIntent);
                     finish();
                 }
@@ -121,6 +109,8 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
     @Override
     public void onMagiskDetected() {
 
+        Log.d("hello","hello");
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -133,6 +123,15 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
 
     @Override
     public void onMagiskNotDetected() {
+
+checkfrida();
+
+    }
+
+    private void checkfrida() {
+
+
+
 
     }
 }

@@ -3,7 +3,9 @@ package com.BugBazaar.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -43,7 +45,7 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
             }
 
         else {
-            startWebView(AppConstants.Terms_Conditions_URL);
+            startdefaultwebview(AppConstants.Terms_Conditions_URL);
 
 
         }
@@ -51,6 +53,13 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
 
 
 }
+
+    private void startdefaultwebview(String terms_conditions_url) {
+
+        webView.loadUrl(webViewUrl);
+
+
+    }
 
     private void setupwebview(WebView webView) {
         webView.setWebViewClient(new WebViewClient());
@@ -63,21 +72,34 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
 
     private void startWebView(String webViewUrl) {
 
-        if (webViewUrl.contains("bugbazaar") && webViewUrl.contains("bugbazaar.com")) {
+        if (webViewUrl.startsWith("bugbazaar.com")) {
             webView.addJavascriptInterface(new JavaScriptInterface(), "Androidinterface");
             webView.loadUrl(webViewUrl);
 
 
         }
 
-        else {
-            webView.loadUrl(AppConstants.Terms_Conditions_URL);
+        else if (webViewUrl.endsWith(".bugbazaar.com")){
+            CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.setCookie(webViewUrl, getsessionid());
+
+            Log.d("hello","cookieset");
 
 
         }
 
+        webView.loadUrl(webViewUrl);
+
+
+
 
     }
+
+    private String getsessionid() {
+
+        return String.valueOf(UUID.randomUUID());
+    }
+
     //Code to handle backbutton
     public void onBackButtonClick(View view) {
         onBackPressed(); // Navigate back to the previous activity

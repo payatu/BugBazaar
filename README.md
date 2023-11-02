@@ -8,6 +8,7 @@ vulnerable Application !!
 - Stealing User token Via javascript Interface
 - Access of Arbitrary files via insecure Flags
 - Stealing of Arbitrary files via Insecure `WebResourceResponse`
+- Account Takeover via Steal Session id
     
 ### INTENT
 - Intent interception
@@ -25,6 +26,7 @@ vulnerable Application !!
 -  Exported Components
 -  Steal User's Contact via typo permission in Content Provider
 -  Arbitrary data write to Content provider
+-  Access to Protected Components via Recevier
 
 ### Injections
 
