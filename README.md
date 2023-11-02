@@ -25,6 +25,7 @@ vulnerable Application !!
 -  Exported Components
 -  Steal User's Contact via typo permission in Content Provider
 -  Arbitrary data write to Content provider
+-  Access to Protected Components via Recevier
 
 ### Injections
 
