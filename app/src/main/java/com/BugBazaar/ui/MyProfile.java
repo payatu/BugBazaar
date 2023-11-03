@@ -78,7 +78,6 @@ public class MyProfile extends BaseActivity {
 //
 //        }
 
-
         //Firebase
         FirebaseApp.initializeApp(this);
         firebaseStorage = FirebaseStorage.getInstance();
@@ -362,6 +361,11 @@ public class MyProfile extends BaseActivity {
 
 
 }
+    //Code to handle backbutton
+    public void onBackButtonClick(View view) {
+        onBackPressed(); // Navigate back to the previous activity
+    }
+
 
             //After clicking on "Save Profile" revert all EditTextViews into TextViews. Also Hide "Save Profile" button and "Edit Profile" button is visible.
             private void revertToTextViews() {
