@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.BugBazaar.R;
 import com.BugBazaar.ui.detectAppInt.checkroot;
 import com.BugBazaar.utils.AlertDialogManager;
+import com.bug.hook.checkdetect;
 import com.bug.hook.runtime;
 import com.darvin.security.DetectMagisk;
 import com.darvin.security.Native;
@@ -78,7 +79,9 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
 
                 else if (switch3State) {
 
-                    alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"WE ARE IN PROGRESS");
+
+
+//                    alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"WE ARE IN PROGRESS");
 
 
                 }
@@ -135,17 +138,19 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
     @Override
     public void onMagiskNotDetected() {
 
+        checkdetect checkdetect = new checkdetect();
+        checkdetect.someMethod(SplashActivity.this);
+
 if(checkfrida()){
 
     alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"FRIDA");
 
 }
 
-
 else
 {
-
     launchapp();
+
 }
 
     }
@@ -156,8 +161,6 @@ else
         startActivity(mainIntent);
         finish();
     }
-
-
     private boolean checkfrida() {
 
 if(runtime.areFridaFilesPresent() || runtime.isFridaDetectedinmounts() || runtime.isFridaServerRunning() || runtime.isFridaDetectedfile()){
