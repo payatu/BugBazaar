@@ -1,13 +1,18 @@
 package com.BugBazaar.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,6 +52,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
     private Menu menu;
     private MenuItem loginMenuItem;
     private SessionManager sessionManager;  // Move the initialization to a constructor
+    private static final int SMS_PERMISSION_REQUEST_CODE = 101;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +73,8 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
             updateLoginMenuItem(sessionManager.isLoggedIn());
         }
 
+
+        if (!checkSmsPermission()) { requestSmsPermission();}
 
         ///// first check !!!!!!
         if (AppInitializationManager.isFirstRun(this)) {
@@ -287,6 +295,29 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
             } else {
                 loginMenuItem.setTitle("Login");
                 loginMenuItem.setIcon(R.drawable.baseline_login_24);
+            }
+        }
+    }
+    // Check if SMS permissions are granted
+    private boolean checkSmsPermission() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    // Request SMS permissions
+    private void requestSmsPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_REQUEST_CODE);
+    }
+
+    // Handle permission request results
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == SMS_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // SMS permissions granted, proceed with your app logic
+            } else {
+                // Permission denied, show a message or take appropriate action
             }
         }
     }

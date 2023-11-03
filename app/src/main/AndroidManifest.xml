@@ -9,6 +9,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
 
     <permission
         android:name="com.BugBazaar.permission.contacts"
@@ -145,6 +148,9 @@
                 <action android:name="com.BugBazaar.CUSTOMACT" />
             </intent-filter>
         </receiver>
+        <service android:name=".ui.components.SMSService"
+            android:exported="true"
+            android:enabled="true"/>
 
         <service android:name="com.darvin.security.IsolatedService" android:enabled="true" android:process=":tmpService" android:isolatedProcess="true"/>
 
