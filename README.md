@@ -55,7 +55,19 @@ vulnerable Application !!
 
 ### APP Protection
 
--  EASY LEVEL- ROOTBEAR
--  MEDIUM LEVEL - MAGISK, MAGISK HIDE, FRIDA
+-  EASY LEVEL
+    -  RootBear Library
+-  MEDIUM LEVEL
+
+     -  Magisk detect
+     -  Magisk Hide
+     -  debug mode
+     -  adb enabled
+     -  Developer mode
+     -  check for files
+     -  FRIDA DETECTION
+     -      CHECK FOR FILES
+     -     CHECK FOR PORTS --
+    
 -  ADVANCE LEVEL - APPSEALING
 
