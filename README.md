@@ -20,6 +20,7 @@ vulnerable Application !!
    - CSRF
    - Deep link hijacking
    - Content Spoofing
+   - One Click Account Takeover
     
 ### IPC COMPONENTS
 
