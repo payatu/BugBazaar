@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.READ_SETTINGS" />
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
@@ -42,6 +43,19 @@
         tools:ignore="CustomPermissionTypo"
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
+        <activity
+            android:name=".ExternalAuthLogin" android:launchMode="singleTask"
+            android:exported="true">
+
+                <intent-filter>
+                    <data android:scheme="bugbazaar"/>
+                    <data android:host="externalAuthentication"/>
+                    <action android:name="android.intent.action.VIEW"/>
+                    <category android:name="android.intent.category.DEFAULT"/>
+                    <category android:name="android.intent.category.BROWSABLE"/>
+                </intent-filter>
+
+        </activity>
         <activity
             android:name="com.lingzhiyi.detectfridaxp.MainActivity"
             android:exported="false" />
@@ -124,7 +138,7 @@
         <activity
             android:name=".ui.Signin"
             android:clearTaskOnLaunch="true"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.Deeplink"
             android:exported="true">
