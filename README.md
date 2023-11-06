@@ -61,16 +61,23 @@ vulnerable Application !!
 -  MEDIUM LEVEL
 
      -  Magisk detect
-     -  Magisk Hide
-     -  debug mode
-     -  adb enabled
-     -  Developer mode
-     -  check for files
+        -  Magisk Hide
+    -  Emulator Check
+       -  debug mode
+       -  adb enabled
+       -  Developer mode
+       -  check for files
+       -  check for All sensors
+       -  Check for Network Connectivity
      -  FRIDA DETECTION
      -      CHECK FOR FILES
      -     CHECK FOR PORTS --
     
 -  ADVANCE LEVEL - APPSEALING
+
+  - hello
+    - cool
+        - hello
 
 
 
