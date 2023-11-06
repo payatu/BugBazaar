@@ -70,14 +70,11 @@ vulnerable Application !!
        -  check for All sensors
        -  Check for Network Connectivity
      -  FRIDA DETECTION
-     -      CHECK FOR FILES
-     -     CHECK FOR PORTS --
+        -  CHECK FOR FILES
+        -  CHECK FOR PORTS --
     
 -  ADVANCE LEVEL - APPSEALING
 
-  - hello
-    - cool
-        - hello
 
 
 
