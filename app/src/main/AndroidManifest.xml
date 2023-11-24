@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.READ_SETTINGS" />
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -43,6 +44,22 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
         <activity
+            android:name=".ExternalAuthLogin" android:launchMode="singleTask"
+            android:exported="true">
+
+                <intent-filter>
+                    <data android:scheme="bugbazaar"/>
+                    <data android:host="externalAuthentication"/>
+                    <action android:name="android.intent.action.VIEW"/>
+                    <category android:name="android.intent.category.DEFAULT"/>
+                    <category android:name="android.intent.category.BROWSABLE"/>
+                </intent-filter>
+
+        </activity>
+        <activity
+            android:name="com.lingzhiyi.detectfridaxp.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.components.ved"
             android:exported="false" />
         <activity
@@ -77,8 +94,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.SplashActivity"
-            android:exported="true" >
-
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -122,9 +138,7 @@
         <activity
             android:name=".ui.Signin"
             android:clearTaskOnLaunch="true"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ui.Deeplink"
             android:exported="true">
@@ -140,6 +154,7 @@
                     android:scheme="bb" />
             </intent-filter>
         </activity>
+
         <receiver
             android:name=".ui.components.CustomBR"
             android:enabled="true"
@@ -152,8 +167,11 @@
             android:exported="true"
             android:enabled="true"/>
 
-        <service android:name="com.darvin.security.IsolatedService" android:enabled="true" android:process=":tmpService" android:isolatedProcess="true"/>
-
+        <service
+            android:name="com.darvin.security.IsolatedService"
+            android:enabled="true"
+            android:isolatedProcess="true"
+            android:process=":tmpService" />
         <service
             android:name=".MyFirebaseInstanceIDService"
             android:exported="true">

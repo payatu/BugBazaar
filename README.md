@@ -20,6 +20,7 @@ vulnerable Application !!
    - CSRF
    - Deep link hijacking
    - Content Spoofing
+   - One Click Account Takeover
     
 ### IPC COMPONENTS
 
@@ -55,7 +56,27 @@ vulnerable Application !!
 
 ### APP Protection
 
--  EASY LEVEL- ROOTBEAR
--  MEDIUM LEVEL - MAGISK, MAGISK HIDE, FRIDA
+-  EASY LEVEL
+    -  RootBear Library
+-  MEDIUM LEVEL
+
+     -  Magisk detect
+        -  Magisk Hide
+    -  Emulator Check
+       -  debug mode
+       -  adb enabled
+       -  Developer mode
+       -  check for files
+       -  check for All sensors
+       -  Check for Network Connectivity
+     -  FRIDA DETECTION
+        -  CHECK FOR FILES
+        -  CHECK FOR PORTS --
+    
 -  ADVANCE LEVEL - APPSEALING
+
+
+
+
+// MANY MORE BUGS !!! COMING
 

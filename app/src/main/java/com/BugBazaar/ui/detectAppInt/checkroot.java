@@ -2,6 +2,7 @@ package com.BugBazaar.ui.detectAppInt;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -45,7 +46,9 @@ public class checkroot {
                 public void run() {
                     alertDialog.dismiss();
 
-                     System.exit(0);
+                    // Finish the current activity
+                    ((Activity) context).finish();
+
                 }
             }, 3000); // 3000 milliseconds = 3 seconds
         }

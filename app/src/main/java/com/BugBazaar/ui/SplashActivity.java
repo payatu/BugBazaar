@@ -1,10 +1,13 @@
 package com.BugBazaar.ui;
 
 
+import android.app.ActivityManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.util.Log;
@@ -16,9 +19,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.BugBazaar.R;
 import com.BugBazaar.ui.detectAppInt.checkroot;
 import com.BugBazaar.utils.AlertDialogManager;
+import com.bug.hook.checkdetect;
+import com.bug.hook.runtime;
 import com.darvin.security.DetectMagisk;
 import com.darvin.security.Native;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 public class SplashActivity extends AppCompatActivity  implements DetectMagisk.DetectionListener {
 
@@ -63,7 +70,6 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
                     detectMagisk.setDetectionListener(SplashActivity.this);
                     // Start Magisk detection
                     detectMagisk.startMagiskDetection();
-                    Log.d("hacker","cool");
 
 
                 }
@@ -72,6 +78,11 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
 
 
                 else if (switch3State) {
+
+
+
+//                    alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"WE ARE IN PROGRESS");
+
 
                 }
 
@@ -109,12 +120,15 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
     @Override
     public void onMagiskDetected() {
 
-        Log.d("hello","hello");
+        Log.d("hello", String.valueOf(runtime.isFridaServerRunning()));
 
-        runOnUiThread(new Runnable() {
+
+            runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"Magisk ");
+//                Log.d("frida", String.valueOf(runtime.isFridaDetected()));
+
+                alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"Magisk");
 
             }
         });
@@ -124,12 +138,37 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
     @Override
     public void onMagiskNotDetected() {
 
-checkfrida();
+        checkdetect checkdetect = new checkdetect();
+        checkdetect.someMethod(SplashActivity.this);
+
+if(checkfrida()){
+
+    alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"FRIDA");
+
+}
+
+else
+{
+    launchapp();
+
+}
 
     }
 
-    private void checkfrida() {
+    private void launchapp() {
 
+        Intent mainIntent = new Intent(SplashActivity.this, Signin.class);
+        startActivity(mainIntent);
+        finish();
+    }
+    private boolean checkfrida() {
+
+if(runtime.areFridaFilesPresent() || runtime.isFridaDetectedinmounts() || runtime.isFridaServerRunning() || runtime.isFridaDetectedfile()){
+
+    return  true;
+
+}
+return  false;
 
 
 
