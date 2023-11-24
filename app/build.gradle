@@ -14,6 +14,21 @@ android {
             jniLibs.srcDirs = ['src/main/jniLibs']
         }
     }
+    signingConfigs {
+        release {
+            storeFile file('loki.jks')
+            storePassword 'Loki$$8090'
+            keyAlias 'loki'
+            keyPassword 'Loki$$8090'
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            // Other release-specific configurations
+        }
+    }
 
     defaultConfig {
         applicationId "com.BugBazaar"
