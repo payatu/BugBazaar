@@ -73,7 +73,7 @@ vulnerable Application !!
         -  CHECK FOR FILES
         -  CHECK FOR PORTS --
     
--  ADVANCE LEVEL - APPSEALING
+-  ADVANCE LEVEL - !!! IN PROGRESS WILL UPDATE IN NEXT RELEASE
 
 
 
