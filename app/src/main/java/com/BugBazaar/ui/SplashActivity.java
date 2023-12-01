@@ -29,7 +29,8 @@ import java.util.List;
 
 public class SplashActivity extends AppCompatActivity  implements DetectMagisk.DetectionListener {
 
-    private static final int SPLASH_TIMEOUT = 2000; // 2 seconds
+    private static final int SPLASH_TIMEOUT = 500; //half second
+
     AlertDialogManager alertDialogManager = new AlertDialogManager();
 
 

@@ -163,7 +163,7 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
             public void onClick(View v) {
                 String searchText = String.valueOf(searchEditText.getText());
 
-                if (searchText.length() <= 30) {
+                if (searchText.length() <= 15) {
 
                     ArrayList<Product> filteredList = new ArrayList<>();
                     for (Product product : productList) {
@@ -185,10 +185,11 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
                     // Hide the keyboard
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                }
+                }else{
                 //DO NOT REMOVEIf you search for empty searchbox and app crashed, it is intentional. It is a "Improper Exception Handling" bug
                 String filteredList = null;
                 Log.d("Exception",filteredList);
+            }
             }
         });
 
