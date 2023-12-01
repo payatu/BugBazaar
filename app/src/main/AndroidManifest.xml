@@ -166,7 +166,7 @@
 
         <service
             android:name="com.darvin.security.IsolatedService"
-            android:enabled="false"
+            android:enabled="true"
             android:isolatedProcess="true"
             android:process=":tmpService" />
         <service

@@ -21,6 +21,7 @@ import com.BugBazaar.ui.detectAppInt.checkroot;
 import com.BugBazaar.utils.AlertDialogManager;
 import com.bug.hook.checkdetect;
 import com.bug.hook.runtime;
+import com.bug.hook.*;
 import com.darvin.security.DetectMagisk;
 import com.darvin.security.Native;
 import com.google.android.material.snackbar.Snackbar;
@@ -29,7 +30,7 @@ import java.util.List;
 
 public class SplashActivity extends AppCompatActivity  implements DetectMagisk.DetectionListener {
 
-    private static final int SPLASH_TIMEOUT = 500; //half second
+    private static final int SPLASH_TIMEOUT = 2000; //half second
 
     AlertDialogManager alertDialogManager = new AlertDialogManager();
 
@@ -72,7 +73,6 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
                     // Start Magisk detection
                     detectMagisk.startMagiskDetection();
 
-
                 }
 
 
@@ -81,9 +81,7 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
                 else if (switch3State) {
 
 
-
-//                    alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"WE ARE IN PROGRESS");
-
+                    alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"WE ARE IN PROGRESS");
 
                 }
 
@@ -120,6 +118,10 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
 
     @Override
     public void onMagiskDetected() {
+
+
+        Log.d("hello", String.valueOf(emultorcheck.isEmulator(getApplicationContext())));
+
 
         Log.d("hello", String.valueOf(runtime.isFridaServerRunning()));
 
