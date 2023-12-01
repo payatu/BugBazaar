@@ -21,6 +21,7 @@ import com.BugBazaar.ui.detectAppInt.checkroot;
 import com.BugBazaar.utils.AlertDialogManager;
 import com.bug.hook.checkdetect;
 import com.bug.hook.runtime;
+import com.bug.hook.*;
 import com.darvin.security.DetectMagisk;
 import com.darvin.security.Native;
 import com.google.android.material.snackbar.Snackbar;
@@ -119,6 +120,10 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
 
     @Override
     public void onMagiskDetected() {
+
+
+        Log.d("hello", String.valueOf(emultorcheck.isEmulator(getApplicationContext())));
+
 
         Log.d("hello", String.valueOf(runtime.isFridaServerRunning()));
 
