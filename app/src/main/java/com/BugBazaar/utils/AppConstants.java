@@ -10,7 +10,7 @@ import java.util.Map;
 public class AppConstants {
 
     public static final String KEY_WEBVIEW_URL = "webViewUrl";
-    public  static  final String Terms_Conditions_URL ="https://payatu.io";
+    public  static  final String Terms_Conditions_URL ="https://payatu.com";
 
 Context context;
 

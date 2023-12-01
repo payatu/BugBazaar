@@ -83,7 +83,6 @@ public class checkWorker {
             double totalPrice = 100.0; // Replace with your actual price
             discountedPrice = (double) discountModuleClass.getMethod("applyDiscount", double.class).invoke(discountModule, totalPrice);
 
-            Toast.makeText(context, "discountedPrice price" + discountedPrice, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
