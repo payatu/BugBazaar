@@ -7,11 +7,27 @@ plugins {
 
 android {
     namespace 'com.BugBazaar'
-    compileSdk 32
+    compileSdk 33
 
     sourceSets {
         main {
             jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file('loki.jks')
+            storePassword 'Loki$$8090'
+            keyAlias 'loki'
+            keyPassword 'Loki$$8090'
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            // Other release-specific configurations
+            //debuggable false
         }
     }
 
@@ -61,9 +77,9 @@ dependencies {
     releaseImplementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    //testImplementation 'junit:junit:4.13.2'
+    //androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    //androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //Custom installed modules
     implementation 'de.hdodenhof:circleimageview:3.1.0'

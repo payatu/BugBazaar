@@ -38,14 +38,6 @@ public class Address extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         addressListLayout = findViewById(R.id.addressListLayout);
-        //Session check
-        sessionManager = new SessionManager(this);
-        if (sessionManager.getUserToken()==null) {
-            Toast.makeText(getApplicationContext(),"Please login first",Toast.LENGTH_SHORT).show();
-            // The user is not logged in; redirect to the login activity
-            startActivity(new Intent(this, Signin.class));
-            finish();  // Prevent going back to the previous activity
-        }
 
         //Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);

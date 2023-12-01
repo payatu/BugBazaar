@@ -40,25 +40,17 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
                 this.webViewUrl = getIntent().getExtras().getString(AppConstants.KEY_WEBVIEW_URL);
                 startWebView(this.webViewUrl);
             }
-
-
             }
 
         else {
             startdefaultwebview(AppConstants.Terms_Conditions_URL);
-
-
         }
-
-
 
 }
 
     private void startdefaultwebview(String terms_conditions_url) {
 
-        webView.loadUrl(webViewUrl);
-
-
+        webView.loadUrl(terms_conditions_url);
     }
 
     private void setupwebview(WebView webView) {
@@ -66,8 +58,6 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient());
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
-
-
     }
 
     private void startWebView(String webViewUrl) {
@@ -75,35 +65,25 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         if (webViewUrl.startsWith("bugbazaar.com")) {
             webView.addJavascriptInterface(new JavaScriptInterface(), "Androidinterface");
             webView.loadUrl(webViewUrl);
-
-
         }
 
         else if (webViewUrl.endsWith(".bugbazaar.com")){
             CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.setCookie(webViewUrl, getsessionid());
 
-            Log.d("hello","cookieset");
-
-
+           // Log.d("hello","cookieset");
         }
 
         webView.loadUrl(webViewUrl);
 
 
-
-
     }
 
     private String getsessionid() {
-
         return String.valueOf(UUID.randomUUID());
     }
 
-    //Code to handle backbutton
-    public void onBackButtonClick(View view) {
-        onBackPressed(); // Navigate back to the previous activity
-    }
+
 
     private class JavaScriptInterface {
         @android.webkit.JavascriptInterface
@@ -119,7 +99,6 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
 
         @android.webkit.JavascriptInterface
         public String gettoken(){
-
             return String.valueOf(UUID.randomUUID());
         }
 
@@ -135,5 +114,9 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
             return UserAuthSave.getSavedPassword();
         }
 
+    }
+    //Code to handle backbutton
+    public void onBackButtonClick(View view) {
+        onBackPressed(); // Navigate back to the previous activity
     }
 }
