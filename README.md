@@ -1,4 +1,4 @@
-# BugBazaar
+# Android BugBazaar: Your mobile appsec playground to Explore, Exploit, Excel
 Vulnerable Application !!
 
 
