@@ -1,5 +1,5 @@
 # BugBazaar
-vulnerable Application !!
+Vulnerable Application !!
 
 
 ### WEBVIEW
