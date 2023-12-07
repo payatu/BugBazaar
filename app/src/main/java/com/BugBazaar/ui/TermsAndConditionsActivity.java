@@ -70,20 +70,15 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         else if (webViewUrl.endsWith(".bugbazaar.com")){
             CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.setCookie(webViewUrl, getsessionid());
-
-           // Log.d("hello","cookieset");
+           Log.d("hello","cookieset");
         }
 
         webView.loadUrl(webViewUrl);
-
-
     }
 
     private String getsessionid() {
         return String.valueOf(UUID.randomUUID());
     }
-
-
 
     private class JavaScriptInterface {
         @android.webkit.JavascriptInterface
