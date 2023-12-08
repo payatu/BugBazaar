@@ -98,13 +98,10 @@ What's more exciting? Stay in sync with the evolving landscape! BugBazaar regula
     
 -  ADVANCE LEVEL - !!! IN PROGRESS WILL UPDATE IN NEXT RELEASE
 
-## 🙌Thanks
-Amit Kumar Prajapat
-Akshay Khilari
-Vedant Wayal
-
-
-
-
 // MANY MORE BUGS !!! COMING SOON 😎
+
+## 🙌Thanks
+- Amit Kumar Prajapat
+- Akshay Khilari
+- Vedant Wayal
 
