@@ -4,10 +4,19 @@ Welcome to BugBazaar, your gateway to mastering Mobile penetration testing on An
 ## 📱What is it?
 BugBazaar is a comprehensive mobile application intentionally designed to be vulnerable, featuring over 30 vulnerabilities. Developed to emulate real-world scenarios, it includes more than 10 modules and features, each replicating real-world functions and the vulnerabilities surrounding them.
 
+## 🔍Why?
+We've bundled **30+ vulnerabilities** into a single application, saving you from downloading multiple apps to learn about mobile application pentesting. We've packed a lot into one.
+ 
+## 🎯For whom?
+Whether you're a security enthusiast, developer, beginner exploring the mobile pentesting arena, or a professional looking to hone your skills, BugBazaar has something for everyone on the mobile pentesting learning curve.
+ 
+## 🤔What's in for me?
+BugBazaar offers a wide range of vulnerabilities, from "RCE through insecure Dynamic Code Loading" to "One Click Account Takeover via deeplink." We cover "intent Spoofing" to "SQLite db injection," "WebView" bugs to "IPC" misconfigurations in Android  — we've got a lot of things covered.
+ 
+## 🤓Never-Ending Learning
+What's more exciting? Stay in sync with the evolving landscape! BugBazaar regularly updates with fresh vulnerabilities and captivating challenges. Stay vigilant, stay ahead! Get Started Today!
 
-
-Vulnerable Application !!
-
+## ⚠️Vulnerable Application !!
 
 ### WEBVIEW
 - XSS
