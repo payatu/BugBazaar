@@ -7,7 +7,7 @@ BugBazaar is a comprehensive mobile application intentionally designed to be vul
 ## 🔍Why?
 We've bundled **30+ vulnerabilities** into a single application, saving you from downloading multiple apps to learn about mobile application pentesting. We've packed a lot into one.
 
-![9dc4c1f318fe7529cabae2f5086b4294 (1)](https://github.com/payatu/BugBazaar/assets/151744825/222b8886-6e82-4804-b959-b5e75cd6b093)
+<img width="153" alt="meme" src="https://github.com/payatu/BugBazaar/assets/151744825/04643b7c-6ad2-41bf-8a69-b1779328cf00">
 
 ## 🎯For whom?
 Whether you're a security enthusiast, developer, beginner exploring the mobile pentesting arena, or a professional looking to hone your skills, BugBazaar has something for everyone on the mobile pentesting learning curve.
