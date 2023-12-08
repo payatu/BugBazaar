@@ -34,6 +34,7 @@ public class emultorcheck {
     };
 
     public static boolean isEmulator(Context context) {
+        Log.d("cool","hello");
         SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
