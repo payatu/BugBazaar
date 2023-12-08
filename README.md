@@ -6,8 +6,8 @@ BugBazaar is a comprehensive mobile application intentionally designed to be vul
 
 ## 🔍Why?
 We've bundled **30+ vulnerabilities** into a single application, saving you from downloading multiple apps to learn about mobile application pentesting. We've packed a lot into one.
+![9dc4c1f318fe7529cabae2f5086b4294](https://github.com/payatu/BugBazaar/assets/151744825/f38faf86-1820-48c1-997d-b46a56977ecd)
 
-![9dc4c1f318fe7529cabae2f5086b4294](https://github.com/payatu/BugBazaar/assets/151744825/fcb2d8d1-5f28-4bb9-9463-a7a4343a492a)
  
 ## 🎯For whom?
 Whether you're a security enthusiast, developer, beginner exploring the mobile pentesting arena, or a professional looking to hone your skills, BugBazaar has something for everyone on the mobile pentesting learning curve.
@@ -19,9 +19,8 @@ BugBazaar offers a wide range of vulnerabilities, from "RCE through insecure Dyn
 What's more exciting? Stay in sync with the evolving landscape! BugBazaar regularly updates with fresh vulnerabilities and captivating challenges. Stay vigilant, stay ahead! Get Started Today!
 
 ## 📷Screenshots
-![image (13)](https://github.com/payatu/BugBazaar/assets/151744825/a2e74ee7-fdc8-4886-ab4b-78af240991ac)
-![image (14)](https://github.com/payatu/BugBazaar/assets/151744825/bd1641a0-dbeb-4b07-b699-b35e48a3098e)
-![image (11)](https://github.com/payatu/BugBazaar/assets/151744825/55e15c4e-fd4c-4ee8-af2d-279a3bbccb01)
+![Untitled (1715 x 1080 px)](https://github.com/payatu/BugBazaar/assets/151744825/4b291b47-c51e-4644-9871-bbc1a8c388fc)
+
 
 ## ⚠️Vulnerabilities
 
