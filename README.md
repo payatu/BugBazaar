@@ -18,7 +18,12 @@ BugBazaar offers a wide range of vulnerabilities, from "RCE through insecure Dyn
 ## 🤓Never-Ending Learning
 What's more exciting? Stay in sync with the evolving landscape! BugBazaar regularly updates with fresh vulnerabilities and captivating challenges. Stay vigilant, stay ahead! Get Started Today!
 
-## ⚠️Vulnerable Application !!
+## 📷Screenshots
+![image (13)](https://github.com/payatu/BugBazaar/assets/151744825/a2e74ee7-fdc8-4886-ab4b-78af240991ac)
+![image (14)](https://github.com/payatu/BugBazaar/assets/151744825/bd1641a0-dbeb-4b07-b699-b35e48a3098e)
+![image (11)](https://github.com/payatu/BugBazaar/assets/151744825/55e15c4e-fd4c-4ee8-af2d-279a3bbccb01)
+
+## ⚠️Vulnerabilities
 
 ### WEBVIEW
 - XSS
