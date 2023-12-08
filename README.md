@@ -100,4 +100,4 @@ What's more exciting? Stay in sync with the evolving landscape! BugBazaar regula
 // MANY MORE BUGS !!! COMING SOON 😎
 
 ## Core Team
-| Amit Kumar Prajapat | Lead Lead Security Consultant- Mobile | [GitHub](https://github.com/banditAmit) |
+| Amit Kumar Prajapat | Lead Security Consultant at Payatu- Mobile | [GitHub](https://github.com/banditAmit) |
