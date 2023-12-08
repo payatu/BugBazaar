@@ -99,8 +99,10 @@ What's more exciting? Stay in sync with the evolving landscape! BugBazaar regula
 
 // MANY MORE BUGS !!! COMING SOON 😎
 
-## 🙌Thanks
-- Amit Kumar Prajapat
-- Akshay Khilari
-- Vedant Wayal
+## Core Team
+|   |   |   |
+|---|---|---|
 
+| Amit Kumar Prajapat |   |   |
+| Akshay Khilari |   |   |
+| Vedant Wayal |   |   |
