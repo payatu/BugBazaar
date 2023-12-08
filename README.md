@@ -1,4 +1,11 @@
 # Android BugBazaar: Your mobile appsec playground to Explore, Exploit, Excel
+Welcome to BugBazaar, your gateway to mastering Mobile penetration testing on Android platform!
+
+## 📱What is it?
+BugBazaar is a comprehensive mobile application intentionally designed to be vulnerable, featuring over 30 vulnerabilities. Developed to emulate real-world scenarios, it includes more than 10 modules and features, each replicating real-world functions and the vulnerabilities surrounding them.
+
+
+
 Vulnerable Application !!
 
 
