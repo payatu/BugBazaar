@@ -215,14 +215,18 @@ public class MyProfile extends BaseActivity {
         // Upload the image
         storageRef.putFile(imageUri)
                 .addOnSuccessListener(taskSnapshot -> {
-                    Log.d("helloamit", String.valueOf(imageUri));
+                    //Log.d("imageuri", String.valueOf(imageUri));
 
-                    Log.d("hello", "success");
+                    //Log.d("success", "success");
+                    // Image upload successful, show a Toast notification
+                    Toast.makeText(MyProfile.this, "Profile picture uploaded successfully.", Toast.LENGTH_SHORT).show();
                     // Image upload successful, do something if needed
                 })
                 .addOnFailureListener(exception -> {
-                    Log.d("hello", "fail");
+                    //Log.d("fail", "fail");
                     // Handle unsuccessful uploads, do something if needed
+                    // Handle unsuccessful uploads, show a Toast notification
+                    Toast.makeText(MyProfile.this, "Image upload failed.", Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -303,7 +307,7 @@ public class MyProfile extends BaseActivity {
 
         if (!savedSuccessfully) {
 
-            Toast.makeText(this, "somwthing wrong happened", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -321,12 +325,10 @@ public class MyProfile extends BaseActivity {
 //                editor.apply();
 
         uploaddatatofirebase(nameData, emailData, mobileData, addressData);
-
         //
 
-
         // Display a toast message to indicate that the data is saved
-        Toast.makeText(this, "Profile has been updated", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Profile has been updated successfully.", Toast.LENGTH_SHORT).show();
         revertToTextViews();
     }
 
@@ -352,20 +354,11 @@ public class MyProfile extends BaseActivity {
         });
 
 
-
-
-
-
-
-
-
-
 }
     //Code to handle backbutton
     public void onBackButtonClick(View view) {
         onBackPressed(); // Navigate back to the previous activity
     }
-
 
             //After clicking on "Save Profile" revert all EditTextViews into TextViews. Also Hide "Save Profile" button and "Edit Profile" button is visible.
             private void revertToTextViews() {
