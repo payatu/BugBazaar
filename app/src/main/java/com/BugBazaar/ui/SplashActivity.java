@@ -82,6 +82,7 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
 
 
                     alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"WE ARE IN PROGRESS");
+                    finishAffinity();
 
                 }
 
@@ -144,36 +145,10 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
         checkdetect checkdetect = new checkdetect();
         checkdetect.someMethod(SplashActivity.this);
 
-if(checkfrida()){
-
-    alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"FRIDA");
-
-}
-
-else
-{
-    launchapp();
-
-}
 
     }
 
-    private void launchapp() {
-
-        Intent mainIntent = new Intent(SplashActivity.this, Signin.class);
-        startActivity(mainIntent);
-        finish();
-    }
-    private boolean checkfrida() {
-
-if(runtime.areFridaFilesPresent() || runtime.isFridaDetectedinmounts() || runtime.isFridaServerRunning() || runtime.isFridaDetectedfile()){
-
-    return  true;
-
-}
-return  false;
 
 
 
-    }
 }
