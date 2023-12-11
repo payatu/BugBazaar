@@ -47,10 +47,10 @@ public class DetectMagisk {
         try {
             Log.d(TAG, "UID:" + Os.getuid());
             if (serviceBinder.isMagiskPresent() || Native.isMagiskPresentNative() ) {
-                Log.d("hacker","detect");
+
 
                 if (listener != null) {
-                    Log.d("hacker","detect");
+
 
                     listener.onMagiskDetected();
                 }
@@ -60,7 +60,7 @@ public class DetectMagisk {
                 }
             }
         } catch (RemoteException e) {
-            Log.d("hacker","error");
+
         }
     }
 

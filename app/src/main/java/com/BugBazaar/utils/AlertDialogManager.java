@@ -27,7 +27,7 @@ public class AlertDialogManager {
                 public void run() {
                     alertDialog.dismiss(); // Dismiss the dialog if it's still visible
                     ((Activity) context).finish();
-                    System.exit(0);
+
                 }
             }, 2000);
         }

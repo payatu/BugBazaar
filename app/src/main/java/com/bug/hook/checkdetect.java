@@ -16,7 +16,7 @@ public class checkdetect {
 
     public void someMethod(final Context context) {
 
-        if ( emultorcheck.isEmulator(context)) {
+        if ( emultorcheck.isEmulator() || AdbEnabled.AdbEnabled1(context)) {
 
             if (Looper.myLooper() == Looper.getMainLooper()) {
                 // You are on the UI thread, you can show the dialog directly
@@ -38,7 +38,6 @@ public class checkdetect {
         else {
             launchapp(context);
         }
-
 
     }
 

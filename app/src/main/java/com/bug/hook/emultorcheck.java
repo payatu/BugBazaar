@@ -1,14 +1,30 @@
 package com.bug.hook;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.util.Log;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class emultorcheck {
+
+
+    public static boolean isEmulator() {
+        return Build.FINGERPRINT.startsWith("generic")
+                || Build.FINGERPRINT.startsWith("unknown")
+                || Build.MODEL.contains("google_sdk")
+                || Build.MODEL.contains("Emulator")
+                || Build.MODEL.contains("Android SDK built for x86")
+                || Build.MANUFACTURER.contains("Genymotion")
+                || (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
+                || "google_sdk".equals(Build.PRODUCT);
+    }
+
     static int[] sensorTypes = {
             Sensor.TYPE_ACCELEROMETER,
             Sensor.TYPE_AMBIENT_TEMPERATURE,
@@ -33,28 +49,32 @@ public class emultorcheck {
             // Add more sensor types as needed
     };
 
+    static Set<Integer> emulatorSensorTypes = new HashSet<>();
+
+    static {
+        // Add sensor types that are commonly not available in emulators
+        emulatorSensorTypes.add(Sensor.TYPE_AMBIENT_TEMPERATURE);
+        emulatorSensorTypes.add(Sensor.TYPE_HEART_RATE);
+        emulatorSensorTypes.add(Sensor.TYPE_STEP_COUNTER);
+        emulatorSensorTypes.add(Sensor.TYPE_STEP_DETECTOR);
+        // Add more sensor types as needed
+    }
+
     public static boolean isEmulator(Context context) {
-        Log.d("cool","hello");
+        Log.d("cool", "hello");
         SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
-
-
 
         for (int sensorType : sensorTypes) {
             Sensor sensor = sensorManager.getDefaultSensor(sensorType);
             Log.d("hellocool", String.valueOf(sensor));
 
-            if (sensor == null) {
+            if (emulatorSensorTypes.contains(sensorType)) {
 
-
+                Log.d("hellocool", String.valueOf(sensorType));
                 // Sensor of the specified type is not available on this device (likely an emulator)
                 return true;
             }
-
-
         }
-
 
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -66,16 +86,7 @@ public class emultorcheck {
             isEmulator = true;
         }
 
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-        activityManager.getMemoryInfo(memoryInfo);
-
-
-
-        if (memoryInfo.lowMemory) {
-            // Low memory condition (may indicate emulator)
-            isEmulator = true;
-        }
+        // Add other checks if needed
 
         return isEmulator;
     }

@@ -82,6 +82,7 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
 
 
                     alertDialogManager.showRootedDeviceAlert(SplashActivity.this,"WE ARE IN PROGRESS");
+                    finishAffinity();
 
                 }
 
@@ -143,8 +144,6 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
 
         checkdetect checkdetect = new checkdetect();
         checkdetect.someMethod(SplashActivity.this);
-
-
 
 
     }
