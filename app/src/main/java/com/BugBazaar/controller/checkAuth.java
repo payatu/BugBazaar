@@ -23,7 +23,7 @@ public class checkAuth extends Activity {
 
             Toast.makeText(this, "Welcome back !!", Toast.LENGTH_SHORT).show();
 
-            Log.d("passcodemait", String.valueOf(UserAuthSave.getpasscode_flag()));
+            //Log.d("passcodemait", String.valueOf(UserAuthSave.getpasscode_flag()));
 
             if (UserAuthSave.getpasscode_flag()) {
 

@@ -23,7 +23,7 @@ public class IsolatedService extends Service {
         public boolean isMagiskPresent() {
             String[] strArr;
             Binder.clearCallingIdentity();
-            Log.d(IsolatedService.TAG, "Isolated UID:" + Os.getuid());
+            //Log.d(IsolatedService.TAG, "Isolated UID:" + Os.getuid());
             boolean z = false;
             try {
                 FileInputStream fileInputStream = new FileInputStream(new File(String.format("/proc/%d/mounts", Integer.valueOf(Process.myPid()))));
@@ -37,7 +37,7 @@ public class IsolatedService extends Service {
                     int i2 = i;
                     for (String str : IsolatedService.this.blackListedMountPaths) {
                         if (readLine.contains(str)) {
-                            Log.d(IsolatedService.TAG, "Blacklisted Path found " + str);
+                 //           Log.d(IsolatedService.TAG, "Blacklisted Path found " + str);
                             i2++;
                         }
                     }

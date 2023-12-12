@@ -196,7 +196,7 @@ public class Wallet extends BaseActivity implements PaymentResultListener {
                     options.put("name", "BugBazaar Private Limited"); // Replace with your company name
                     options.put("description", "Add money to wallet");
                     options.put("currency", "INR"); // Replace with the appropriate currency code
-                    Log.d("newAmount2",String.valueOf(newAmount));
+               //     Log.d("newAmount2",String.valueOf(newAmount));
                     options.put("amount", newAmount); // Amount should be in paise
                     options.put("prefill.email", "customer@example.com");
                     options.put("prefill.contact", "1234567890");

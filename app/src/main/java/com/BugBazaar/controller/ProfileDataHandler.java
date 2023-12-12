@@ -45,15 +45,15 @@ public class ProfileDataHandler {
             try {
                 Uri insertedUri = contentResolver.insert(uri, values);
                 if (insertedUri != null) {
-                    Log.d("amit", "Insertion successful. URI: " + insertedUri.toString());
+                    Log.d("Insertion successful", "Insertion successful. URI: " + insertedUri.toString());
                     return true;
                 } else {
-                    Log.d("amit", "Insertion failed. URI is null.");
+                    Log.d("Insertion failed", "Insertion failed. URI is null.");
                     return false;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.e("amit", "Insertion error: " + e.getMessage());
+                Log.e("Insertion error", "Insertion error: " + e.getMessage());
                 return false;
             }
         }
@@ -85,7 +85,7 @@ public class ProfileDataHandler {
             // A matching user profile with the provided email was found
             @SuppressLint("Range") long profileId = cursor.getLong(cursor.getColumnIndex(UserProfileContract.UserProfileEntry.COLUMN_ID));
             cursor.close();
-            Log.d("amitcool", "Profile ID: " + profileId);
+           // Log.d("amitcool", "Profile ID: " + profileId);
             return profileId;
         } else {
             // No matching user profile with the provided email was found

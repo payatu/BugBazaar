@@ -30,7 +30,7 @@ public class runtime {
             }
             process.waitFor();
         } catch (IOException e) {
-            Log.d("hello", String.valueOf(e));
+            Log.d("Exception: ", String.valueOf(e));
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

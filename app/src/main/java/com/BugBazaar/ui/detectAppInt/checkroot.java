@@ -54,7 +54,7 @@ public class checkroot {
         }
         else {
 
-            Log.d("hello","hello");
+         //   Log.d("hello","hello");
 
             Intent mainIntent = new Intent(context.getApplicationContext(), Signin.class);
             context.startActivity(mainIntent);

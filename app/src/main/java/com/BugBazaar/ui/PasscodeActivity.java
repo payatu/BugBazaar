@@ -56,7 +56,7 @@ public class PasscodeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String enteredPasscode = editTextPasscode.getText().toString();
                 String passcode  = UserAuthSave.getpasscode();
-                Log.d("passcodeamit", passcode);
+                //Log.d("passcodeamit", passcode);
 
                 if (enteredPasscode.equals(passcode)) {
                     // Passcode is correct, proceed to the next activity. Add next activity here....

@@ -45,7 +45,7 @@ public class DetectMagisk {
 
     private void checkForMagisk() {
         try {
-            Log.d(TAG, "UID:" + Os.getuid());
+          //  Log.d(TAG, "UID:" + Os.getuid());
             if (serviceBinder.isMagiskPresent() || Native.isMagiskPresentNative() ) {
 
 
@@ -68,13 +68,13 @@ public class DetectMagisk {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             serviceBinder = IIsolatedService.Stub.asInterface(iBinder);
-            Log.d(TAG, "Service bound");
+         //   Log.d(TAG, "Service bound");
             checkForMagisk();
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
-            Log.d(TAG, "Service Unbound");
+         //   Log.d(TAG, "Service Unbound");
         }
     };
 }

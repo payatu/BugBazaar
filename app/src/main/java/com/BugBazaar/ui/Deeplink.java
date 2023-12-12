@@ -30,7 +30,7 @@ public class Deeplink extends AppCompatActivity {
             // Get the item parameter value from the URI
             String fetched_item = deeplink.getQueryParameter("item");
             if (fetched_item != null) {
-                Log.d("Item fetched from deep link:", fetched_item);
+                //Log.d("Item fetched from deep link:", fetched_item);
 
                 //Start NavigationDrawer_Dashboard to populate the product list
                 Intent intentA = new Intent(this, NavigationDrawer_Dashboard.class);

@@ -31,9 +31,9 @@ public class CredentialsLoader {
 
     public static User getUser() {
         String username = deobfuscate(OBFUSCATED_USERNAME_HEX);
-        Log.d("hello",username);
+        Log.d("uname",username);
         String password = deobfuscate(OBFUSCATED_PASSWORD_HEX);
-        Log.d("hello",password);
+        Log.d("pass",password);
 
         return new User(username, password);
     }

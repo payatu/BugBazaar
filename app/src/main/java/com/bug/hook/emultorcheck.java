@@ -61,16 +61,16 @@ public class emultorcheck {
     }
 
     public static boolean isEmulator(Context context) {
-        Log.d("cool", "hello");
+        //Log.d("cool", "hello");
         SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
 
         for (int sensorType : sensorTypes) {
             Sensor sensor = sensorManager.getDefaultSensor(sensorType);
-            Log.d("hellocool", String.valueOf(sensor));
+            //Log.d("hellocool", String.valueOf(sensor));
 
             if (emulatorSensorTypes.contains(sensorType)) {
 
-                Log.d("hellocool", String.valueOf(sensorType));
+              //  Log.d("hellocool", String.valueOf(sensorType));
                 // Sensor of the specified type is not available on this device (likely an emulator)
                 return true;
             }

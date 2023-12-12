@@ -44,7 +44,7 @@ public class FileDownloadWorker extends Worker {
 
             return Result.success();
         } catch (Exception e) {
-            Log.d("hello", String.valueOf(e));
+         //   Log.d("hello", String.valueOf(e));
 
             e.printStackTrace();
             return Result.failure();

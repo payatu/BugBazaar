@@ -65,15 +65,15 @@ public class Contact_us extends AppCompatActivity {
                 }
 
 
-                Log.d("checkurl", String.valueOf(uri.getPath().startsWith("/local_cache/")));
+                //Log.d("checkurl", String.valueOf(uri.getPath().startsWith("/local_cache/")));
                 // https://any.domain/local_cache/..%2Fshared_prefs%2Fuserinfo.xmlhttps://any.domain/local_cache/..%2Fshared_prefs%2Fuserinfo.xmlhttps://any.domain/local_cache/..%2Fshared_prefs%2Fuserinfo.xml
                 // Example: If the requested URL ends with ".png", return a custom WebResourceResponse
                 if (uri.getPath().startsWith("/local_cache/")) {
                     // Read the content of the cache file
                     File cacheDir = getCacheDir();
                     File cacheFile = new File(cacheDir, uri.getLastPathSegment());
-                    Log.d("testcachelastsegment", uri.getLastPathSegment());
-                    Log.d("testcachefile", String.valueOf(cacheFile));
+                   // Log.d("testcachelastsegment", uri.getLastPathSegment());
+                    //Log.d("testcachefile", String.valueOf(cacheFile));
                     if (cacheFile.exists()) {
                         try {
                             FileInputStream fileInputStream = new FileInputStream(cacheFile);
@@ -86,7 +86,7 @@ public class Contact_us extends AppCompatActivity {
                             headers.put("Access-Control-Allow-Origin", "*");
                             return new WebResourceResponse(mimeType, encoding, statusCode, reasonPhrase, headers, fileInputStream);
                         } catch (IOException e) {
-                            Log.d("testerr", String.valueOf(e));
+                            Log.d("IOException", String.valueOf(e));
                             return null;
                         }
                     }
@@ -108,7 +108,7 @@ public class Contact_us extends AppCompatActivity {
                                 InputStream inputStream = connection.getInputStream();
                                 OutputStream outputStream = new FileOutputStream(cacheFile);
 
-                                Log.d("testuser", String.valueOf(outputStream));
+                                //Log.d("testuser", String.valueOf(outputStream));
                                 byte[] buffer = new byte[1024];
                                 int bytesRead;
                                 while ((bytesRead = inputStream.read(buffer)) != -1) {

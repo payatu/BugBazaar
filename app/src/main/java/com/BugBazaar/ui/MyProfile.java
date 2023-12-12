@@ -187,10 +187,10 @@ public class MyProfile extends BaseActivity {
             if (data != null) {
                 try {
                     Uri selectedImageUri = data.getData();
-                    Log.d("hello amit", String.valueOf(selectedImageUri));
+                  //  Log.d("hello amit", String.valueOf(selectedImageUri));
 //                    Uri selectedImageUri = Uri.parse("file:////data/data/com.BugBazaar/shared_prefs/user_auth.xml");
 
-                    Log.d("helloamit", String.valueOf(selectedImageUri));
+                  //  Log.d("helloamit", String.valueOf(selectedImageUri));
                     InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
                     Bitmap imageBitmap = BitmapFactory.decodeStream(inputStream);
                     imageView.setImageBitmap(imageBitmap);

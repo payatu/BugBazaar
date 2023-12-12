@@ -3,11 +3,9 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
-
-
 android {
     namespace 'com.BugBazaar'
-    compileSdk 33
+    compileSdk 32
 
     sourceSets {
         main {
@@ -16,10 +14,10 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file('loki.jks')
-            storePassword 'Loki$$8090'
-            keyAlias 'loki'
-            keyPassword 'Loki$$8090'
+            storeFile file('vedant.jks')
+            storePassword 'ved$$9090'
+            keyAlias 'vedant'
+            keyPassword 'ved$$9090'
         }
     }
 

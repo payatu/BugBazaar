@@ -66,7 +66,7 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
                 } else if (switch2State) {
 
 
-                    Log.d("hacker","hacker");
+                    //Log.d("hacker","hacker");
 
                     DetectMagisk detectMagisk = new DetectMagisk(getApplicationContext());
                     detectMagisk.setDetectionListener(SplashActivity.this);
@@ -88,7 +88,7 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
 
                 else {
 
-                    Log.d("hello","hello");
+                   // Log.d("hello","hello");
                     Intent mainIntent = new Intent(SplashActivity.this, Signin.class);
                     startActivity(mainIntent);
                     finish();
@@ -121,10 +121,10 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
     public void onMagiskDetected() {
 
 
-        Log.d("hello", String.valueOf(emultorcheck.isEmulator(getApplicationContext())));
+      //  Log.d("hello", String.valueOf(emultorcheck.isEmulator(getApplicationContext())));
 
 
-        Log.d("hello", String.valueOf(runtime.isFridaServerRunning()));
+       // Log.d("hello", String.valueOf(runtime.isFridaServerRunning()));
 
 
             runOnUiThread(new Runnable() {

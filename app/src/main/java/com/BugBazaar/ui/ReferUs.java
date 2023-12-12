@@ -51,7 +51,7 @@ public class ReferUs extends AppCompatActivity {
                 "\nCheck it out our new application and you will never have to go back to any other shopping app. " +
                 "\n\nBugBazaar!! for all your vulnerabilty needs!!";
         String emailAddress= edtEmailId.getText().toString();
-        Log.d("emailId",emailAddress);
+        //Log.d("emailId",emailAddress);
         //Creating Intent
         Intent iEMail = new Intent(Intent.ACTION_SEND);
         iEMail.setType("message/rfc822");

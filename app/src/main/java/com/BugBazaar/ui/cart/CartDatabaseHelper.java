@@ -83,7 +83,7 @@ public class CartDatabaseHelper extends SQLiteOpenHelper {
     //To Debug
     public void removeCartItem(CartItem cartItem) {
         SQLiteDatabase db = this.getWritableDatabase();
-            Log.d("removeid",String.valueOf(cartItem.getId()));
+         //   Log.d("removeid",String.valueOf(cartItem.getId()));
             // Quantity is zero, delete the item from the database
             db.delete(CartItemDBModel.CartItemEntry.TABLE_NAME,
                     COLUMN_PRODUCT_NAME + " = ?",

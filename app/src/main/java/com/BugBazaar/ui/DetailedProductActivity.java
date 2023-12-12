@@ -95,7 +95,7 @@ public class DetailedProductActivity extends BaseActivity  {
                     cartItems.add(cartItem);
                     cartItem.setId(recordId);
                     cartItems.add(cartItem);
-                    Log.d("hello amit",productName);
+                    //Log.d("hello amit",productName);
 
                     // Add the item to the cartItems list
                 }
