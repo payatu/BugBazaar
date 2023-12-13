@@ -19,8 +19,7 @@ BugBazaar offers a wide range of vulnerabilities, from "RCE through insecure Dyn
 What's more exciting? Stay in sync with the evolving landscape! BugBazaar regularly updates with fresh vulnerabilities and captivating challenges. Stay vigilant, stay ahead! Get Started Today!
 
 ## 📷Screenshots
-![Untitled (1715 x 1080 px)](https://github.com/payatu/BugBazaar/assets/151744825/4b291b47-c51e-4644-9871-bbc1a8c388fc)
-
+![BugBazaar](https://github.com/payatu/BugBazaar/assets/151744825/1027f066-4961-440b-9eb4-9baf8c2a2cb3)
 
 ## ⚠️Vulnerabilities
 
