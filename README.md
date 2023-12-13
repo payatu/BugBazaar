@@ -1,25 +1,37 @@
 # Android BugBazaar: Your mobile appsec playground to Explore, Exploit, Excel
-Welcome to BugBazaar, your gateway to mastering Mobile penetration testing on Android platform!
+Welcome to BugBazaar, your gateway to mastering Mobile penetration testing on the Android platform!
 
 ## 📱What is it?
 BugBazaar is a comprehensive mobile application intentionally designed to be vulnerable, featuring over 30 vulnerabilities. Developed to emulate real-world scenarios, it includes more than 10 modules and features, each replicating real-world functions and the vulnerabilities surrounding them.
 
+<img width="328" height="212" alt="meme" src="https://github.com/payatu/BugBazaar/assets/120417058/7b3a44c1-09b5-4d89-93f6-da542dd6aed6">
+
 ## 🔍Why?
+
 We've bundled **30+ vulnerabilities** into a single application, saving you from downloading multiple apps to learn about mobile application pentesting. We've packed a lot into one.
 
-<img width="153" alt="meme" src="https://github.com/payatu/BugBazaar/assets/151744825/04643b7c-6ad2-41bf-8a69-b1779328cf00">
+<img width="350" height="206" alt="meme" src="https://github.com/payatu/BugBazaar/assets/120417058/df9a64cc-33fb-4a75-9fbe-96eb202d3e65">
+
 
 ## 🎯For whom?
 Whether you're a security enthusiast, developer, beginner exploring the mobile pentesting arena, or a professional looking to hone your skills, BugBazaar has something for everyone on the mobile pentesting learning curve.
+
+<img width="350" height="206" alt="meme" src="https://github.com/payatu/BugBazaar/assets/120417058/0bbca800-f84f-46ff-af7a-8b5de6487136">
+
+
  
 ## 🤔What's in for me?
 BugBazaar offers a wide range of vulnerabilities, from "RCE through insecure Dynamic Code Loading" to "One Click Account Takeover via deeplink." We cover "intent Spoofing" to "SQLite db injection," "WebView" bugs to "IPC" misconfigurations in Android  — we've got a lot of things covered.
- 
+
+<img width="380" height="260" alt="meme" src="https://github.com/payatu/BugBazaar/assets/120417058/67054daa-2cc1-4878-9dc4-ac1a55755419">
+
+
 ## 🤓Never-Ending Learning
 What's more exciting? Stay in sync with the evolving landscape! BugBazaar regularly updates with fresh vulnerabilities and captivating challenges. Stay vigilant, stay ahead! Get Started Today!
 
 ## 📷Screenshots
-![BugBazaar](https://github.com/payatu/BugBazaar/assets/151744825/1027f066-4961-440b-9eb4-9baf8c2a2cb3)
+![Untitled (1715 x 1080 px)](https://github.com/payatu/BugBazaar/assets/151744825/4b291b47-c51e-4644-9871-bbc1a8c388fc)
+
 
 ## ⚠️Vulnerabilities
 
