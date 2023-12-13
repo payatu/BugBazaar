@@ -83,17 +83,9 @@ What's more exciting? Stay in sync with the evolving landscape! BugBazaar regula
 -  MEDIUM LEVEL
 
      -  Magisk detect
-        -  Magisk Hide
-    -  Emulator Check
-       -  debug mode
-       -  adb enabled
-       -  Developer mode
-       -  check for files
-       -  check for All sensors
-       -  Check for Network Connectivity
+     -  Emulator Check
      -  FRIDA DETECTION
-        -  CHECK FOR FILES
-        -  CHECK FOR PORTS --
+        
     
 -  ADVANCE LEVEL - !!! IN PROGRESS WILL UPDATE IN NEXT RELEASE
 
