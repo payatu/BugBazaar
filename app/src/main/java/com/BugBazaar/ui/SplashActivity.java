@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.BugBazaar.R;
 import com.BugBazaar.ui.detectAppInt.checkroot;
@@ -40,6 +41,7 @@ public class SplashActivity extends AppCompatActivity  implements DetectMagisk.D
         super.onCreate(bundle);
 
         setContentView(R.layout.activity_splash);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
 
