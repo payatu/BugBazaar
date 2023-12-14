@@ -103,8 +103,8 @@ What's more exciting? Stay in sync with the evolving landscape! BugBazaar regula
 // MANY MORE BUGS !!! COMING SOON 😎
 
 ## Core Team
-|   |   |   |
-|---|---|---|
-| Amit Kumar Prajapat | Lead Security Consultant at Payatu- Mobile | [GitHub](https://github.com/banditAmit) | [Twitter](https://twitter.com/bit3threat) |
-| Vedant Wayal | Senior Security Consultant at Payatu - Mobile | [GitHub](https://github.com/banditVedant) | [Twitter](https://twitter.com/h1_squirtle) |
-| Akshay Khilari | Security Consultant at Payatu- Mobile | [GitHub](https://github.com/banditAkshay) |
+|   |   |   |   |   |
+|---|---|---|---|---|
+| Amit Kumar Prajapat | Lead Security Consultant at Payatu- Mobile | [GitHub](https://github.com/banditAmit) | [Twitter](https://twitter.com/bit3threat) | [LinkedIn](https://www.linkedin.com/in/amit-parjapat/) |
+| Vedant Wayal | Senior Security Consultant at Payatu - Mobile | [GitHub](https://github.com/banditVedant) | [Twitter](https://twitter.com/h1_squirtle) |  [LinkedIn](https://www.linkedin.com/in/vedant-wayal/) |
+| Akshay Khilari | Security Consultant at Payatu- Mobile | [GitHub](https://github.com/banditAkshay) | [LinkedIn](https://www.linkedin.com/in/akshay-khilari-626126105/)|
