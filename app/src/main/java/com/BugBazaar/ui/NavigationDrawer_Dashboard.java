@@ -121,17 +121,17 @@ public class NavigationDrawer_Dashboard extends AppCompatActivity implements che
 
         // product data
         productList = new ArrayList<>();
-        productList.add(new Product("Old Town Camera",getString(R.string.desc_cycle), R.drawable.item_camera,3199));
-        productList.add(new Product("Dumb Watch", getString(R.string.desc_cycle), R.drawable.item_watch,2499));
-        productList.add(new Product("Skate-Board", getString(R.string.desc_cycle), R.drawable.item_skateboard,1659));
+        productList.add(new Product("Old Town Camera",getString(R.string.desc_camera), R.drawable.item_camera,3199));
+        productList.add(new Product("Dumb Watch", getString(R.string.desc_watch), R.drawable.item_watch,2499));
+        productList.add(new Product("Skate-Board", getString(R.string.desc_skateboard), R.drawable.item_skateboard,1659));
         productList.add(new Product("A Lazy BiCycle", getString(R.string.desc_cycle), R.drawable.item_cycle,7049));
-        productList.add(new Product("PineApple iPhone", getString(R.string.desc_cycle), R.drawable.item_iphone,6999));
-        productList.add(new Product("Z Box Gaming Controller", getString(R.string.desc_cycle), R.drawable.item_gc,3499));
-        productList.add(new Product("A Rat", getString(R.string.desc_cycle), R.drawable.item_mouse,1199));
-        productList.add(new Product("Spy TWS", getString(R.string.desc_cycle), R.drawable.item_tws,4199));
-        productList.add(new Product("Skull phone", getString(R.string.desc_cycle), R.drawable.item_headphones,3599));
-        productList.add(new Product("Mac'N Cheese book", getString(R.string.desc_cycle), R.drawable.item_mmacbook_air,88389));
-        productList.add(new Product("Useless Trimmer", getString(R.string.desc_cycle), R.drawable.item_trimmer,799));
+        productList.add(new Product("PineApple iPhone", getString(R.string.desc_iphone), R.drawable.item_iphone,6999));
+        productList.add(new Product("Z Box Gaming Controller", getString(R.string.desc_controller), R.drawable.item_gc,3499));
+        productList.add(new Product("A Rat", getString(R.string.desc_rat), R.drawable.item_mouse,1199));
+        productList.add(new Product("Spy TWS", getString(R.string.desc_tws), R.drawable.item_tws,4199));
+        productList.add(new Product("Skull phone", getString(R.string.desc_skullphone), R.drawable.item_headphones,3599));
+        productList.add(new Product("Mac'N Cheese book", getString(R.string.desc_macbook), R.drawable.item_mmacbook_air,88389));
+        productList.add(new Product("Useless Trimmer", getString(R.string.desc_trimmer), R.drawable.item_trimmer,799));
 
 
         //Handle Deeplink intent

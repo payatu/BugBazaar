@@ -23,7 +23,7 @@ public class RASPSettings extends AppCompatActivity {
         setContentView(R.layout.activity_raspsettings);
         //Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
-        toolbarTitle.setText("RASP Settings");
+        toolbarTitle.setText("App protection settings");
 
         switch1 = findViewById(R.id.switch1);
         switch2 = findViewById(R.id.switch2);
