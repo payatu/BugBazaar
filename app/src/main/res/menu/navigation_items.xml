@@ -46,7 +46,7 @@
 
         <item
             android:id="@+id/itemRASP_Settings"
-            android:title="RASP Settings"
+            android:title="App Protection Settings"
             android:icon="@drawable/baseline_security_24"></item>
     </group>
 

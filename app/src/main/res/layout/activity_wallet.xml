@@ -197,6 +197,7 @@
             android:layout_weight="1"
             android:background="@drawable/sharp_button_corners"
             android:text="Proceed to Payment"
+            android:textSize="17sp"
             android:onClick="gotoPayment"/>
     </LinearLayout>
 </LinearLayout>
