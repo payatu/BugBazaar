@@ -210,7 +210,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_weight="2">
+                    android:layout_weight="3">
 
                     <!-- First RadioButton -->
                     <RadioButton
@@ -227,7 +227,7 @@
                     <!-- Second RadioButton -->
                     <RadioButton
                         android:id="@+id/rbPayViaRazorpay"
-                        android:layout_width="250dp"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:text="Pay Via Razorpay"
                         android:textSize="19dp"
@@ -250,6 +250,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingEnd="5dp"
                     android:orientation="vertical">
 
                     <!-- Wallet Icon -->
