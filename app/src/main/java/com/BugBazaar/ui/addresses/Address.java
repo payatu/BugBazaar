@@ -1,43 +1,24 @@
 package com.BugBazaar.ui.addresses;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.Cursor;
-import android.content.ContentValues;
+
 import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 import com.BugBazaar.R;
 import com.BugBazaar.ui.BaseActivity;
-import com.BugBazaar.ui.SessionManager;
-import com.BugBazaar.ui.Signin;
 
 import java.util.List;
 
 public class Address extends BaseActivity {
-    private SessionManager sessionManager;
-    private EditText editTextNewAddrNickName;
-    private EditText editTextNewAddress;
-    private EditText searchBoxEditText;
-    private Button btnSaveAddress;
-    private Button btnSearchAddress;
-    private LinearLayout addressListLayout;
-    private SQLiteDatabase database;
-    private AddressDatabaseHelper dbHelper; // Declare dbHelper here
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
-        addressListLayout = findViewById(R.id.addressListLayout);
 
         //Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
