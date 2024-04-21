@@ -89,7 +89,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.ContactsPack.ReferUs"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.cart.CartActivity"
             android:exported="false" />
@@ -118,7 +118,6 @@
             android:name=".ui.addresses.AddressContentProvider"
             android:authorities="com.bugbazaar.provider.addresses"
             android:exported="true" />
-
 
         <activity
             android:name=".ui.DetailedProductActivity"
@@ -150,8 +149,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data
                     android:host="bugbazaar"
                     android:path="/cart/add"

@@ -10,126 +10,159 @@
         layout="@layout/nav_toolbar_sub"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"></include>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:gravity="center"
-        >
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
             android:text="Spread the word!!"
-            android:textSize="45dp"
-            android:textStyle="bold"
             android:textColor="@color/main_theme"
-            ></TextView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:cardCornerRadius="7dp"
-            app:cardElevation="1dp"
-        app:cardBackgroundColor="@color/teal_700"
-        app:cardUseCompatPadding="true">
-
-        <ImageView
-            android:layout_width="350dp"
-            android:layout_height="190dp"
-            android:src="@drawable/evilkermit"
-            android:padding="0dp" />
+            android:textSize="35dp"
+            android:textStyle="bold"></TextView>
 
 
-    </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_width="280dp"
+                android:layout_height="150dp"
+                android:padding="0dp"
+                android:src="@drawable/evilkermit" />
+
+
+
+
         <LinearLayout
+            android:id="@+id/linLink"
             android:layout_width="350dp"
-            android:layout_height="90dp"
-            android:orientation="vertical"
-            android:layout_marginBottom="4dp"
+            android:layout_height="70dp"
             android:layout_marginTop="4dp"
-            android:background="@drawable/border_txtbox">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:text="Share via Link"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:textColor="@color/main_theme"></TextView>
 
-                <Button
-                    android:id="@+id/btnCopyLink"
-                    android:onClick="onCopyLinkClick"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Copy Link"
-                    android:layout_gravity="center"></Button>
+            android:background="@drawable/border_txtbox"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:text="Share via Link"
+                android:textColor="@color/main_theme"
+                android:textSize="20sp"
+                android:textStyle="bold"></TextView>
+
+            <Button
+                android:id="@+id/btnCopyLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="onCopyLinkClick"
+                android:text="Copy Link"></Button>
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/linSMS"
             android:layout_width="350dp"
             android:layout_height="90dp"
-            android:orientation="vertical"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/border_txtbox">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:text="Share via SMS"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:textColor="@color/main_theme"></TextView>
+            android:background="@drawable/border_txtbox"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:text="Share via SMS"
+                android:textColor="@color/main_theme"
+                android:textSize="20dp"
+                android:textStyle="bold"></TextView>
+
             <Button
                 android:id="@+id/openContactButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Select Contacts"
-                android:onClick="openSelectContacts"/>
+                android:onClick="openSelectContacts"
+                android:text="Select Contacts" />
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linEmail"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_txtbox"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="7dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:text="Share Via Email"
+                android:textColor="@color/main_theme"
+                android:textSize="20dp"
+                android:textStyle="bold"></TextView>
+
             <LinearLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:paddingBottom="7dp"
-                android:orientation="vertical"
                 android:gravity="center"
-                android:background="@drawable/border_txtbox">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:text="Share Via Email"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:textColor="@color/main_theme"></TextView>
-                <LinearLayout
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                android:orientation="horizontal">
+
                 <EditText
                     android:id="@+id/edtEmailId"
-                    android:layout_marginRight="10dp"
-                    android:ems="12"
-                    android:textSize="17dp"
-                    android:inputType="textEmailAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter email address"></EditText>
+                    android:layout_marginRight="10dp"
+                    android:ems="12"
+                    android:hint="Enter email address"
+                    android:inputType="textEmailAddress"
+                    android:textSize="17dp"></EditText>
+
                 <Button
                     android:id="@+id/btnSendEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Send"
-                    android:onClick="openEmailApp"></Button>
-                </LinearLayout>
+                    android:onClick="openEmailApp"
+                    android:text="Send"></Button>
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linQR"
+            android:layout_width="350dp"
+            android:layout_height="210dp"
+            android:background="@drawable/border_txtbox"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="7dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:text="Share via QR Code"
+                android:textColor="@color/main_theme"
+                android:textSize="20dp"
+                android:textStyle="bold"></TextView>
+
+            <fragment
+                android:id="@+id/qrfragment"
+                android:name="com.BugBazaar.ui.Fragments.QRCodeFragment"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
+
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -1,13 +1,13 @@
 package com.BugBazaar.ui.ContactsPack;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.BugBazaar.R;
 import com.BugBazaar.ui.BaseActivity;
-import com.BugBazaar.ui.ContactsPack.SelectContacts;
+import com.BugBazaar.ui.Fragments.QRCodeFragment;
 
 public class ReferUs extends BaseActivity {
 
@@ -25,6 +25,7 @@ public class ReferUs extends BaseActivity {
     Button openContactButton;
     EditText edtEmailId;
     ClipboardManager clipboardManager;
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,9 @@ public class ReferUs extends BaseActivity {
         btnSendEmail=findViewById(R.id.btnSendEmail);
         edtEmailId=findViewById(R.id.edtEmailId);
         openContactButton=findViewById(R.id.openContactButton);
-
+        fragmentManager = getSupportFragmentManager();
+        // Load ReferUSFragment inside qrfragment layout
+        loadFragment(new QRCodeFragment());
     }
     public void onCopyLinkClick(View view){
 
@@ -69,6 +72,12 @@ public class ReferUs extends BaseActivity {
 
         Intent intent=new Intent(this, SelectContacts.class);
         startActivity(intent);
+    }
+
+    private void loadFragment(Fragment fragment) {
+        fragmentManager.beginTransaction()
+                .replace(R.id.qrfragment, fragment)
+                .commit();
     }
 
 
