@@ -28,44 +28,11 @@
             android:textSize="35dp"
             android:textStyle="bold"></TextView>
 
-
-
             <ImageView
                 android:layout_width="280dp"
                 android:layout_height="150dp"
-                android:padding="0dp"
+                android:paddingBottom="10dp"
                 android:src="@drawable/evilkermit" />
-
-
-
-
-        <LinearLayout
-            android:id="@+id/linLink"
-            android:layout_width="350dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="4dp"
-
-            android:background="@drawable/border_txtbox"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:text="Share via Link"
-                android:textColor="@color/main_theme"
-                android:textSize="20sp"
-                android:textStyle="bold"></TextView>
-
-            <Button
-                android:id="@+id/btnCopyLink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="onCopyLinkClick"
-                android:text="Copy Link"></Button>
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linSMS"
@@ -140,9 +107,10 @@
         <LinearLayout
             android:id="@+id/linQR"
             android:layout_width="350dp"
-            android:layout_height="210dp"
+            android:layout_height="280dp"
             android:background="@drawable/border_txtbox"
             android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="vertical"
             android:paddingBottom="7dp">
 
@@ -156,11 +124,11 @@
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
 
-            <fragment
-                android:id="@+id/qrfragment"
-                android:name="com.BugBazaar.ui.Fragments.QRCodeFragment"
-                android:layout_width="150dp"
-                android:layout_height="150dp" />
+            <FrameLayout
+                android:layout_gravity="center"
+                android:id="@+id/qrfragment_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 

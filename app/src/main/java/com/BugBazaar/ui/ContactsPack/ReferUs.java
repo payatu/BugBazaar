@@ -8,6 +8,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,11 +21,9 @@ import com.BugBazaar.ui.Fragments.QRCodeFragment;
 
 public class ReferUs extends BaseActivity {
 
-    Button btnCopyLink;
     Button btnSendEmail;
     Button openContactButton;
     EditText edtEmailId;
-    ClipboardManager clipboardManager;
     FragmentManager fragmentManager;
 
     @Override
@@ -35,21 +34,24 @@ public class ReferUs extends BaseActivity {
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Refer-Us");
 
-        btnCopyLink=findViewById(R.id.btnCopyLink);
-        clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         btnSendEmail=findViewById(R.id.btnSendEmail);
         edtEmailId=findViewById(R.id.edtEmailId);
         openContactButton=findViewById(R.id.openContactButton);
-        fragmentManager = getSupportFragmentManager();
-        // Load ReferUSFragment inside qrfragment layout
-        loadFragment(new QRCodeFragment());
-    }
-    public void onCopyLinkClick(View view){
+       fragmentManager = getSupportFragmentManager(); // Initialize fragmentManager
 
-        String copyDeepLink = "bb://bugbazaar/dashboard";
-        ClipData clipData = ClipData.newPlainText("Copied Text", copyDeepLink);
-        clipboardManager.setPrimaryClip(clipData);
-        Toast.makeText(this, "Link has been copied.", Toast.LENGTH_SHORT).show();
+        // Load ReferUSFragment inside qrfragment layout
+        String fragName = getIntent().getStringExtra("fragName");
+        Log.d("fragName", "Received fragName: " + fragName);
+
+
+        if (fragName != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.qrfragment_placeholder, Fragment.instantiate(this, fragName, null))
+                    .commit();
+        } else {
+            // Load default fragment if fragName is null
+            loadFragment(new QRCodeFragment());
+        }
     }
 
     public void openEmailApp(View view){
@@ -68,22 +70,20 @@ public class ReferUs extends BaseActivity {
         startActivity(Intent.createChooser(iEMail, "Email via: "));
         edtEmailId.setText("");
     }
-    public void openSelectContacts(View view){
 
+    public void openSelectContacts(View view){
         Intent intent=new Intent(this, SelectContacts.class);
         startActivity(intent);
     }
 
     private void loadFragment(Fragment fragment) {
-        fragmentManager.beginTransaction()
-                .replace(R.id.qrfragment, fragment)
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.qrfragment_placeholder, fragment)
                 .commit();
     }
-
 
     //Code to handle backbutton
     public void onBackButtonClick(View view) {
         onBackPressed(); // Navigate back to the previous activity
     }
-
 }
