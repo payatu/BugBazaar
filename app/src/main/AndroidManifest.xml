@@ -89,7 +89,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.ContactsPack.ReferUs"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.cart.CartActivity"
             android:exported="false" />
@@ -114,6 +114,10 @@
             android:authorities="com.bugbazaar.mycontacts"
             android:exported="true"
             android:permission="com.BugBazaar.permission.contact" />
+        <provider
+            android:name=".ui.addresses.AddressContentProvider"
+            android:authorities="com.bugbazaar.provider.addresses"
+            android:exported="true" />
 
         <activity
             android:name=".ui.DetailedProductActivity"
@@ -152,6 +156,14 @@
                 <data
                     android:host="bugbazaar"
                     android:path="/cart/add"
+                    android:scheme="bb" />
+                <data
+                    android:host="bugbazaar"
+                    android:path="/offers"
+                    android:scheme="bb" />
+                <data
+                    android:host="bugbazaar"
+                    android:path="/web"
                     android:scheme="bb" />
             </intent-filter>
         </activity>

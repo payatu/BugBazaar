@@ -36,71 +36,75 @@ What's more exciting? Stay in sync with the evolving landscape! BugBazaar regula
 ## ⚠️Vulnerabilities
 
 ### WEBVIEW
+- Opening arbitrary URLs in the webview
 - XSS
 - OPEN REDIRECTION
-- Stealing User token Via javascript Interface
+- Account Takeover via Stealing Session ID (Host validation bypass)
+- Stealing User token Via JavaScriptInterface class
 - Access of Arbitrary files via insecure Flags
-- Stealing of Arbitrary files via Insecure `WebResourceResponse`
-- Account Takeover via Steal Session id
+    - Note: Only exploitable until API level 28
+- Stealing of Arbitrary files via Insecure `WebResourceResponse`
     
 ### INTENT
 - Intent interception
 - Account takeover via intent Spoofing
 - Steal User's Contact via Insecure Pending Intent
 - RCE through insecure Dynamic Code Loading
-###  Deep Link
-    
-   - CSRF
-   - Deep link hijacking
-   - Content Spoofing
-   - One Click Account Takeover
+
+###  Deep Link  
+   - CSRF to add the product to cart
+   - Deep link hijacking to load URLs in webview
+   - Content Spoofing on Offers activity
     
 ### IPC COMPONENTS
-
 -  Exported Components
 -  Steal User's Contact via typo permission in Content Provider
--  Arbitrary data write to Content provider
--  Access to Protected Components via Recevier
+-  Insecure broadcast receiver
+-  Access to Protected Components via broadcast Receiver
+-  Insecure services
+-  Fragment injection in Refer-Us
 
 ### Injections
+ - SQL Injection via user input in My order
+ - Content Provider SQL Injection in Address
+ - Data insertion via insecure Content Provider in Address
 
- - SQL Injection via user input
+### Unintended Data Leakage
+- Copy/Paste buffer Caching
+- Application backgrounding
+- Insecure Logging (logging user creds
 
-
+### Insecure Storage
+- Unencrypted database
+- Man in the Disk Attack
+- Storing sensitive info in SharedPref
+- Hardcoded secrets
 
 ### OTHERS
-
 - Improper Input Validation
-- Insecure Logging
-- Insecure Storage
 - Unrestricted file upload
-- Firebase Misconfiguration
+- Misconfigured firebase's firestore
 - Passcode Bypass
-- Copy paster Buffer
 - Tapjacking
-- hardcoded secrets
 - Improper exception Handling
-- Debuggable
+- Debuggable application
 - Backup enabled
 - Task Hijacking
-- Man in the Disk Attack
+- Improper cache handling
 
-
+### Runtime exploitation
+- Runtime code modification
+- Login pin bypass via Frida/Objection
 
 ### APP Protection
-
--  EASY LEVEL
+-  EASY LEVEL:
     -  RootBear Library
--  MEDIUM LEVEL
-
+-  MEDIUM LEVEL:
      -  Magisk detect
      -  Emulator Check
-     -  FRIDA DETECTION
-        
-    
--  ADVANCE LEVEL - !!! IN PROGRESS WILL UPDATE IN NEXT RELEASE
+     -  FRIDA DETECTION    
+-  ADVANCE LEVEL - ⚠️IN PROGRESS WILL UPDATE IN UPCOMING Release⚠️
 
-// MANY MORE BUGS !!! COMING SOON 😎
 
 ## Core Team
 |   |   |   |   |   |

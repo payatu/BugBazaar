@@ -8,7 +8,7 @@ public class CredentialsLoader {
     private static final String OBFUSCATED_PASSWORD_HEX = "\u0017 2\u00174/44'\u0006066::9"; // Obfuscated "BugBazaarSeccool"
 
     // XOR key for obfuscation/deobfuscation
-    private static final byte XOR_KEY = 0x55;
+    private static final byte XOR_KEY = 0x55; //85
 
     // Function to perform XOR obfuscation
     private static String obfuscate(String str) {

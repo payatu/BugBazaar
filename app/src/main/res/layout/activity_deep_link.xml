@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <include
         layout="@layout/nav_toolbar_sub"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"></include>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></include>
+
     <TextView
         android:id="@+id/messageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_gravity="center"
+        android:paddingTop="30dp"
+        android:text="🚧 This page is under construction 🚧"
+        android:textColor="#000"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginTop="24dp"
-        android:text="This page is under construction"
-        android:textColor="#000" />
+        android:layout_margin="10dp"/>
+
     <WebView
         android:id="@+id/deeplink_view"
         android:layout_width="match_parent"
