@@ -63,6 +63,7 @@ public class OrderSummary extends AppCompatActivity {
         txtFinalCostOS = findViewById(R.id.txtFinalCostOS);
         btnProceedPaymentOS = findViewById(R.id.btnProceedPaymentOS);
 
+
         // Retrieve all addresses from the AddressDB database
         addressDBHelper = new AddressDatabaseHelper(this);
         addressList = addressDBHelper.getAllAddresses();

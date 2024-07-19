@@ -1,5 +1,9 @@
 package com.BugBazaar.ui.addresses;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 import android.content.ContentValues;
@@ -38,6 +42,15 @@ public class Address extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         addressListLayout = findViewById(R.id.addressListLayout);
+
+        ///
+
+
+
+
+
+        ///
+
 
         //Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
@@ -87,9 +100,10 @@ public class Address extends BaseActivity {
                 } else {
                     addressListLayout.removeAllViews();
                     // Insert data into the SQLite database
-                    dbHelper.insertAddress(nickname, address);
+
+                    sendacrosscomponents(nickname,address);
                     List<AddressItem> addresses = dbHelper.getAllAddresses();
-                    Toast.makeText(getApplicationContext(), "Address has been saved Successfully", Toast.LENGTH_SHORT).show();
+
 
                     for (AddressItem item : addresses) {
                         View customAddressView = inflater.inflate(R.layout.item_address, null);
@@ -150,9 +164,36 @@ public class Address extends BaseActivity {
             }
         });
     }
-        //Code to handle backbutton
+
+    private void sendacrosscomponents(String nickname, String address) {
+        Intent intent = new Intent("bugbazaar.address_update");
+        intent.putExtra("nickname",nickname);
+        intent.putExtra("address",address);
+        sendImplicitBroadcast(this,intent);
+    }
+
+    private static void sendImplicitBroadcast(Context ctxt, Intent i) {
+        PackageManager pm=ctxt.getPackageManager();
+        List<ResolveInfo> matches=pm.queryBroadcastReceivers(i, 0);
+
+        for (ResolveInfo resolveInfo : matches) {
+            Intent explicit=new Intent(i);
+            ComponentName cn=
+                    new ComponentName(resolveInfo.activityInfo.applicationInfo.packageName,
+                            resolveInfo.activityInfo.name);
+
+            explicit.setComponent(cn);
+            Log.d("test", String.valueOf(cn));
+            ctxt.sendBroadcast(explicit);
+        }
+    }
+
+
+    //Code to handle backbutton
     public void onBackButtonClick(View view) {
         onBackPressed(); // Navigate back to the previous activity
     }
+
+
 
 }
