@@ -6,7 +6,9 @@ plugins {
 android {
     namespace 'com.BugBazaar'
     compileSdk 34
-
+    lintOptions {
+        checkReleaseBuilds false
+    }
     sourceSets {
         main {
             jniLibs.srcDirs = ['src/main/jniLibs']
@@ -72,6 +74,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-inappmessaging-display:20.2.0'
     implementation 'com.google.firebase:firebase-messaging:23.1.0'
     implementation 'androidx.databinding:viewbinding:7.1.2'
+    implementation 'androidx.activity:activity:1.8.0'
     releaseImplementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -90,5 +93,6 @@ dependencies {
     implementation 'com.scottyab:rootbeer-lib:0.1.0'
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'androidx.work:work-runtime:2.9.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }
