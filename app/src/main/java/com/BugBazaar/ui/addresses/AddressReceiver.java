@@ -10,6 +10,6 @@ public class AddressReceiver  extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Toast.makeText(context.getApplicationContext(), "address hacker changes", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context.getApplicationContext(), "your address changed", Toast.LENGTH_SHORT).show();
     }
 }

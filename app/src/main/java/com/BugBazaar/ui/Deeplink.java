@@ -17,13 +17,22 @@ import java.util.List;
 public class Deeplink extends AppCompatActivity {
     //private List<Product> products;
     WebView webView;
+    TextView messageTextView;
+    TextView toolbarTitle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deep_link);
+
+        // Toolbar title set
+        TextView toolbarTitle = findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText("DeepLink");
+
+        messageTextView= findViewById(R.id.messageTextView);
         Intent intent = getIntent();
         Uri deeplink = intent.getData();
+        toolbarTitle = findViewById(R.id.toolbarTitle);
 
         // Deep link handling for item
         if (deeplink != null && "/cart/add".equals(deeplink.getPath())) {
@@ -41,44 +50,45 @@ public class Deeplink extends AppCompatActivity {
 
         // Deep link handling for msg
         if (deeplink != null && "/offers".equals(deeplink.getPath())) {
-            String message = deeplink.getQueryParameter("msg");
-            if (message != null) {
-                // Display the message, e.g., in a TextView
-                TextView toolbarTitle = findViewById(R.id.toolbarTitle);
-                toolbarTitle.setText("Offers");
-                TextView messageTextView = findViewById(R.id.messageTextView);
+            String message = deeplink.getQueryParameter("textMsg");
+            String offer = deeplink.getQueryParameter("offer");
+            if (message != null && offer!=null) {
                 messageTextView.setText(message);
-            } else {
-                TextView toolbarTitle = findViewById(R.id.toolbarTitle);
-                toolbarTitle.setText("Offers");
-                TextView messageTextView = findViewById(R.id.messageTextView);
-                messageTextView.setText("Coming Soon...............!");
+                Intent intentA = new Intent(this, NavigationDrawer_Dashboard.class);
+                intentA.setData(Uri.parse(offer));
+                startActivity(intentA);
             }
+
+
         }
 
         // Deep link handling for url
         if (deeplink != null && "/web".equals(deeplink.getPath())) {
-            String webViewUrl = deeplink.getQueryParameter("url");
+            String webViewUrl = deeplink.getQueryParameter("urlToLoad");
             // Check if the "url" parameter contains "payatu.com"
             if (webViewUrl != null && webViewUrl.contains("payatu.com")) {
-                TextView toolbarTitle = findViewById(R.id.toolbarTitle);
-                toolbarTitle.setText("BugBazaar");
+
                 webView = findViewById(R.id.deeplink_view);
                 setupwebview(webView);
                 this.webView.loadUrl(webViewUrl);
+                messageTextView.setVisibility(View.GONE);
+            }
+            else{
+                messageTextView.setText("Host is invalid.");
             }
         }
     }
-        //Code to handle back button - Redirect to home page on back pressed
-        public void onBackButtonClick (View view){
-            //  onBackPressed(); // Navigate back to the previous activity
-            Intent backtohome = new Intent(this, NavigationDrawer_Dashboard.class);
-            startActivity(backtohome);
-        }
+    //Code to handle back button - Redirect to home page on back pressed
+
     private void setupwebview (WebView webView){
         webView.setWebViewClient(new WebViewClient());
         webView.setWebChromeClient(new WebChromeClient());
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
     }
+    public void onBackButtonClick (View view){
+        //  onBackPressed(); // Navigate back to the previous activity
+        Intent backtohome = new Intent(this, NavigationDrawer_Dashboard.class);
+        startActivity(backtohome);
     }
+}
