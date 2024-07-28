@@ -176,7 +176,14 @@
                 <action android:name="com.BugBazaar.CUSTOMACT" />
             </intent-filter>
         </receiver>
-
+        <receiver
+            android:name=".BugBazaarAddress"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="bugbazaar.address_update"></action>
+            </intent-filter>
+        </receiver>
         <service
             android:name=".ui.components.SMSService"
             android:enabled="true"
