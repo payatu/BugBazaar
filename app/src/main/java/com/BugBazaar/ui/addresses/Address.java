@@ -43,13 +43,6 @@ public class Address extends BaseActivity {
         setContentView(R.layout.activity_address);
         addressListLayout = findViewById(R.id.addressListLayout);
 
-        ///
-
-
-
-
-
-        ///
 
 
         //Toolbar title set
@@ -100,7 +93,7 @@ public class Address extends BaseActivity {
                 } else {
                     addressListLayout.removeAllViews();
                     // Insert data into the SQLite database
-
+                    dbHelper.insertAddress(nickname, address);
                     sendacrosscomponents(nickname,address);
                     List<AddressItem> addresses = dbHelper.getAllAddresses();
 

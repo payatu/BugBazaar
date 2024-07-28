@@ -89,9 +89,6 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
                     userAuthSave.saveUserData( randomToken,isLoggedin);
                     userAuthSave.saveuserCred(username,password);
                     sessionManager.setLoggedIn(true);
-                    String randomToken = TokenGenerator.generateRandomToken(64);
-                    userAuthSave.saveUserData( randomToken,isLoggedin);
-                    userAuthSave.saveuserCred(username,password);
                     // Successful login, do something (e.g., start a new activity)
                     Toast.makeText(Signin.this, "Login successful!", Toast.LENGTH_SHORT).show();
 

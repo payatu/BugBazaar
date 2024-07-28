@@ -16,11 +16,10 @@ public class UserAuthSave {
     private static SharedPreferences sharedPreferences1;
 
     private static final String keypasscode_flag = "passcode_flag";
-    private static final String USER_DATA = "userCred";
 
     private static SharedPreferences sharedPreferences;
     private SessionManager sessionManager;  // Move the initialization to a constructor
-    private static SharedPreferences sharedPreferences1;
+
 
  public UserAuthSave(Context context) {
         sharedPreferences = context.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
