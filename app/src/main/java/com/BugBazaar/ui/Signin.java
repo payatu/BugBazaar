@@ -82,10 +82,12 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
                 //This will fetch hex username and password  from CredentialLoader and compare it with user provided values class.
                 // It will return true if values are correct. Will return false if values are incorrect.
                 boolean isLoggedin= loginController.validateLogin(username, password);
-                String randomToken = TokenGenerator.generateRandomToken(64);
 
                 if (isLoggedin==true) {
-
+                    String randomToken = TokenGenerator.generateRandomToken(64);
+                    sessionManager.setLoggedIn(true);
+                    userAuthSave.saveUserData( randomToken,isLoggedin);
+                    userAuthSave.saveuserCred(username,password);
                     sessionManager.setLoggedIn(true);
                     userAuthSave.saveUserData( randomToken,isLoggedin);
                     // Successful login, do something (e.g., start a new activity)

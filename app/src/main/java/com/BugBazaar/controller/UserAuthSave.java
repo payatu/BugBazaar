@@ -12,6 +12,9 @@ public class UserAuthSave {
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
     private static final String keypasscode = "passcode";
+    private static final String USER_DATA = "userCred";
+    private static SharedPreferences sharedPreferences1;
+
     private static final String keypasscode_flag = "passcode_flag";
 
     private static SharedPreferences sharedPreferences;
@@ -19,7 +22,8 @@ public class UserAuthSave {
 
     public UserAuthSave(Context context) {
         sharedPreferences = context.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
-        sessionManager = new SessionManager(context);  // Initialize SessionManager in the constructor
+        sessionManager = new SessionManager(context);
+        sharedPreferences1 = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);// Initialize SessionManager in the constructor
     }
 
     public void saveUserData(String randomToken, boolean loggedIn) {
@@ -63,5 +67,14 @@ public class UserAuthSave {
 
     public static boolean isLoggedIn() {
         return sharedPreferences.getBoolean(KEY_LOGGED_IN, false);
+    }
+
+    public void saveuserCred(String username, String password) {
+        SharedPreferences.Editor editor = sharedPreferences1.edit();
+        editor.putString("username", username);
+        editor.putString("password", password);
+        editor.apply();
+
+
     }
 }
