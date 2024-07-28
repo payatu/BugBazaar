@@ -84,7 +84,10 @@ public class Signin extends AppCompatActivity implements PermissionCallback {
                 boolean isLoggedin= loginController.validateLogin(username, password);
 
                 if (isLoggedin==true) {
-
+                    String randomToken = TokenGenerator.generateRandomToken(64);
+                    sessionManager.setLoggedIn(true);
+                    userAuthSave.saveUserData( randomToken,isLoggedin);
+                    userAuthSave.saveuserCred(username,password);
                     sessionManager.setLoggedIn(true);
                     String randomToken = TokenGenerator.generateRandomToken(64);
                     userAuthSave.saveUserData( randomToken,isLoggedin);

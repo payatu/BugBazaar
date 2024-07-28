@@ -21,6 +21,7 @@ import java.util.UUID;
 
 public class TermsAndConditionsActivity extends AppCompatActivity {
     WebView webView;
+    private SessionManager sessionManager;
 
     private String webViewUrl;
 
@@ -77,7 +78,7 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
     }
 
     private String getsessionid() {
-        return String.valueOf(UUID.randomUUID());
+        return sessionManager.getUserToken();
     }
 
     private class JavaScriptInterface {

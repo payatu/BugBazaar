@@ -12,6 +12,9 @@ public class UserAuthSave {
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
     private static final String keypasscode = "passcode";
+    private static final String USER_DATA = "userCred";
+    private static SharedPreferences sharedPreferences1;
+
     private static final String keypasscode_flag = "passcode_flag";
     private static final String USER_DATA = "userCred";
 
@@ -19,7 +22,7 @@ public class UserAuthSave {
     private SessionManager sessionManager;  // Move the initialization to a constructor
     private static SharedPreferences sharedPreferences1;
 
-    public UserAuthSave(Context context) {
+ public UserAuthSave(Context context) {
         sharedPreferences = context.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
         sessionManager = new SessionManager(context);  // Initialize SessionManager in the constructor
         sharedPreferences1 = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
