@@ -52,11 +52,15 @@ public class Deeplink extends AppCompatActivity {
         if (deeplink != null && "/offers".equals(deeplink.getPath())) {
             String message = deeplink.getQueryParameter("textMsg");
             String offer = deeplink.getQueryParameter("offer");
-            if (message != null && offer!=null) {
+            if (message != null && offer==null) {
                 messageTextView.setText(message);
+
+            }
+            else if(message!=null & offer!=null){
                 Intent intentA = new Intent(this, NavigationDrawer_Dashboard.class);
                 intentA.setData(Uri.parse(offer));
                 startActivity(intentA);
+
             }
 
 
