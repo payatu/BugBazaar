@@ -34,20 +34,21 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         //Toolbar title set
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Terms & Conditions");
-
+        sessionManager =  new SessionManager(getApplicationContext());
+        
         setupwebview(webView);
         if (getIntent().getExtras() != null) {
             if (getIntent().hasExtra(AppConstants.KEY_WEBVIEW_URL)) {
                 this.webViewUrl = getIntent().getExtras().getString(AppConstants.KEY_WEBVIEW_URL);
                 startWebView(this.webViewUrl);
             }
-            }
+        }
 
         else {
             startdefaultwebview(AppConstants.Terms_Conditions_URL);
         }
 
-}
+    }
 
     private void startdefaultwebview(String terms_conditions_url) {
 
@@ -71,7 +72,7 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         else if (webViewUrl.endsWith(".bugbazaar.com")){
             CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.setCookie(webViewUrl, getsessionid());
-           //Log.d("hello","cookieset");
+            //Log.d("hello","cookieset");
         }
 
         webView.loadUrl(webViewUrl);
@@ -95,7 +96,7 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
 
         @android.webkit.JavascriptInterface
         public String gettoken(){
-            return String.valueOf(UUID.randomUUID());
+            return sessionManager.getUserToken();
         }
 
         @android.webkit.JavascriptInterface
