@@ -52,7 +52,7 @@ public class UserAuthSave {
     }
 
     public static String getSavedUsername() {
-        return sharedPreferences.getString(KEY_USERNAME, "");
+        return sharedPreferences1.getString(KEY_USERNAME, "");
     }
 
     public static boolean getpasscode_flag() {
@@ -64,7 +64,7 @@ public class UserAuthSave {
     }
 
     public static String getSavedPassword() {
-        return sharedPreferences.getString(KEY_PASSWORD, "");
+        return sharedPreferences1.getString(KEY_PASSWORD, "");
     }
 
     public static boolean isLoggedIn() {
