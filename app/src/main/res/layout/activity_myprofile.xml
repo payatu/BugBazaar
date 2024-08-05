@@ -144,7 +144,7 @@
             android:focusable="true"
             android:gravity="center_vertical"
             android:paddingStart="15dp"
-            android:text="Sam Fisher"
+            android:text="Vedant Wayal"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -159,6 +159,8 @@
             android:layout_height="43dp"
             android:layout_marginTop="24dp"
             android:layout_weight="0"
+            android:paddingStart="5dp"
+            android:textSize="18dp"
             android:ems="20"
             android:inputType="text"
             android:visibility="gone"
@@ -179,7 +181,7 @@
             android:gravity="center_vertical"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:text="samfisher@splintercell.io"
+            android:text="careers@payatu.io"
             android:textSize="17dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.957"
@@ -187,14 +189,15 @@
             app:layout_constraintTop_toBottomOf="@+id/txtViewName3"></TextView>
 
         <EditText
+            android:visibility="gone"
             android:id="@+id/editTxtEmail"
             android:layout_width="203dp"
             android:layout_height="40dp"
             android:layout_marginTop="24dp"
             android:layout_weight="0"
+            android:paddingStart="5dp"
             android:ems="20"
             android:inputType="textEmailAddress"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/txtViewEmail"
             app:layout_constraintEnd_toEndOf="@+id/txtViewEmail"
             app:layout_constraintHorizontal_bias="1.0"
@@ -223,18 +226,20 @@
             app:layout_constraintVertical_bias="0.0"></TextView>
 
         <EditText
-            android:id="@+id/editTextText3"
+            android:id="@+id/editTextMobile"
             android:layout_width="208dp"
             android:layout_height="43dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="76dp"
             android:layout_weight="0"
             android:ems="15"
             android:inputType="number"
             android:visibility="gone"
+            android:paddingStart="5dp"
             app:layout_constraintBottom_toBottomOf="@+id/txtViewMobile"
             app:layout_constraintStart_toStartOf="@+id/txtViewMobile"
             app:layout_constraintTop_toTopOf="@+id/txtViewName3"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/txtViewName2"
@@ -257,18 +262,20 @@
             app:layout_constraintVertical_bias="0.0"></TextView>
 
         <EditText
+            android:visibility="gone"
             android:id="@+id/editTxtAddress"
-            android:layout_width="207dp"
-            android:layout_height="149dp"
+            android:layout_width="203dp"
+            android:layout_height="111dp"
             android:layout_weight="0"
             android:ems="30"
-            android:paddingTop="10dp"
             android:inputType="textMultiLine"
-            android:visibility="gone"
+            android:paddingStart="5dp"
+            android:paddingTop="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/txtViewName2"
             app:layout_constraintEnd_toEndOf="@+id/txtViewName2"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/txtViewName2"
-            app:layout_constraintTop_toTopOf="@+id/txtViewName3"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewMobile"
             app:layout_constraintVertical_bias="1.0" />
 
 

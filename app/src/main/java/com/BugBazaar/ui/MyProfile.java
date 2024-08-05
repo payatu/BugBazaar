@@ -96,7 +96,7 @@ public class MyProfile extends BaseActivity {
         editTxtEmail = findViewById(R.id.editTxtEmail);
         //Mobile
         txtViewMobile = findViewById(R.id.txtViewMobile);
-        editTextMobile = findViewById(R.id.editTextText3);
+        editTextMobile = findViewById(R.id.editTextMobile);
         //Address
         txtViewAddress = findViewById(R.id.txtViewName2);
         editTxtAddress = findViewById(R.id.editTxtAddress);
@@ -190,7 +190,6 @@ public class MyProfile extends BaseActivity {
                   //  Log.d("hello amit", String.valueOf(selectedImageUri));
 //                    Uri selectedImageUri = Uri.parse("file:////data/data/com.BugBazaar/shared_prefs/user_auth.xml");
 
-                  //  Log.d("helloamit", String.valueOf(selectedImageUri));
                     InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
                     Bitmap imageBitmap = BitmapFactory.decodeStream(inputStream);
                     imageView.setImageBitmap(imageBitmap);
