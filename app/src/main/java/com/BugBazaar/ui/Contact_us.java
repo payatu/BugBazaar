@@ -37,7 +37,7 @@ public class Contact_us extends AppCompatActivity {
         toolbarTitle.setText("Contact us");
 
         WebView webView = findViewById(R.id.webview2);
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new MyWebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAllowFileAccess(true);
         webView.getSettings().getAllowFileAccessFromFileURLs();
@@ -53,7 +53,7 @@ public class Contact_us extends AppCompatActivity {
 
             webView.loadUrl(String.valueOf(uri));
         }
-
+    }
         class MyWebViewClient extends WebViewClient {
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
@@ -72,7 +72,7 @@ public class Contact_us extends AppCompatActivity {
                     // Read the content of the cache file
                     File cacheDir = getCacheDir();
                     File cacheFile = new File(cacheDir, uri.getLastPathSegment());
-                   // Log.d("testcachelastsegment", uri.getLastPathSegment());
+                    // Log.d("testcachelastsegment", uri.getLastPathSegment());
                     //Log.d("testcachefile", String.valueOf(cacheFile));
                     if (cacheFile.exists()) {
                         try {
@@ -138,7 +138,7 @@ public class Contact_us extends AppCompatActivity {
 
 
         }
-    }
+    
     //Code to handle backbutton
     public void onBackButtonClick(View view) {
         onBackPressed(); // Navigate back to the previous activity
