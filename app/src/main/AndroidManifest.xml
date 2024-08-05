@@ -136,7 +136,7 @@
             android:exported="true" />
         <activity
             android:name=".ui.Contact_us"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.PasscodeActivity"
             android:exported="false" />
